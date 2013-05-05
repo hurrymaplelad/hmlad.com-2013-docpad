@@ -1,0 +1,24 @@
+{
+  "name": "hmlad.com",
+  "version": "0.0.0",
+  "description": "My very own website",
+  "dependencies": {
+    "docpad": "~6.32.0",
+    "docpad-plugin-cleanurls": "~2.4.3",
+    "docpad-plugin-datefromfilename": "~1.0.1",
+    "docpad-plugin-marked": "~2.1.1",
+    "docpad-plugin-paged": "~2.1.4",
+    "docpad-plugin-teacup": "~2.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hurrymaplelad/hmlad.com.git"
+  },
+  "author": "Adam Hull <adam@hmlad.com>",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/hurrymaplelad/hmlad.com/issues"
+  }
+}
