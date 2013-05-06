@@ -1,11 +1,11 @@
 ---
 layout: default
 isPaged: true
-pagedCollection: html
+pagedCollection: posts
 pageSize: 2
 ---
-{div, article, a, text} = require 'teacup'
-utils = require 'util'
+{a, article, footer, div, h1, header, p, raw, text} = require 'teacup'
+{excerpt} = require '../partials/helpers'
 
 module.exports = (docpad) ->
   # TODO: extract this
@@ -14,7 +14,9 @@ module.exports = (docpad) ->
 
   # TODO: and this
   page = document.page
-  page.docs = docpad.getCollection(document.pagedCollection)[page.startIdx...page.endIdx]
+  page.docs = docpad.getCollection(document.pagedCollection)
+    .slice(page.startIdx, page.endIdx)
+    .map((doc) -> doc.toJSON())
   page.hasNextPage = -> documentModel.hasNextPage()
   page.hasPrevPage = -> documentModel.hasPrevPage()
   page.getNextPage = -> documentModel.getNextPage()
@@ -23,8 +25,12 @@ module.exports = (docpad) ->
   div '.blog-index', ->
     for post in page.docs
       article ->
-        text post.get('title')
-        # index=true; {% include post_listing.html %}
+        header ->
+          h1 '.entry-title', ->
+            a href: post.url
+
+        text post.url
+        raw excerpt post.contentRenderedWithoutLayouts
 
   div '.pagination', ->
     if page.hasNextPage()

@@ -9,7 +9,8 @@
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-paged": "~2.1.4",
     "docpad-plugin-stylus": "~2.3.0",
-    "docpad-plugin-teacup": "~2.0.1"
+    "docpad-plugin-teacup": "~2.0.2",
+    "sugar": "~1.3.8"
   },
   "devDependencies": {},
   "repository": {

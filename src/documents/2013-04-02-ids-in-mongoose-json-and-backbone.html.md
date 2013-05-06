@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ids in Mongoose, JSON, and Backbone"
-date: 2013-04-02 21:24
+post: true
 comments: true
 categories:
 style: |

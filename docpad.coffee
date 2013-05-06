@@ -1,3 +1,5 @@
+require 'sugar'
+
 module.exports = 
   plugins:
     datefromfilename:
@@ -7,3 +9,7 @@ module.exports =
     site:
       title: 'Hurry Maple Lad'
       author: 'Adam Hull'
+
+  collections:
+    posts: (database) ->
+      database.findAllLive({post: true}, [date: -1])
