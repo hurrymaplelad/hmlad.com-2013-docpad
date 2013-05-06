@@ -44,15 +44,15 @@ module.exports = ({site, document, content}) ->
         p ->
           text "by #{site.author}"
 
-        a '.linkedin.icon',
-          href: 'http://www.linkedin.com/in/hurrymaplelad'
-          target: '_blank'
-        a '.goodreads.icon',
-          href: 'http://www.goodreads.com/hurrymaplelad'
-          target: '_blank'
-        a '.stackoverflow.icon',
-          href: 'http://stackoverflow.com/users/407845/hurrymaplelad'
-          target: '_blank'
-        a '.github.icon',
-          href: 'https://github.com/hurrymaplelad'
-          target: '_blank'
+          a '.linkedin.icon',
+            href: 'http://www.linkedin.com/in/hurrymaplelad'
+            target: '_blank'
+          a '.goodreads.icon',
+            href: 'http://www.goodreads.com/hurrymaplelad'
+            target: '_blank'
+          a '.stackoverflow.icon',
+            href: 'http://stackoverflow.com/users/407845/hurrymaplelad'
+            target: '_blank'
+          a '.github.icon',
+            href: 'https://github.com/hurrymaplelad'
+            target: '_blank'
