@@ -5,7 +5,7 @@ pagedCollection: posts
 pageSize: 2
 ---
 {a, article, footer, div, h1, header, p, raw, text} = require 'teacup'
-{excerpt} = require '../partials/helpers'
+{excerpt, date} = require '../partials/helpers'
 
 module.exports = (docpad) ->
   # TODO: extract this
@@ -25,11 +25,13 @@ module.exports = (docpad) ->
   div '.blog-index', ->
     for post in page.docs
       article ->
-        header ->
-          h1 '.entry-title', ->
-            a href: post.url
+        unless post.no_header
+          header ->
+            h1 '.entry-title', ->
+              a {href: post.url}, post.title
+            p '.meta', ->
+              date post
 
-        text post.url
         raw excerpt post.contentRenderedWithoutLayouts
 
   div '.pagination', ->
