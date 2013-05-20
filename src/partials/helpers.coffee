@@ -13,10 +13,11 @@ module.exports =
     [above, below] = content.split excerptSplitter
     if below? then above else content
 
-  date: (document) ->
+  date: (document, {format}={}) ->
+    format ?= '{Month} {ord}, {year}'
     date = document.date
     return unless date
-    formatted = date.format '{Month} {ord}, {year}'
+    formatted = date.format format
 
     time datetime: date.utc(true).toISOString(), formatted
 
