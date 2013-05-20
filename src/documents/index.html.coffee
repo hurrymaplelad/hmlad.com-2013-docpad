@@ -5,7 +5,7 @@ pagedCollection: posts
 pageSize: 2
 ---
 {a, article, footer, div, h1, header, p, raw, text} = require 'teacup'
-{excerpt, date} = require '../partials/helpers'
+{excerpt, hasExcerpt, date} = require '../partials/helpers'
 
 module.exports = (docpad) ->
   # TODO: extract this
@@ -31,12 +31,16 @@ module.exports = (docpad) ->
               a {href: post.url}, post.title
             p '.meta', ->
               date post
+        content = post.contentRenderedWithoutLayouts
+        div '.entry-content', ->
+          raw excerpt content
+        if hasExcerpt content
+          footer ->
+            a rel: 'full-article', href: post.url, '▨ More'
 
-        raw excerpt post.contentRenderedWithoutLayouts
-
-  div '.pagination', ->
-    if page.hasNextPage()
-      a '.prev', href: page.getNextPage(), '← Older'
-    a {href: '/archives'}, 'Archives'
-    if page.hasPrevPage()
-      a '.next', href: page.getPrevPage(), '→ Newer'
+    div '.pagination', ->
+      if page.hasNextPage()
+        a '.prev', href: page.getNextPage(), '← Older'
+      a {href: '/archives'}, 'Archives'
+      if page.hasPrevPage()
+        a '.next', href: page.getPrevPage(), '→ Newer'
