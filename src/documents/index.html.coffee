@@ -25,7 +25,7 @@ module.exports = (docpad) ->
   div '.blog-index', ->
     for post in page.docs
       article ->
-        unless post.no_header
+        unless post.noHeader
           header ->
             h1 '.entry-title', ->
               a {href: post.url}, post.title

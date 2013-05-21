@@ -24,16 +24,17 @@ module.exports = (docpad) ->
         tag 'style', scoped: true, ->
           raw document.style
 
-      header ->
-        h1 '.entry-title', document.title
-        p '.meta', ->
-          date document
-        if document.canonical?
-          p '.meta.canonical', ->
-            text 
-            a href: document.canonical, target: '_blank', ->
-              text 'Crossposted from '
-              text url.parse(document.canonical, false, true).host
+      unless document.noHeader
+        header ->
+          h1 '.entry-title', document.title
+          p '.meta', ->
+            date document
+          if document.canonical?
+            p '.meta.canonical', ->
+              text 
+              a href: document.canonical, target: '_blank', ->
+                text 'Crossposted from '
+                text url.parse(document.canonical, false, true).host
 
       div '.entry-content', ->
         raw content
