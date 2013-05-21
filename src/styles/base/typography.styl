@@ -18,7 +18,9 @@ $h6 ?= 0.8em
 }
 .sans { font-family: $sans; }
 .serif { font-family: $serif; }
-.mono { font-family: $mono; }
+.mono
+  font-family: $mono
+  font-size: 85%
 
 body > header h1 {
   font-size: 3em !important;
@@ -68,7 +70,8 @@ h5, section h4, section section h3 {
 h6, section h5, section section h4, section section section h3 {
   font-size: .8em;
 }
-p, blockquote, ul, ol { margin-bottom: 1.5em; }
+p, blockquote, ul, ol, pre, code
+  margin-bottom: 1.5em
 
 ul { list-style-type: circle;
   ul { list-style-type: disc; margin-bottom: 0px;
@@ -114,6 +117,10 @@ abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 
 pre, code, tt 
   @extend .mono
+
+pre > code
+  line-height 1.7
+  padding-left 8%
 
 sub, sup { line-height: 0; }
 
