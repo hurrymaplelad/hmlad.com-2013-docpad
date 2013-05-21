@@ -2,7 +2,7 @@
 layout: default
 isPaged: true
 pagedCollection: posts
-pageSize: 2
+pageSize: 10
 ---
 {a, article, footer, div, h1, header, p, raw, text} = require 'teacup'
 {excerpt, hasExcerpt, date} = require '../partials/helpers'

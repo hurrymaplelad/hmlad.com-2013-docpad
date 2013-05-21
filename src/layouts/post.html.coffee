@@ -8,15 +8,15 @@ url = require 'url'
 module.exports = (docpad) ->
   {document, content} = docpad
 
-  # TODO: extract into plugin
+  # TODO: extract into plugin, assumes sorted newest first
   posts = docpad.getCollection('posts')
   index = posts.indexOf(docpad.getDocument())
-  nextDocument = null
   previousDocument = null
+  nextDocument = null
   if index < posts.length - 1
-    nextDocument = posts.at(index + 1).toJSON()
+    previousDocument = posts.at(index + 1).toJSON()
   if index > 0 
-    previousDocument = posts.at(index - 1).toJSON()
+    nextDocument = posts.at(index - 1).toJSON()
 
   div ->
     article '.hentry', role: 'article', ->
