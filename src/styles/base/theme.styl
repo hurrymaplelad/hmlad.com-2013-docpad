@@ -51,16 +51,20 @@ $article-border ?= $footer-border-top
 
 /* Core theme application */
 
-a {
-  link-colors($link-color, $hover = $link-color-hover, $focus = $link-color-hover, $visited = $link-color-visited, $active = $link-color-active);
-  text-decoration: none;
-  &:hover, &:active {
-    text-decoration: underline;
-  }
-}
-a {
-  transition(color .3s);
-}
+a
+  color: $link-color
+  transition(color .3s)
+  text-decoration: none
+  &:visited
+    color: $link-color-visited 
+  &:hover
+    color: $link-color-hover
+  &:focus
+    color: $link-color-hover
+  &:active
+    color: $link-color-active
+  &:hover, &:active
+    text-decoration: underline
 
 html {
   background: $site-bg;
