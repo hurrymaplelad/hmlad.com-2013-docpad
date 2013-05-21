@@ -2,8 +2,6 @@
 layout: post
 title: "Ids in Mongoose, JSON, and Backbone"
 post: true
-comments: true
-categories:
 style: |
   .ids {
     width: 100%;

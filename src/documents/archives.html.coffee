@@ -8,7 +8,7 @@ module.exports = (docpad) ->
   div '#blog-archives', ->
     posts = docpad.getCollection('posts').toArray().map('toJSON')
     prevYear = null
-    for post in posts.reverse()
+    for post in posts
       year = post.date?.getFullYear()
       unless prevYear == year
         prevYear = year
