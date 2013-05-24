@@ -48,3 +48,17 @@ module.exports = (grunt) ->
       'copy:release'
       'shell:stageReleaseDir'
     ]
+
+  grunt.registerTask 'assertNoUncommitedChanges', ->
+    done = this.async()
+    exec 'git status --porcelain', (err, stdout) ->
+      if stdout
+        grunt.warn 'Attempting to release uncommitted changes.'
+      done()
+
+  grunt.registerTask 'release',
+    'Commit a release build to gh-pages and push to origin',
+    [
+      'assertNoUncommitedChanges'
+      'stage'
+    ]
