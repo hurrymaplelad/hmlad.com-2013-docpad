@@ -3,14 +3,22 @@ module.exports = (grunt) ->
 
   grunt.initConfig
     clean:
-      release: ['release']
+      out: ['out/']
+      release: ['release/']
 
     copy:
       release:
         cwd: 'out/'
-        src: '**/index.html'
+        src: [
+          '**/index.html'
+          'images/**'
+          'favicon.png'
+          'styles/**'
+        ]
         dest: 'release/'
         expand: true
+
+    docs: {}
 
     shell:
       options:
@@ -35,13 +43,21 @@ module.exports = (grunt) ->
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-copy'
+  grunt.loadNpmTasks 'grunt-docs'
   grunt.loadNpmTasks 'grunt-shell'
+
+  grunt.registerTask 'generate', 
+    'Render docpad documents into out',
+    [
+      'clean:out'
+      'docs'
+    ]
 
   grunt.registerTask 'stage', 
     'Stage a release build in ./release ready to be committed to the gh-pages branch', 
     [
+      'generate'
       'clean:release'
-      'shell:fetchGHPages'
       'shell:makeReleaseDir'
       'shell:checkoutGHPages'
       'shell:nukeReleaseDir'
@@ -60,5 +76,9 @@ module.exports = (grunt) ->
     'Commit a release build to gh-pages and push to origin',
     [
       'assertNoUncommitedChanges'
+      'shell:fetchGHPages'
       'stage'
+      # 'captureCurrentRef'
+      # 'shell:commitReleaseDir'
+      # 'shell:pushGHPages'
     ]
