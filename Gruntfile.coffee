@@ -15,9 +15,10 @@ module.exports = (grunt) ->
         cwd: 'out/'
         src: [
           '**/index.html'
+          'styles/**'
           'images/**'
           'favicon.png'
-          'styles/**'
+          'CNAME'
         ]
         dest: 'release/'
         expand: true
