@@ -10,6 +10,11 @@ module.exports = (grunt) ->
       out: ['out/']
       release: ['release/']
 
+    connect:
+      preview:
+        options:
+          base: 'release'
+
     copy:
       release:
         cwd: 'out/'
@@ -56,6 +61,13 @@ module.exports = (grunt) ->
     [
       'clean:out'
       'docs'
+    ]
+
+  grunt.registerTask 'dev',
+    'Start a local development server',
+    [
+      'stage'
+      'connect:preview:keepalive'
     ]
 
   grunt.registerTask 'stage', 
