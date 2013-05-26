@@ -15,3 +15,5 @@ module.exports =
   plugins:
     datefromfilename:
       removeDate: true
+    cleanurls:
+      trailingSlashes: true
