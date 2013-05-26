@@ -17,8 +17,10 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-rename": "0.0.2",
     "grunt-docs": "~0.5.1",
-    "grunt-shell": "~0.2.2"
+    "grunt-shell": "~0.2.2",
+    "matchdep": "~0.1.2"
   },
   "repository": {
     "type": "git",

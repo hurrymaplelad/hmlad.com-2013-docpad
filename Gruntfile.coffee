@@ -1,5 +1,9 @@
+{exec} = require 'child_process'
+{filterDev} = require 'matchdep'
+
 module.exports = (grunt) ->
-  {exec} = require 'child_process'
+  # Load grunt plugins from devDependencies
+  filterDev('grunt-*').forEach grunt.loadNpmTasks
 
   grunt.initConfig
     clean:
@@ -19,6 +23,11 @@ module.exports = (grunt) ->
         expand: true
 
     docs: {}
+
+    rename:
+      release:
+        files:
+          'release/404.html': 'release/404/index.html'
 
     shell:
       options:
@@ -41,13 +50,8 @@ module.exports = (grunt) ->
         command: 'git add .'
         options: execOptions: cwd: 'release'
 
-  grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-contrib-copy'
-  grunt.loadNpmTasks 'grunt-docs'
-  grunt.loadNpmTasks 'grunt-shell'
-
   grunt.registerTask 'generate', 
-    'Render docpad documents into out',
+    'Render docpad documents in ./out',
     [
       'clean:out'
       'docs'
@@ -62,6 +66,7 @@ module.exports = (grunt) ->
       'shell:checkoutGHPages'
       'shell:nukeReleaseDir'
       'copy:release'
+      'rename:release'
       'shell:stageReleaseDir'
     ]
 
