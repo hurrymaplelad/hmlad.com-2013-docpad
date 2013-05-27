@@ -25,9 +25,7 @@ module.exports = ({site, document, content}) ->
 
       link rel: 'icon', type: 'image/png', href: '/favicon.png'
       link rel: 'stylesheet', href: '/styles/main.css'
-
-      # TODO: Add this. See https://github.com/docpad/twitter-bootstrap.docpad/blob/master/src/documents/atom.xml.eco
-      # link rel: 'alternate', title: site.title, type: 'application/atom+xml', href: '/atom.xml'
+      link rel: 'alternate', title: site.title, type: 'application/atom+xml', href: '/atom.xml'
 
       script """
         var _gaq = _gaq || [];

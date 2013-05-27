@@ -7,6 +7,7 @@ module.exports =
     site:
       title: 'Hurry Maple Lad'
       author: 'Adam Hull'
+      url: 'http://hurrymaplelad.com'
 
       googleAnalytics:
         id: 'UA-35976996-1'

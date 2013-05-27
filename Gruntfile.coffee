@@ -23,6 +23,7 @@ module.exports = (grunt) ->
           'styles/**'
           'images/**'
           'favicon.png'
+          'atom.xml'
           'CNAME'
         ]
         dest: 'release/'
