@@ -30,6 +30,10 @@ module.exports = (grunt) ->
 
     docs: {}
 
+    open:
+      preview:
+        path: 'http://localhost:8000'
+
     rename:
       release:
         files:
@@ -106,6 +110,7 @@ module.exports = (grunt) ->
       'copy:release'
       'rename:release'
       'connect:preview'
+      'open:preview'
       'watch'
     ]
 
