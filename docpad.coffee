@@ -8,6 +8,10 @@ module.exports =
       title: 'Hurry Maple Lad'
       author: 'Adam Hull'
 
+      googleAnalytics:
+        id: 'UA-35976996-1'
+
+
   collections:
     posts: (database) ->
       database.findAllLive({post: true}, [date: -1])

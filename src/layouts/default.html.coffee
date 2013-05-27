@@ -1,6 +1,7 @@
 {
   doctype, html, head, title, meta, link,
-  body, header, footer, h1, br, div, p, a, raw, text
+  body, header, footer, h1, br, div, p, a, raw,
+  script, text
 } = require 'teacup'
 
 module.exports = ({site, document, content}) ->
@@ -28,7 +29,17 @@ module.exports = ({site, document, content}) ->
       # TODO: Add this. See https://github.com/docpad/twitter-bootstrap.docpad/blob/master/src/documents/atom.xml.eco
       # link rel: 'alternate', title: site.title, type: 'application/atom+xml', href: '/atom.xml'
 
-      # TODO: Wire in Google analytics.  Maybe use docpad-plugin-services?
+      script """
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{site.googleAnalytics.id}']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      """
 
     body ->
       header ->
