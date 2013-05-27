@@ -1,0 +1,34 @@
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Ids in Mongoose, JSON, and Backbone</title><meta name="author" content="Adam Hull" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><style scoped="scoped">.ids {
+  width: 100%;
+  margin-bottom: 30px;
+  table-layout: fixed;
+}
+
+.ids th:first-child {
+  font-size: 160%;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  font-weight: normal;
+  width: 40%;
+}
+
+.ids th {
+  font-weight: bold;
+  width: 30%;
+}
+</style><header><h1 class="entry-title">Ids in Mongoose, JSON, and Backbone</h1><p class="meta"><time datetime="2013-04-02T00:00:00.000Z">April 2nd, 2013</time></p></header><div class="entry-content"><p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
+<p>If you find yourself typing <code>vegetable.id</code> when you really needed <code>new ObjectID(vegetable.toJSON()._id)</code> this fancy chart might help:
+<!-- more --></p>
+<table class="ids">
+  <tr><th>Mongoose</th><th>id</th><th>_id</th></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#document_Document-id">document</a></td><td>String</td><td>ObjectID</td></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#query_Query-lean">lean document</a></td><td>∅</td><td>ObjectID</td></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#document_Document-toJSON">document.toJSON()</a></td><td>∅</td><td>ObjectID</td></tr>
+
+  <tr><th>JSON</th><th></th><th></th></tr>
+  <tr><td><a href="http://www.json.org/">object</a></td><td>∅</td><td>String</td></tr>
+
+  <tr><th>Backbone</th><th></th><th></th></tr>
+  <tr><td><a href="http://backbonejs.org/#Model-id">model</td><td>String</td><td>∅</td></tr>
+  <tr><td><a href="http://backbonejs.org/#Model-get">model.get()</td><td>∅</td><td>String</td></tr>
+</table></div><footer><p class="meta"><a class="basic-alignment left" href="/a-breakthrough-a-day/">&laquo; A Breakthrough a Day</a></p></footer></article></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
