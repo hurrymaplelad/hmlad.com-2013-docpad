@@ -56,6 +56,15 @@ module.exports = (grunt) ->
         command: 'git add .'
         options: execOptions: cwd: 'release'
 
+    watch:
+      docpad:
+        files: 'src/**'
+        tasks: [
+          'generate'
+          'copy:release'
+          'rename:release'
+        ]
+
   grunt.registerTask 'generate', 
     'Render docpad documents in ./out',
     [
@@ -66,18 +75,24 @@ module.exports = (grunt) ->
   grunt.registerTask 'dev',
     'Start a local development server',
     [
-      'stage'
-      'connect:preview:keepalive'
+      'clean'
+      'shell:makeReleaseDir'
+      'shell:checkoutGHPages'
+      'generate'
+      'copy:release'
+      'rename:release'
+      'connect:preview'
+      'watch'
     ]
 
   grunt.registerTask 'stage', 
     'Stage a release build in ./release ready to be committed to the gh-pages branch', 
     [
-      'generate'
-      'clean:release'
+      'cleanj'
       'shell:makeReleaseDir'
       'shell:checkoutGHPages'
       'shell:nukeReleaseDir'
+      'generate'
       'copy:release'
       'rename:release'
       'shell:stageReleaseDir'
