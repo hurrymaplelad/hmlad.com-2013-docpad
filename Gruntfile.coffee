@@ -40,21 +40,45 @@ module.exports = (grunt) ->
         stdout: true
         failOnError: true
 
-      'fetchGHPages': 
+      fetchGHPages:
         command: 'git fetch origin gh-pages'
         options:
           failOnError: false
-      'makeReleaseDir':
+      makeReleaseDir:
         command: 'git clone . release'
-      'checkoutGHPages':
+      checkoutGHPages:
         command: 'git checkout gh-pages || git checkout --orphan gh-pages'
         options: execOptions: cwd: 'release'
-      'nukeReleaseDir':
+      nukeReleaseDir:
         command: 'git rm -rfq .'
         options: execOptions: cwd: 'release'
-      'stageReleaseDir':
+      stageReleaseDir:
         command: 'git add .'
         options: execOptions: cwd: 'release'
+      assertNoUncommitedChanges:
+        command: 'git status --porcelain'
+        options:
+          stdout: false
+          callback: (err, stdout, stderr, done) ->
+            if err ?= stderr
+              grunt.fatal err
+            if stdout
+              grunt.warn "Attempting to release uncommitted changes: \n#{stdout}"
+            done()
+      captureCurrentRef:
+        command: 'echo "$(git symbolic-ref --short HEAD):$(git log -1 --format=%h)"'
+        options: 
+          stdout: false
+          callback: (err, stdout, stderr, done) ->
+            if err ?= stderr
+              grunt.fatal err
+            grunt.config.set 'currentRef', stdout
+            done()
+      commitReleaseDir:
+        command: 'git commit -m"Released from <%= currentRef %>"'
+        options: execOptions: cwd: 'release'
+      pushGHPages:
+        command: 'git push origin gh-pages'
 
     watch:
       docpad:
@@ -88,7 +112,7 @@ module.exports = (grunt) ->
   grunt.registerTask 'stage', 
     'Stage a release build in ./release ready to be committed to the gh-pages branch', 
     [
-      'cleanj'
+      'clean'
       'shell:makeReleaseDir'
       'shell:checkoutGHPages'
       'shell:nukeReleaseDir'
@@ -98,20 +122,13 @@ module.exports = (grunt) ->
       'shell:stageReleaseDir'
     ]
 
-  grunt.registerTask 'assertNoUncommitedChanges', ->
-    done = this.async()
-    exec 'git status --porcelain', (err, stdout) ->
-      if stdout
-        grunt.warn 'Attempting to release uncommitted changes.'
-      done()
-
   grunt.registerTask 'release',
     'Commit a release build to gh-pages and push to origin',
     [
-      'assertNoUncommitedChanges'
+      'shell:assertNoUncommitedChanges'
       'shell:fetchGHPages'
       'stage'
-      # 'captureCurrentRef'
-      # 'shell:commitReleaseDir'
-      # 'shell:pushGHPages'
+      'shell:captureCurrentRef'
+      'shell:commitReleaseDir'
+      'shell:pushGHPages'
     ]
