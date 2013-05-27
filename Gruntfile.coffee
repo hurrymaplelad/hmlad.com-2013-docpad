@@ -82,7 +82,7 @@ module.exports = (grunt) ->
         command: 'git commit -m"Released from <%= currentRef %>"'
         options: execOptions: cwd: 'release'
       pushGHPages:
-        command: 'git push origin gh-pages'
+        command: 'git fetch release gh-pages:gh-pages && git push origin gh-pages'
 
     watch:
       docpad:
