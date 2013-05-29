@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-05-27T09:30:34.822Z</updated>
+  <updated>2013-05-29T07:45:11.757Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -227,6 +227,43 @@ broccoli.save(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
 &lt;p&gt;Phew.  &lt;/p&gt;
 &lt;p&gt;Here&amp;#39;s a &lt;a href=&quot;https://gist.github.com/4008255&quot;&gt;Mocha spec&lt;/a&gt; reproducing this frustrating sequence.  How should we make it be better?&lt;/p&gt;
 
+      </content>
+    </entry>
+  
+    <entry>
+      <title>Space Shoot 'em Up</title>
+      <link href="http://hurrymaplelad.com/space-shootemup/"/>
+      <updated>2003-10-01T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/space-shootemup/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+
+&lt;p&gt;
+A dusty relic from the days rolling around in a creaky office chair on the red carpet of my old room.  My second game&lt;sup&gt;†&lt;/sup&gt;, and one of very few that have an end.  
+&lt;/p&gt;
+
+&lt;!-- more --&gt;
+&lt;table class=&quot;controls&quot;&gt;
+  &lt;caption&gt;Controls:&lt;/caption&gt;
+  &lt;tr&gt;&lt;th&gt;Move:&lt;/th&gt;&lt;td&gt;&amp;larr; &amp;rarr;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Shoot:&lt;/th&gt;&lt;td&gt;Space&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;ul class=&quot;footnotes&quot;&gt;
+&lt;sup&gt;†&lt;/sup&gt;&lt;small&gt;The first, Cow Hunter, I can't bring myself to put (back) on the internet.  It's out there somehere.  If you've dug this far into the dust bucket of the footnotes of the archives, you might be crazy enough to look :)&lt;/small&gt;
+&lt;/ul&gt;
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/space-shootemup/master/space-shootemup.swf',
+    'flash', 
+    '550', '400', 
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
       </content>
     </entry>
   

@@ -41,8 +41,8 @@ ul,ol,ul ul,ol ul,ul ol,ol ol{margin-left:1.3em}
 strong{font-weight:bold}
 em{font-style:italic}
 mark{color:#626262;background-color:transparent;font-weight:normal;font-style:italic;font-family:"PT Serif",Georgia,Times,"Times New Roman",serif}
-sup,sub{font-size:.8em;position:relative;display:inline-block}
-sup{top:-.5em}
+sup,sub{font-size:.6em;display:inline;padding:0 1px}
+sup{vertical-align:super}
 sub{bottom:-.5em}
 q{font-style:italic;}
 q:before{content:"\201C"}
@@ -52,7 +52,6 @@ strong,dfn{font-weight:bold}
 del,s{text-decoration:line-through}
 abbr,acronym{border-bottom:1px dotted;cursor:help}
 pre > code{line-height:1.7;padding-left:8%}
-sub,sup{line-height:0}
 hr{margin-bottom:.2em}
 small{font-size:.8em}
 big{font-size:1.2em}
@@ -78,11 +77,11 @@ body > header,body > nav,body > footer,body #content > article,body #content > d
 }@media only screen and (min-width: 992px){body div.pagination{margin-left:24px;margin-right:24px}
 }body > header{font-size:1em;padding-top:2em;padding-bottom:.75em}
 #content > div,#content > article{width:100%}
-.flex-content,table,article img,article video,article .flash-video{max-width:100%;height:auto}
-.basic-alignment.left,table.left,article img.left,article video.left,article .flash-video.left{float:left;margin-right:1.5em}
-.basic-alignment.right,table.right,article img.right,article video.right,article .flash-video.right{float:right;margin-left:1.5em}
-.basic-alignment.center,table.center,article img.center,article video.center,article .flash-video.center{display:block;margin:0 auto 1.5em}
-.basic-alignment.left,table.left,article img.left,article video.left,article .flash-video.left,.basic-alignment.right,table.right,article img.right,article video.right,article .flash-video.right{margin-bottom:.8em}
+.flex-content,table,article img,article video{max-width:100%;height:auto}
+.basic-alignment.left,table.left,article img.left,article video.left{float:left;margin-right:1.5em}
+.basic-alignment.right,table.right,article img.right,article video.right{float:right;margin-left:1.5em}
+.basic-alignment.center,table.center,article img.center,article video.center{display:block;margin:0 auto 1.5em}
+.basic-alignment.left,table.left,article img.left,article video.left,.basic-alignment.right,table.right,article img.right,article video.right{margin-bottom:.8em}
 #content{border-right:none}
 @media only screen and (min-width: 550px){body > header{font-size:1em}
 }@media only screen and (min-width: 768px){body{-webkit-text-size-adjust:auto}
@@ -129,14 +128,17 @@ article header p{font-size:.9em;color:#a2a2a2;margin:0;}
 .entry-content article h2:first-child,article header + h2{padding-top:0}
 article h2:first-child,article header + h2{background:none}
 article .feature{padding-top:.5em;margin-bottom:1em;padding-bottom:1em;background:#666 bottom left repeat-x;line-height:1.3em}
-article img,article video,article .flash-video{padding:.25em;background-color:#fff}
+article img,article video{padding:.25em;background-color:#fff}
 article .no-border{border:none;-webkit-border-radius:0;border-radius:0;-moz-border-radius:0;-webkit-box-shadow:none;box-shadow:none;background:transparent;padding:0}
-article video,article .flash-video{margin:0 auto 1.5em}
-article video{display:block;width:100%}
-article .flash-video > div{position:relative;display:block;padding-bottom:56.25%;padding-top:1px;height:0;overflow:hidden;}
-article .flash-video > div iframe,article .flash-video > div object,article .flash-video > div embed{position:absolute;top:0;left:0;width:100%;height:100%}
+article video{margin:0 auto 1.5em;display:block;width:100%}
 article > footer{color:#888;margin-top:2em;}
 article > footer p.meta{margin-bottom:.8em;font-size:.85em;clear:both;overflow:hidden}
+article #flash{margin-bottom:1.5em}
+article table.controls{margin:.3in auto;}
+article table.controls caption{text-align:center}
+article table.controls th{text-align:right}
+article table.controls td{padding-left:6px}
+article ul.footnotes{margin:1.2em}
 #content .blog-index article{padding-top:3em;padding-bottom:1.5em;border-top:4px solid #e6e6e6}
 #content .blog-index article:first-child{padding-top:1em;border-top:none}
 #content .blog-index article header{background:none}
