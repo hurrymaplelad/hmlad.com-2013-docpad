@@ -98,8 +98,12 @@ mark {
   font-style: italic;
   font-family: $serif; 
 }
-sup, sub { font-size: 0.8em; position: relative;  display: inline-block; }
-sup { top: -.5em; }
+sup, sub
+  font-size 0.6em
+  display inline
+  padding 0 1px
+sup
+  vertical-align super
 sub { bottom: -.5em; }
 
 q { font-style: italic;
@@ -121,8 +125,6 @@ pre, code, tt
 pre > code
   line-height 1.7
   padding-left 8%
-
-sub, sup { line-height: 0; }
 
 hr { margin-bottom: 0.2em; }
 
