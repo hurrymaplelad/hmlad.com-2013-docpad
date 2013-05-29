@@ -20,6 +20,7 @@ module.exports = (grunt) ->
         cwd: 'out/'
         src: [
           '**/index.html'
+          '!**/20??-??-??-*/index.html'
           'styles/**'
           'images/**'
           'favicon.png'
