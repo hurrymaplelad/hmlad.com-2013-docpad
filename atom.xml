@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-05-30T06:56:57.041Z</updated>
+  <updated>2013-06-05T06:49:09.274Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -255,6 +255,41 @@ Under the sea! Kinda fizzles after the whale rush…
     'https://rawgithub.com/hurrymaplelad/turtle-shootemup/master/turtle-shootemup.swf',
     'flash', 
     '550', '400', 
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
+      <title>Tower Defense</title>
+      <link href="http://hurrymaplelad.com/tower-defense/"/>
+      <updated>2004-01-01T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/tower-defense/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;p&gt;
+3 waves of enemies.  Basically endless money.  The mouse does everything.
+&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;p&gt;
+You may remember the grass from &lt;a href=&quot;/minigolf/&quot;&gt;Mini Golf&lt;/a&gt;.
+The enemy art is
+&lt;a id=&quot;nintendo&quot;
+   href=&quot;http://www.nintendo.com/&quot;
+  target=&quot;_blank&quot;&gt;&lt;/a&gt;
+handiwork.
+&lt;/p&gt;
+
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/tower-defense/master/tower-defense.swf',
+    'flash', 
+    '480', '360',
     '9.0.0'
   );
   window.onload = function() {
