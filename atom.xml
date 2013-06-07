@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-06-05T06:49:09.274Z</updated>
+  <updated>2013-06-07T06:13:24.173Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -290,6 +290,35 @@ handiwork.
     'https://rawgithub.com/hurrymaplelad/tower-defense/master/tower-defense.swf',
     'flash', 
     '480', '360',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
+      <title>Throwing</title>
+      <link href="http://hurrymaplelad.com/throwing/"/>
+      <updated>2004-01-01T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/throwing/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;table class=&quot;controls&quot;&gt;
+  &lt;caption&gt;Controls:&lt;/caption&gt;
+  &lt;tr&gt;&lt;th&gt;Catch:&lt;/th&gt;&lt;td&gt;Click&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Throw:&lt;/th&gt;&lt;td&gt;Drag&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;!-- more --&gt;
+
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/throwing/master/throwing.swf',
+    'flash',
+    '550', '400',
     '9.0.0'
   );
   window.onload = function() {
