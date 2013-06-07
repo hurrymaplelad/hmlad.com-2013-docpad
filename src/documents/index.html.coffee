@@ -41,6 +41,6 @@ module.exports = (docpad) ->
     div '.pagination', ->
       if page.hasNextPage()
         a '.prev', href: page.getNextPage(), '← Older'
-      a {href: '/archives'}, 'Archives'
+      a {href: '/archives/'}, 'Archives'
       if page.hasPrevPage()
         a '.next', href: page.getPrevPage(), '→ Newer'

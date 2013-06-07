@@ -1,0 +1,30 @@
+---
+layout: post
+post: true
+title: Tank
+---
+<div id="flash"></div>
+<p>
+From that semester on Newton and Photoshop filters.
+</p>
+<!-- more -->
+
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &rarr;</td></tr>
+  <tr><th>Aim:</th><td>Mouse</td></tr>
+  <tr><th>Shoot:</th><td>Click</td></tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/tank/master/tank.swf',
+    'flash',
+    '500', '300',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>
