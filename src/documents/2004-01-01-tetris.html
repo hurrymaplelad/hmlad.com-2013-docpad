@@ -1,0 +1,34 @@
+---
+layout: post
+post: true
+title: Tetris
+---
+<div id="flash"></div>
+<p>
+In soviet highschool, tetris clones you.
+</p>
+<!-- more -->
+
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &rarr;</td></tr>
+  <tr><th>Drop:</th><td>&darr;</td></tr>
+  <tr><th>Spin:</th><td>&uarr;</td></tr>
+</table>
+
+<p class="attribution">
+  Not sure where to give attribution, so I'll just point to 
+  <a href="http://en.wikipedia.org/wiki/Tetris" target="_blank">wikipedia</a>.
+</p>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/tetris/master/tetris.swf',
+    'flash',
+    '425', '400', 
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>
