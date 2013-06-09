@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-06-09T20:15:54.486Z</updated>
+  <updated>2013-06-09T20:26:00.233Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -231,6 +231,32 @@ broccoli.save(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
     </entry>
   
     <entry>
+      <title>Rotational Grazing</title>
+      <link href="http://hurrymaplelad.com/rotational-grazing/"/>
+      <updated>2008-09-01T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/rotational-grazing/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;p&gt;
+Click and drag to fence in the sheep.
+&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/rotational-grazing/master/rotational-grazing.swf',
+    'flash',
+    '900', '500',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
       <title>Robots in Isometric Projection</title>
       <link href="http://hurrymaplelad.com/isobots/"/>
       <updated>2004-01-09T00:00:00.000Z</updated>
@@ -345,35 +371,6 @@ Under the sea! Kinda fizzles after the whale rush…
     'https://rawgithub.com/hurrymaplelad/turtle-shootemup/master/turtle-shootemup.swf',
     'flash', 
     '550', '400', 
-    '9.0.0'
-  );
-  window.onload = function() {
-    document.getElementById('flash').focus();
-  };
-&lt;/script&gt;
-      </content>
-    </entry>
-  
-    <entry>
-      <title>Throwing</title>
-      <link href="http://hurrymaplelad.com/throwing/"/>
-      <updated>2004-01-05T00:00:00.000Z</updated>
-      <id>http://hurrymaplelad.com/throwing/</id>
-      <content type="html">
-        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
-&lt;table class=&quot;controls&quot;&gt;
-  &lt;caption&gt;Controls:&lt;/caption&gt;
-  &lt;tr&gt;&lt;th&gt;Catch:&lt;/th&gt;&lt;td&gt;Click&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th&gt;Throw:&lt;/th&gt;&lt;td&gt;Drag&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;!-- more --&gt;
-
-&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  swfobject.embedSWF(
-    'https://rawgithub.com/hurrymaplelad/throwing/master/throwing.swf',
-    'flash',
-    '550', '400',
     '9.0.0'
   );
   window.onload = function() {
