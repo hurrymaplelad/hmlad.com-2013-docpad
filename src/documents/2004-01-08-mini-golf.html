@@ -1,0 +1,22 @@
+---
+layout: post
+post: true
+title: Mini Golf
+---
+<div id="flash"></div>
+<p>
+Just three holes.  Aim with with mouse.  Click to putt.  Force ∝ distance from mouse to ball.  Sounds and title image plundered from the internet.
+</p>
+<!-- more -->
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/mini-golf/master/mini-golf.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  }
+</script>
