@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-06-09T18:53:49.991Z</updated>
+  <updated>2013-06-09T19:52:32.818Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -231,6 +231,32 @@ broccoli.save(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
     </entry>
   
     <entry>
+      <title>Mini Golf</title>
+      <link href="http://hurrymaplelad.com/mini-golf/"/>
+      <updated>2004-01-08T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/mini-golf/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;p&gt;
+Just three holes.  Aim with with mouse.  Click to putt.  Force ∝ distance from mouse to ball.  Sounds and title image plundered from the internet.
+&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/mini-golf/master/mini-golf.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  }
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
       <title>Pirates!</title>
       <link href="http://hurrymaplelad.com/pirates/"/>
       <updated>2004-01-07T00:00:00.000Z</updated>
@@ -351,44 +377,6 @@ From that semester on Newton and Photoshop filters.
     'https://rawgithub.com/hurrymaplelad/tank/master/tank.swf',
     'flash',
     '500', '300',
-    '9.0.0'
-  );
-  window.onload = function() {
-    document.getElementById('flash').focus();
-  };
-&lt;/script&gt;
-      </content>
-    </entry>
-  
-    <entry>
-      <title>Tetris</title>
-      <link href="http://hurrymaplelad.com/tetris/"/>
-      <updated>2004-01-03T00:00:00.000Z</updated>
-      <id>http://hurrymaplelad.com/tetris/</id>
-      <content type="html">
-        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
-&lt;p&gt;
-In soviet highschool, tetris clones you.
-&lt;/p&gt;
-&lt;!-- more --&gt;
-
-&lt;table class=&quot;controls&quot;&gt;
-  &lt;caption&gt;Controls:&lt;/caption&gt;
-  &lt;tr&gt;&lt;th&gt;Move:&lt;/th&gt;&lt;td&gt;&amp;larr; &amp;rarr;&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th&gt;Drop:&lt;/th&gt;&lt;td&gt;&amp;darr;&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th&gt;Spin:&lt;/th&gt;&lt;td&gt;&amp;uarr;&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;p class=&quot;attribution&quot;&gt;
-  Not sure where to give attribution, so I'll just point to 
-  &lt;a href=&quot;http://en.wikipedia.org/wiki/Tetris&quot; target=&quot;_blank&quot;&gt;wikipedia&lt;/a&gt;.
-&lt;/p&gt;
-&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  swfobject.embedSWF(
-    'https://rawgithub.com/hurrymaplelad/tetris/master/tetris.swf',
-    'flash',
-    '425', '400', 
     '9.0.0'
   );
   window.onload = function() {
