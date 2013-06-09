@@ -3,7 +3,7 @@
   <title>Hurry Maple Lad</title>
   <link href="http://hurrymaplelad.com/atom.xml" rel="self"/>
   <link href="http://hurrymaplelad.com"/>
-  <updated>2013-06-07T07:03:31.936Z</updated>
+  <updated>2013-06-09T07:21:43.332Z</updated>
   <id>http://hurrymaplelad.com/</id>
   <author>
     <name>Adam Hull</name>
@@ -231,9 +231,42 @@ broccoli.save(&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;() {
     </entry>
   
     <entry>
+      <title>Pirates!</title>
+      <link href="http://hurrymaplelad.com/pirates/"/>
+      <updated>2004-01-07T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/pirates/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;p&gt;
+  The turtle shaped rock is the only functioning dock.
+&lt;/p&gt;
+&lt;!-- more --&gt;
+&lt;table class=&quot;controls&quot;&gt;
+  &lt;caption&gt;Controls:&lt;/caption&gt;
+  &lt;tr&gt;&lt;th&gt;Move:&lt;/th&gt;&lt;td&gt;&amp;larr; &amp;uarr; &amp;rarr; &amp;darr;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Run:&lt;/th&gt;&lt;td&gt;&amp;larr;&amp;larr; or &amp;rarr;&amp;rarr;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Attack:&lt;/th&gt;&lt;td&gt; Space (try with different arrow keys)&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/pirates/master/pirates.swf',
+    'flash',
+    '600', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
       <title>Turtle Shoot 'em Up</title>
       <link href="http://hurrymaplelad.com/turtle-shootemup/"/>
-      <updated>2004-01-01T00:00:00.000Z</updated>
+      <updated>2004-01-06T00:00:00.000Z</updated>
       <id>http://hurrymaplelad.com/turtle-shootemup/</id>
       <content type="html">
         &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
@@ -265,44 +298,9 @@ Under the sea! Kinda fizzles after the whale rush…
     </entry>
   
     <entry>
-      <title>Tower Defense</title>
-      <link href="http://hurrymaplelad.com/tower-defense/"/>
-      <updated>2004-01-01T00:00:00.000Z</updated>
-      <id>http://hurrymaplelad.com/tower-defense/</id>
-      <content type="html">
-        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
-&lt;p&gt;
-3 waves of enemies.  Basically endless money.  The mouse does everything.
-&lt;/p&gt;
-&lt;!-- more --&gt;
-&lt;p&gt;
-You may remember the grass from &lt;a href=&quot;/minigolf/&quot;&gt;Mini Golf&lt;/a&gt;.
-The enemy art is
-&lt;a id=&quot;nintendo&quot;
-   href=&quot;http://www.nintendo.com/&quot;
-  target=&quot;_blank&quot;&gt;&lt;/a&gt;
-handiwork.
-&lt;/p&gt;
-
-&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  swfobject.embedSWF(
-    'https://rawgithub.com/hurrymaplelad/tower-defense/master/tower-defense.swf',
-    'flash', 
-    '480', '360',
-    '9.0.0'
-  );
-  window.onload = function() {
-    document.getElementById('flash').focus();
-  };
-&lt;/script&gt;
-      </content>
-    </entry>
-  
-    <entry>
       <title>Throwing</title>
       <link href="http://hurrymaplelad.com/throwing/"/>
-      <updated>2004-01-01T00:00:00.000Z</updated>
+      <updated>2004-01-05T00:00:00.000Z</updated>
       <id>http://hurrymaplelad.com/throwing/</id>
       <content type="html">
         &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
@@ -329,9 +327,43 @@ handiwork.
     </entry>
   
     <entry>
+      <title>Tank</title>
+      <link href="http://hurrymaplelad.com/tank/"/>
+      <updated>2004-01-04T00:00:00.000Z</updated>
+      <id>http://hurrymaplelad.com/tank/</id>
+      <content type="html">
+        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
+&lt;p&gt;
+From that semester on Newton and Photoshop filters.
+&lt;/p&gt;
+&lt;!-- more --&gt;
+
+&lt;table class=&quot;controls&quot;&gt;
+  &lt;caption&gt;Controls:&lt;/caption&gt;
+  &lt;tr&gt;&lt;th&gt;Move:&lt;/th&gt;&lt;td&gt;&amp;larr; &amp;rarr;&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Aim:&lt;/th&gt;&lt;td&gt;Mouse&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;th&gt;Shoot:&lt;/th&gt;&lt;td&gt;Click&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/tank/master/tank.swf',
+    'flash',
+    '500', '300',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+&lt;/script&gt;
+      </content>
+    </entry>
+  
+    <entry>
       <title>Tetris</title>
       <link href="http://hurrymaplelad.com/tetris/"/>
-      <updated>2004-01-01T00:00:00.000Z</updated>
+      <updated>2004-01-03T00:00:00.000Z</updated>
       <id>http://hurrymaplelad.com/tetris/</id>
       <content type="html">
         &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
@@ -357,40 +389,6 @@ In soviet highschool, tetris clones you.
     'https://rawgithub.com/hurrymaplelad/tetris/master/tetris.swf',
     'flash',
     '425', '400', 
-    '9.0.0'
-  );
-  window.onload = function() {
-    document.getElementById('flash').focus();
-  };
-&lt;/script&gt;
-      </content>
-    </entry>
-  
-    <entry>
-      <title>Tank</title>
-      <link href="http://hurrymaplelad.com/tank/"/>
-      <updated>2004-01-01T00:00:00.000Z</updated>
-      <id>http://hurrymaplelad.com/tank/</id>
-      <content type="html">
-        &lt;div id=&quot;flash&quot;&gt;&lt;/div&gt;
-&lt;p&gt;
-From that semester on Newton and Photoshop filters.
-&lt;/p&gt;
-&lt;!-- more --&gt;
-
-&lt;table class=&quot;controls&quot;&gt;
-  &lt;caption&gt;Controls:&lt;/caption&gt;
-  &lt;tr&gt;&lt;th&gt;Move:&lt;/th&gt;&lt;td&gt;&amp;larr; &amp;rarr;&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th&gt;Aim:&lt;/th&gt;&lt;td&gt;Mouse&lt;/td&gt;&lt;/tr&gt;
-  &lt;tr&gt;&lt;th&gt;Shoot:&lt;/th&gt;&lt;td&gt;Click&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;script src=&quot;http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;
-  swfobject.embedSWF(
-    'https://rawgithub.com/hurrymaplelad/tank/master/tank.swf',
-    'flash',
-    '500', '300',
     '9.0.0'
   );
   window.onload = function() {
