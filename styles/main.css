@@ -14,9 +14,8 @@ a:focus{color:#e0a381}
 a:active{color:#97867d}
 a:hover,a:active{text-decoration:underline}
 html{background:#fff}
-body > div > div{background:transparent}
 .heading,h1,h2,h3,h4,h5,h6{font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif}
-.sans,body,article header p.meta,article > footer,#content .blog-index footer,#blog-archives a.category,#blog-archives time{font-family:'HelveticaNeue-Light','HelveticaNeue',Helvetica,Arial,sans-serif}
+.sans,body,article header p.meta,#content .blog-index footer,#blog-archives a.category,#blog-archives time{font-family:'HelveticaNeue-Light','HelveticaNeue',Helvetica,Arial,sans-serif}
 .serif{font-family:"PT Serif",Georgia,Times,"Times New Roman",serif}
 .mono,pre,code,tt{font-family:PragmataPro,Menlo,Monaco,"Andale Mono","Lucida Console","Courier New",monospace;font-size:85%}
 body > header h1{font-size:3em !important;font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif;font-weight:bold;line-height:.85em;text-transform:uppercase}
@@ -131,7 +130,7 @@ article .feature{padding-top:.5em;margin-bottom:1em;padding-bottom:1em;backgroun
 article img,article video{padding:.25em;background-color:#fff}
 article .no-border{border:none;-webkit-border-radius:0;border-radius:0;-moz-border-radius:0;-webkit-box-shadow:none;box-shadow:none;background:transparent;padding:0}
 article video{margin:0 auto 1.5em;display:block;width:100%}
-article > footer{color:#888;margin-top:2em;}
+article > footer{margin-top:2em;}
 article > footer p.meta{margin-bottom:.8em;font-size:.85em;clear:both;overflow:hidden}
 article #flash{margin-bottom:1.5em}
 article table.controls{margin:.3in auto;}
