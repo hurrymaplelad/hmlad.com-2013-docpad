@@ -2,8 +2,9 @@
 layout: default
 ---
 url = require 'url'
-{a, article, div, footer, h1, header, p, style, tag, text, raw} = require 'teacup'
+{a, article, div, footer, h1, header, p, script, style, tag, text, raw} = require 'teacup'
 {date} = require '../partials/helpers'
+disqus = require '../partials/disqus'
 
 module.exports = (docpad) ->
   {document, content} = docpad
@@ -50,3 +51,8 @@ module.exports = (docpad) ->
             a '.basic-alignment.right', href: nextDocument.url, ->
               text nextDocument.title
               raw ' &raquo;'
+
+        if document.disqus
+          disqus
+            shortname: document.disqus.shortname
+            url: document.canonical or document.url

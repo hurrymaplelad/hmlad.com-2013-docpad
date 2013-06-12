@@ -3,6 +3,8 @@ layout: post
 post: true
 title: "How to Remove a Property from a Mongoose.js Schema"
 canonical: "http://bytes.goodeggs.com/post/36553128854/how-to-remove-a-property-from-a-mongoosejs-schema"
+disqus:
+  shortname: goodeggsbytes
 ---
 
 This should be simple, but Mongoose really clings to data in existing documents.  I'll walk through all the ways I wanted it to work that failed.  We'll remove an `organic` flag from a toy `Food` model so we can replace it with [Bittman's dream label](http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html).  If you just came for the solution, I arrived at:
