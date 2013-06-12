@@ -7,10 +7,6 @@ $link-color-visited ?= desaturate(lighten($link-color, 15), 60)
 $link-color-active ?= $link-color-visited 
 
 // Main Section Colors
-$site-bg = white;
-$main-bg ?= transparent 
-$page-bg ?= transparent 
-
 $header-bg ?= transparent 
 $header-border ?= none 
 $title-color ?= #000 
@@ -30,24 +26,12 @@ $nav-color ?= $text-color
 $nav-color-hover ?= $link-color 
 $nav-placeholder ?= desaturate(darken($text-color, 10), 15) 
 $nav-border ?= lighten($text-color-light, 38) 
-$nav-border-top ?= lighten($site-bg, 50) 
 $nav-border-bottom ?= $nav-border 
 $nav-border-left ?= $nav-border 
 $nav-border-right ?= #fff 
 
-$footer-color ?= lighten($text-color-light, 10) 
-$footer-color-hover ?= $text-color-light 
-$footer-bg ?= transparent 
-$footer-bg-front ?= transparent 
-$footer-bg-back ?= transparent 
-$footer-border-top ?= darken($site-bg, 10) 
-$footer-border-bottom ?= none 
 $footer-link-color ?= darken($text-color-light, 38) 
-$footer-link-color-hover ?= darken($footer-color, 25) 
 $page-border-bottom ?= lighten($text-color-light, 38) 
-
-$article-border ?= $footer-border-top 
-
 
 /* Core theme application */
 
@@ -66,13 +50,5 @@ a
   &:hover, &:active
     text-decoration: underline
 
-html {
-  background: $site-bg;
-}
-body {
-  > div {
-    > div {
-      background: $main-bg;
-    }
-  }
-}
+html
+  background white
