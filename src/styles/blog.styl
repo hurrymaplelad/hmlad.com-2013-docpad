@@ -1,20 +1,19 @@
-.separator {
+.separator
   content: "—";
   padding: 0 .4em 0 .2em;
   display: inline-block;
-}
 
 article
   padding-top: 1em;
   a
-    @extend .force-wrap; 
+    @extend .force-wrap;
   header
     position: relative;
     h1
       margin: 0;
-      a 
+      a
         text-decoration: none;
-        &:hover 
+        &:hover
           text-decoration: none;
     p
       font-size: .9em;
@@ -28,9 +27,9 @@ article
       margin-bottom: 1.5em;
   h2
     padding-top: 0.8em;
-  .entry-content & h2:first-child, header + h2 
+  .entry-content & h2:first-child, header + h2
     padding-top: 0;
-  h2:first-child, header + h2 
+  h2:first-child, header + h2
     background: none;
   .feature
     padding-top: .5em;
@@ -87,8 +86,8 @@ article
   article header
     background: none;
   article h1
-    a 
-      color: inherit; 
+    a
+      color: inherit;
       &:hover
         color: $link-color-hover;
   a[rel=full-article]

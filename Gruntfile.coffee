@@ -1,4 +1,3 @@
-{exec} = require 'child_process'
 {filterDev} = require 'matchdep'
 
 module.exports = (grunt) ->

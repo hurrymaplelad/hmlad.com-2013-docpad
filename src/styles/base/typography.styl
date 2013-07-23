@@ -1,16 +1,16 @@
-$blockquote ?= $type-border 
-$sans ?= 'HelveticaNeue-Light','HelveticaNeue',Helvetica,Arial,sans-serif 
-$serif ?= "PT Serif", Georgia, Times, "Times New Roman", serif 
-$mono ?= PragmataPro, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace 
-$heading-font-family ?= 'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif 
-$header-title-font-family ?= $heading-font-family 
-$nav-font-family ?= $heading-font-family 
+$blockquote ?= $type-border
+$sans ?= 'HelveticaNeue-Light','HelveticaNeue',Helvetica,Arial,sans-serif
+$serif ?= "PT Serif", Georgia, Times, "Times New Roman", serif
+$mono ?= PragmataPro, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace
+$heading-font-family ?= 'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif
+$header-title-font-family ?= $heading-font-family
+$nav-font-family ?= $heading-font-family
 
-$h2 ?= 1.5em 
-$h3 ?= 1.3em 
-$h4 ?= 1em 
-$h5 ?= 0.9em 
-$h6 ?= 0.8em 
+$h2 ?= 1.5em
+$h3 ?= 1.3em
+$h4 ?= 1em
+$h5 ?= 0.9em
+$h6 ?= 0.8em
 
 // Fonts
 .heading {
@@ -93,7 +93,7 @@ mark {
   background-color: transparent;
   font-weight: normal;
   font-style: italic;
-  font-family: $serif; 
+  font-family: $serif;
 }
 sup, sub
   font-size 0.6em
@@ -116,7 +116,7 @@ del, s { text-decoration: line-through; }
 
 abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 
-pre, code, tt 
+pre, code, tt
   @extend .mono
 
 pre > code
@@ -144,9 +144,9 @@ blockquote {
     line-height: 1.2;
     padding-right: 30%;
     text-align: right;
-    a { 
-      color: $text-color-light !important; 
-      word-wrap: break-word; 
+    a {
+      color: $text-color-light !important;
+      word-wrap: break-word;
     }
   }
   @media only screen and (min-width: 992px) {
