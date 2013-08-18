@@ -67,13 +67,9 @@ h1.status-code{font-size:12em}
 .group:after,body > header:after,body > nav:after,body > footer:after,body #content > article:after,body #content > div > article:after,body #content > div > section:after,body div.pagination:after{clear:both}
 body{-webkit-text-size-adjust:none;max-width:676px;position:relative;margin:0 auto;}
 body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px;}
-@media only screen and (min-width: 480px){body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px}
-}@media only screen and (min-width: 768px){body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px}
-}@media only screen and (min-width: 992px){body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px}
-}body div.pagination{margin-left:24px;margin-right:24px;}
-@media only screen and (min-width: 480px){body div.pagination{margin-left:24px;margin-right:24px}
-}@media only screen and (min-width: 768px){body div.pagination{margin-left:24px;margin-right:24px}
-}@media only screen and (min-width: 992px){body div.pagination{margin-left:24px;margin-right:24px}
+@media only screen and (min-width: 768px){body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px}
+}body div.pagination{padding-left:24px;padding-right:24px;}
+@media only screen and (min-width: 768px){body div.pagination{padding-left:24px;padding-right:24px}
 }body > header{font-size:1em;padding-top:2em;padding-bottom:.75em}
 #content > div,#content > article{width:100%}
 .flex-content,table,article img,article video{max-width:100%;height:auto}
@@ -115,7 +111,10 @@ body > footer{font-size:.7em;color:#272727;position:relative;padding-top:.5em;ma
 .linkedin:hover,.linkedin:active{background-image:url("/images/icons/linkedin.png")}
 .stackoverflow{background-image:url("/images/icons/stackoverflow.desaturated.png");}
 .stackoverflow:hover,.stackoverflow:active{background-image:url("/images/icons/stackoverflow.png")}
-.separator,article > footer .byline + time:before,article > footer time +time:before,article > footer .comments:before,article > footer .byline ~ .categories:before{content:"—";padding:0 .4em 0 .2em;display:inline-block}
+.context-row,article pre > code,article p.update{padding-top:1em;padding-bottom:1em;padding-left:24px;padding-right:24px;margin-left:-24px;margin-right:-24px;}
+@media only screen and (min-width: 768px){.context-row,article pre > code,article p.update{padding-left:24px;padding-right:24px}
+}@media only screen and (min-width: 768px){.context-row,article pre > code,article p.update{margin-left:-24px;margin-right:-24px}
+}.separator,article > footer .byline + time:before,article > footer time +time:before,article > footer .comments:before,article > footer .byline ~ .categories:before{content:"—";padding:0 .4em 0 .2em;display:inline-block}
 article{padding-top:1em;}
 article header{position:relative;margin-bottom:1em;}
 article header h1{margin:0;}
@@ -138,6 +137,9 @@ article table.controls caption{text-align:center}
 article table.controls th{text-align:right}
 article table.controls td{padding-left:6px}
 article ul.footnotes{margin:1.2em}
+article pre > code{background-color:#fcfbf8;overflow:auto}
+article p.update{background-color:#fffff9;}
+article p.update:before{content:'Update:';font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif;display:block;margin-bottom:.3em}
 #content .blog-index article{padding-top:3em;padding-bottom:1.5em;border-top:4px solid #e6e6e6}
 #content .blog-index article:first-child{padding-top:1em;border-top:none}
 #content .blog-index article header{background:none}

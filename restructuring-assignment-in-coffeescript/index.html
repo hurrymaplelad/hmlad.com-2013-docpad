@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Restructuring Assignment in CoffeeScript</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bytes.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="Hurry Maple Lad" type="application/atom+xml" href="/atom.xml" /><script>var _gaq = _gaq || [];
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Structuring Expressions in CoffeeScript</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bytes.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="Hurry Maple Lad" type="application/atom+xml" href="/atom.xml" /><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-35976996-1']);
 _gaq.push(['_trackPageview']);
 
@@ -6,7 +6,11 @@ _gaq.push(['_trackPageview']);
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><header><h1 class="entry-title">Restructuring Assignment in CoffeeScript</h1><p class="meta"><time datetime="2013-02-12T00:00:00.000Z">February 12th, 2013</time></p><p class="meta canonical"><a href="http://bytes.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" target="_blank">Crossposted from bytes.goodeggs.com</a></p></header><div class="entry-content"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart. You won’t find this one in the docs.</p>
+})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><header><h1 class="entry-title">Structuring Expressions in CoffeeScript</h1><p class="meta"><time datetime="2013-02-12T00:00:00.000Z">February 12th, 2013</time></p><p class="meta canonical"><a href="http://bytes.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" target="_blank">Crossposted from bytes.goodeggs.com</a></p></header><div class="entry-content"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
+<p class="update">
+  For a while I was calling this lexeme <em>restructuring assignment</em> until some on Stack Overflow <a href="http://stackoverflow.com/a/14822198/407845">pointed out that name was ridiculous</a>.  Now I&#39;ve taken to the name <em>structuring expressions</em>.
+</p>
+
 <!-- more -->
 
 <p>Sure <a href="http://blog.carbonfive.com/2011/09/28/destructuring-assignment-in-coffeescript/">C5 told you all about</a> CoffeeScript’s <a href="http://coffeescript.org/#destructuring">destructing assignment</a> syntax for objects…</p>
@@ -34,7 +38,7 @@ coffee&gt; <span class="keyword">new</span> User(name: <span class="string">'Foo
 { name: <span class="string">'foo'</span>, age: <span class="number">42</span> }</code></pre>
 <p>But what does this do?</p>
 <pre class="highlighted"><code class="coffeescript">coffee&gt; age = <span class="number">42</span>
-<span class="number">42</span> 
+<span class="number">42</span>
 
 coffee&gt; user = { <span class="string">'Foo'</span>, age }
 ?</code></pre>
@@ -53,12 +57,12 @@ coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span
 <span class="function"><span class="title">template</span></span> = ({ user, face }) -&gt;
   <span class="string">"&lt;div&gt;<span class="subst">#{user.name}</span> <span class="subst">#{face}</span>&lt;/div&gt;"</span>
 
-<span class="class"><span class="keyword">class</span> <span class="title">UserView</span> </span>
+<span class="class"><span class="keyword">class</span> <span class="title">UserView</span></span>
   constructor: ({ <span class="property">@user</span> }) -&gt;
 
   render: -&gt;
-    <span class="property">@html</span> = template { 
-      <span class="property">@user</span> 
+    <span class="property">@html</span> = template {
+      <span class="property">@user</span>
       face: <span class="string">':)'</span>
     }
 
