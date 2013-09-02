@@ -7,12 +7,12 @@
     "docpad": "~6.32.0",
     "docpad-plugin-cleanurls": "git://github.com/hurrymaplelad/docpad-plugin-cleanurls.git#trailing_slashes_built",
     "docpad-plugin-datefromfilename": "~1.0.1",
-    "docpad-plugin-eco": "~2.0.2",
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-paged": "~2.1.4",
     "docpad-plugin-stylus": "~2.3.0",
     "docpad-plugin-teacup": "~2.0.3",
-    "docpad-plugin-highlightjs": "~2.1.6"
+    "docpad-plugin-highlightjs": "~2.1.6",
+    "docpad-plugin-rss": "~2.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

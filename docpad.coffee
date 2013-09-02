@@ -1,8 +1,8 @@
 require 'sugar'
 
-module.exports = 
+module.exports =
   env: 'static'
-  
+
   templateData:
     site:
       title: 'Hurry Maple Lad'
@@ -22,3 +22,5 @@ module.exports =
       removeDate: true
     cleanurls:
       trailingSlashes: true
+    rss:
+      collection: 'posts'

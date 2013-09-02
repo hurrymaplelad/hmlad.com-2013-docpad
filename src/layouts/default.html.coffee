@@ -25,7 +25,7 @@ module.exports = ({site, document, content}) ->
 
       link rel: 'icon', type: 'image/png', href: '/favicon.png'
       link rel: 'stylesheet', href: '/styles/main.css'
-      link rel: 'alternate', title: site.title, type: 'application/atom+xml', href: '/atom.xml'
+      link rel: 'alternate', title: site.title, type: 'application/rss+xml', href: '/rss.xml'
 
       script """
         var _gaq = _gaq || [];
@@ -43,7 +43,7 @@ module.exports = ({site, document, content}) ->
       header ->
         h1 ->
           a href: '/', ->
-            raw 'Hurry <br>Maple <br> Lad' 
+            raw 'Hurry <br>Maple <br> Lad'
 
       div '#main', ->
         div '#content', ->
