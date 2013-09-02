@@ -24,7 +24,9 @@
     "grunt-docs": "~0.5.1",
     "grunt-open": "~0.2.0",
     "grunt-shell": "~0.2.2",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "grunt-new": "0.0.0",
+    "inquirer": "~0.3.1"
   },
   "repository": {
     "type": "git",

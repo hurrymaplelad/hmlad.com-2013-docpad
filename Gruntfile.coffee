@@ -1,4 +1,5 @@
 {filterDev} = require 'matchdep'
+inquirer = require 'inquirer'
 
 module.exports = (grunt) ->
   # Load grunt plugins from devDependencies
@@ -72,7 +73,7 @@ module.exports = (grunt) ->
             done()
       captureCurrentRef:
         command: 'echo "$(git symbolic-ref --short HEAD):$(git log -1 --format=%h)"'
-        options: 
+        options:
           stdout: false
           callback: (err, stdout, stderr, done) ->
             if err ?= stderr
@@ -94,7 +95,19 @@ module.exports = (grunt) ->
           'rename:release'
         ]
 
-  grunt.registerTask 'generate', 
+    new:
+      post:
+        template: 'generators/templates/post.ld'
+        data: (done) ->
+          inquirer.prompt [name: 'title', message: 'Title'], (answers) ->
+            title = answers.title
+            date = grunt.template.today 'yyyy-mm-dd'
+            slug = grunt.util._.dasherize title.toLowerCase()
+            done null,
+              title: title
+              dest: "src/documents/#{date}-#{slug}.html.md"
+
+  grunt.registerTask 'generate',
     'Render docpad documents in ./out',
     [
       'clean:out'
@@ -115,8 +128,8 @@ module.exports = (grunt) ->
       'watch'
     ]
 
-  grunt.registerTask 'stage', 
-    'Stage a release build in ./release ready to be committed to the gh-pages branch', 
+  grunt.registerTask 'stage',
+    'Stage a release build in ./release ready to be committed to the gh-pages branch',
     [
       'clean'
       'shell:makeReleaseDir'
