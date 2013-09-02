@@ -1,6 +1,7 @@
 ---
-layout: post
 title: "Ids in Mongoose, JSON, and Backbone"
+canonical: "http://bites.goodeggs.com/ids-in-mongoose-json-and-backbone/"
+layout: post
 post: true
 style: |
   .ids {

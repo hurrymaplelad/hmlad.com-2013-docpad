@@ -2,7 +2,7 @@
 layout: post
 post: true
 title: "How to Remove a Property from a Mongoose.js Schema"
-canonical: "http://bytes.goodeggs.com/post/36553128854/how-to-remove-a-property-from-a-mongoosejs-schema"
+canonical: "http://bites.goodeggs.com/post/36553128854/how-to-remove-a-property-from-a-mongoosejs-schema"
 disqus:
   shortname: goodeggsbytes
 ---
@@ -10,8 +10,8 @@ disqus:
 This should be simple, but Mongoose really clings to data in existing documents.  I'll walk through all the ways I wanted it to work that failed.  We'll remove an `organic` flag from a toy `Food` model so we can replace it with [Bittman's dream label](http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html).  If you just came for the solution, I arrived at:
 
 ``` js
-Food.collection.update({}, 
-  {$unset: {organic: true}}, 
+Food.collection.update({},
+  {$unset: {organic: true}},
   {multi: true, safe: true}
 );
 ```
@@ -92,9 +92,9 @@ Wow.  Fine.  Now `strict` decides to help out.
 Mongoose isn't cooperating.  Time to talk directly to Mongo.  Maybe Mongoose can at least offer me some [update sugar](http://mongoosejs.com/docs/api.html#model_Model-update):
 
 ``` js
-Food.update({}, 
-  {$unset: {organic: true}}, 
-  {multi: true, safe: true}, 
+Food.update({},
+  {$unset: {organic: true}},
+  {multi: true, safe: true},
   function(err) {
     Food.findById(broccoli, function(err, broccoli) {
       console.log(broccoli.get('organic'));
@@ -112,9 +112,9 @@ This must be `strict` still [keeping us safe](https://groups.google.com/d/topic/
 Okay.  Last chance Mongoose.  Just give me the collection.
 
 ``` js
-Food.collection.update({}, 
-  {$unset: {organic: true}}, 
-  {multi: true, safe: true}, 
+Food.collection.update({},
+  {$unset: {organic: true}},
+  {multi: true, safe: true},
   function(err) {
     Food.findById(broccoli, function(err, brocolli) {
       console.log(broccoli.get('organic'));
@@ -124,6 +124,6 @@ Food.collection.update({},
 > undefined
 ```
 
-Phew.  
+Phew.
 
 Here's a [Mocha spec](https://gist.github.com/4008255) reproducing this frustrating sequence.  How should we make it be better?

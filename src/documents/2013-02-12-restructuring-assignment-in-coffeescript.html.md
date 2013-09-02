@@ -2,7 +2,7 @@
 layout: post
 post: true
 title: "Structuring Expressions in CoffeeScript"
-canonical: "http://bytes.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript"
+canonical: "http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript"
 tags:
   - CoffeeScript
   - syntax

@@ -8,7 +8,7 @@ title: "Teacup Released"
 
 CoffeeScript templating from the Good Eggs labs:
 
-- [Intro Post](http://bytes.goodeggs.com/post/40042760798/teacup-coffeescript-templates-for-developer-happiness)
+- [Intro Post](http://bites.goodeggs.com/post/40042760798/teacup-coffeescript-templates-for-developer-happiness)
 - [Homepage](http://goodeggs.github.com/teacup/)
 - [Source on Github](http://github.com/goodeggs/teacup/)
 

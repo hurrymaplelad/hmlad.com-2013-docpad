@@ -16,7 +16,7 @@ module.exports = (docpad) ->
   nextDocument = null
   if index < posts.length - 1
     previousDocument = posts.at(index + 1).toJSON()
-  if index > 0 
+  if index > 0
     nextDocument = posts.at(index - 1).toJSON()
 
   div ->
@@ -32,7 +32,7 @@ module.exports = (docpad) ->
             date document
           if document.canonical?
             p '.meta.canonical', ->
-              text 
+              text
               a href: document.canonical, target: '_blank', ->
                 text 'Crossposted from '
                 text url.parse(document.canonical, false, true).host
@@ -44,9 +44,9 @@ module.exports = (docpad) ->
         p '.meta', ->
           if previousDocument
             a '.basic-alignment.left', href: previousDocument.url, ->
-              raw '&laquo; ' 
+              raw '&laquo; '
               text previousDocument.title
-            
+
           if nextDocument
             a '.basic-alignment.right', href: nextDocument.url, ->
               text nextDocument.title
@@ -55,4 +55,4 @@ module.exports = (docpad) ->
         if document.disqus
           disqus
             shortname: document.disqus.shortname
-            url: document.canonical or document.url
+            url: document.disqus.url or document.canonical or document.url
