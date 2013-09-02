@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title><![CDATA[Hurry Maple Lad]]></title>
+        <description><![CDATA[Hurry Maple Lad]]></description>
+        <link>http://hurrymaplelad.com</link>
+        <generator>NodeJS RSS Module</generator>
+        <lastBuildDate>Mon, 02 Sep 2013 21:57:03 GMT</lastBuildDate>
+        <atom:link href="http://hurrymaplelad.com/rss.xml" rel="self" type="application/rss+xml"/>
+        <author><![CDATA[Adam Hull]]></author>
+        <pubDate>Mon, 02 Sep 2013 21:57:00 GMT</pubDate>
+        <item>
+            <title><![CDATA[Fibrous on Harmony Generators? Impossible]]></title>
+            <description><![CDATA[<p>A good Friday afternoon chat about asynchronous programming models left me wondering if the fibrous API could be implemented on top of <a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators">ES6 generators</a>. Generators are baked in to Node 0.11, Chrome 19, and Firefox.  A port would be a big boost to interoperability.  <a href="https://github.com/google/traceur-compiler">Traceur</a> can even transform generator based code into a <a href="http://traceur-compiler.googlecode.com/git/demo/repl.html#function*%20test%20()%20%7B%0A%20%20yield%201%3B%0A%20%20var%20a%20%3D%20yield%202%3B%0A%20%20try%20%7B%0A%20%20%20%20yield%20a%3B%0A%20%20%7D%20catch%20(e)%20%7B%0A%20%20%20%20yield%2099%3B%0A%20%20%7D%0A%20%20for(var%20i%20%3D0%3B%20i%20%3C%201%3B%20i%2B%2B)%20%7B%0A%20%20%20%20yield%20123%3B%0A%20%20%7D%0A%7D%0A%0Afunction%20normal()%20%7B%0A%20%20var%20a%20%3D%20b%3B%0A%20%20return%20b%3B%0A%7D">giant state machine</a> that runs on all of today&#39;s environments.</p>
+<p>At first the port looked promising. Wikipedia claimed that general coroutines could be <a href="http://en.wikipedia.org/wiki/Coroutine#Comparison_with_generators">built on generators</a>, and many folks have <a href="http://taskjs.org/">done</a> <a href="https://gist.github.com/creationix/5762837">just</a> <a href="https://gist.github.com/Benvie/5667557">that</a>.  After a little noodling I&#39;m pretty sure it can&#39;t be done.  In a Harmony environment a function can only suspend execution at <code>yield</code> expressions and <code>yield</code> expressions can only appear in generator functions. A yield expression cannot be wrapped up behind a fibrous <code>sync</code> or <code>wait</code>.</p>
+<!-- more -->
+
+<p>Let&#39;s say we&#39;ve got a fibrous function <code>f</code> that synchronously calls asychronous function <code>g</code>:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> g = <span class="keyword">function</span>(callback) {
+  setTimeout(<span class="keyword">function</span>() {
+    console.log(<span class="string">'g done'</span>);
+    callback();
+  }, <span class="number">1000</span>);
+};
+
+<span class="keyword">var</span> f = fibrous(<span class="keyword">function</span>() {
+  g.sync();
+  console.log(<span class="string">'f done'</span>);
+};</code></pre>
+<p>When we call <code>f</code> we wait one second, log <code>&#39;g done&#39;</code>, then log <code>&#39;f done&#39;</code>.  We need to halt <code>f</code> before the <code>console.log</code>, but <code>f</code> has no yield expressions.  It cannot be halted with any combination of ES6 generators.  Tough break.</p>
+<hr>
+<h3>Related</h3>
+<ul>
+<li><a href="http://taskjs.org/">Task.js</a> seems like a great way to get fibrous-like behavior within the generator constraints.  Still waiting on <a href="https://github.com/mozilla/task.js/issues/28">ES6 syntax support</a> and a <a href="https://github.com/mozilla/task.js/issues/17">CommonJS module published to NPM</a>.</li>
+<li>Fellow coffee lovers, the proposed <a href="https://github.com/jashkenas/coffee-script/pull/3078">coffee script syntax for generators</a> is a &#39;lil fugly and worth checking out.</li>
+</ul>
+]]></description>
+            <link>http://hurrymaplelad.com/fibrous-on-harmony-generators/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/fibrous-on-harmony-generators/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Sat, 17 Aug 2013 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Ids in Mongoose, JSON, and Backbone]]></title>
+            <description><![CDATA[<p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
+<p>If you find yourself typing <code>vegetable.id</code> when you really needed <code>new ObjectID(vegetable.toJSON()._id)</code> this fancy chart might help:
+<!-- more --></p>
+<table class="ids">
+  <tr><th>Mongoose</th><th>id</th><th>_id</th></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#document_Document-id">document</a></td><td>String</td><td>ObjectID</td></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#query_Query-lean">lean document</a></td><td>∅</td><td>ObjectID</td></tr>
+  <tr><td><a href="http://mongoosejs.com/docs/api.html#document_Document-toJSON">document.toJSON()</a></td><td>∅</td><td>ObjectID</td></tr>
+
+  <tr><th>JSON</th><th></th><th></th></tr>
+  <tr><td><a href="http://www.json.org/">object</a></td><td>∅</td><td>String</td></tr>
+
+  <tr><th>Backbone</th><th></th><th></th></tr>
+  <tr><td><a href="http://backbonejs.org/#Model-id">model</td><td>String</td><td>∅</td></tr>
+  <tr><td><a href="http://backbonejs.org/#Model-get">model.get()</td><td>∅</td><td>String</td></tr>
+</table>]]></description>
+            <link>http://hurrymaplelad.com/ids-in-mongoose-json-and-backbone/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/ids-in-mongoose-json-and-backbone/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Tue, 02 Apr 2013 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[A Breakthrough a Day]]></title>
+            <description><![CDATA[<blockquote>
+<p>A breakthrough a day keeps the crisis at bay.</p>
+<p><cite>E. F. Schumacher<br>
+<a href="http://www.goodreads.com/book/show/1117634.Small_Is_Beautiful">Small is Beautiful</a></cite></p>
+</blockquote>
+]]></description>
+            <link>http://hurrymaplelad.com/a-breakthrough-a-day/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/a-breakthrough-a-day/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Mon, 18 Feb 2013 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Structuring Expressions in CoffeeScript]]></title>
+            <description><![CDATA[<p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
+<p class="update">
+  For a while I was calling this lexeme <em>restructuring assignment</em> until some on Stack Overflow <a href="http://stackoverflow.com/a/14822198/407845">pointed out that name was ridiculous</a>.  Now I&#39;ve taken to the name <em>structuring expressions</em>.
+</p>
+
+<!-- more -->
+
+<p>Sure <a href="http://blog.carbonfive.com/2011/09/28/destructuring-assignment-in-coffeescript/">C5 told you all about</a> CoffeeScript’s <a href="http://coffeescript.org/#destructuring">destructing assignment</a> syntax for objects…</p>
+<p>How it can reach deep into nested structures</p>
+<pre class="highlighted"><code class="coffeescript">coffee&gt; user = name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state:
+<span class="string">'AL'</span> }
+{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state: <span class="string">'AL'</span> } }
+
+coffee&gt; { address: { city, state } } = user
+{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state: <span class="string">'AL'</span> } }
+
+coffee&gt; city
+<span class="string">'Anytown'</span></code></pre>
+<p>Or pluck apart function arguments</p>
+<pre class="highlighted"><code class="coffeescript"><span class="function"><span class="title">displayName</span></span> = ({ name, age }) -&gt;
+  console.log <span class="string">"<span class="subst">#{name}</span>, <span class="subst">#{age}</span> year(s) old"</span>
+
+coffee&gt; displayName name: <span class="string">'Foo'</span>, age: <span class="number">42</span>
+Foo, <span class="number">42</span> year(s) old</code></pre>
+<p>Or even destructure directly to instance attributes</p>
+<pre class="highlighted"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
+  constructor: ({ <span class="property">@name</span>, <span class="property">@age</span> }) -&gt;
+
+coffee&gt; <span class="keyword">new</span> User(name: <span class="string">'Foo'</span>, age: <span class="number">42</span>)
+{ name: <span class="string">'foo'</span>, age: <span class="number">42</span> }</code></pre>
+<p>But what does this do?</p>
+<pre class="highlighted"><code class="coffeescript">coffee&gt; age = <span class="number">42</span>
+<span class="number">42</span>
+
+coffee&gt; user = { <span class="string">'Foo'</span>, age }
+?</code></pre>
+<p>My fudge-fingers managed to mash that one unknowingly into my editor one day while attempting to rack up velocity points on the latest story. Instead of hemorrhaging the expected SyntaxError, it evaluated to this beautiful new object</p>
+<pre class="highlighted"><code class="coffeescript">{ Foo: <span class="string">'Foo'</span>, age: <span class="number">42</span> }</code></pre>
+<p>Now I’ve got a handy set syntax</p>
+<pre class="highlighted"><code class="coffeescript">coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span> }
+<span class="literal">true</span>
+
+coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> }
+<span class="literal">false</span></code></pre>
+<p>And with consistent variable naming, breezy data marshaling between some framework actors</p>
+<pre class="highlighted"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
+  constructor: ({ <span class="property">@name</span>, <span class="property">@age</span> }) -&gt;
+
+<span class="function"><span class="title">template</span></span> = ({ user, face }) -&gt;
+  <span class="string">"&lt;div&gt;<span class="subst">#{user.name}</span> <span class="subst">#{face}</span>&lt;/div&gt;"</span>
+
+<span class="class"><span class="keyword">class</span> <span class="title">UserView</span></span>
+  constructor: ({ <span class="property">@user</span> }) -&gt;
+
+  render: -&gt;
+    <span class="property">@html</span> = template {
+      <span class="property">@user</span>
+      face: <span class="string">':)'</span>
+    }
+
+coffee&gt; user = <span class="keyword">new</span> User(name: <span class="string">'Foo'</span>, age: <span class="number">42</span>)
+{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span> }
+
+coffee&gt; view = <span class="keyword">new</span> UserView {user}
+{ user: { name: <span class="string">'Foo'</span>, age: <span class="number">42</span> } }
+
+coffee&gt; view.render()
+<span class="string">'&lt;div&gt;Foo :)&lt;/div&gt;'</span></code></pre>
+]]></description>
+            <link>http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Tue, 12 Feb 2013 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Teacup Released]]></title>
+            <description><![CDATA[<p><img src="https://raw.github.com/goodeggs/teacup/master/docs/teacup.jpg" alt="Teacup"></p>
+<p>CoffeeScript templating from the Good Eggs labs:</p>
+<ul>
+<li><a href="http://bites.goodeggs.com/post/40042760798/teacup-coffeescript-templates-for-developer-happiness">Intro Post</a></li>
+<li><a href="http://goodeggs.github.com/teacup/">Homepage</a></li>
+<li><a href="http://github.com/goodeggs/teacup/">Source on Github</a></li>
+</ul>
+]]></description>
+            <link>http://hurrymaplelad.com/teacup-released/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/teacup-released/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Wed, 09 Jan 2013 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[How to Remove a Property from a Mongoose.js Schema]]></title>
+            <description><![CDATA[<p>This should be simple, but Mongoose really clings to data in existing documents.  I&#39;ll walk through all the ways I wanted it to work that failed.  We&#39;ll remove an <code>organic</code> flag from a toy <code>Food</code> model so we can replace it with <a href="http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html">Bittman&#39;s dream label</a>.  If you just came for the solution, I arrived at:</p>
+<pre class="highlighted"><code class="javascript">Food.collection.update({},
+  {$unset: {organic: <span class="literal">true</span>}},
+  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>}
+);</code></pre>
+<p><!-- more -->Our well-loved <code>Food</code> schema might look something like:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> Food = db.model(<span class="string">'Food'</span>, <span class="keyword">new</span> mongoose.Schema({
+  name: {type: String, required: <span class="literal">true</span>},
+  organic: Boolean
+}, {
+  strict: <span class="literal">true</span>
+}));</code></pre>
+<p>and it might be populated with documents like organic frozen broccoli:</p>
+<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> broccoli = <span class="keyword">new</span> Food({
+  name: <span class="string">'frozen broccoli'</span>,
+  organic: <span class="literal">true</span>
+});</code></pre>
+<p>Alright, time to get rid of that <code>organic</code> property.  Adding a property with Mongoose is as easy as declaring it in the schema.  Could removing be just as easy?</p>
+<pre class="highlighted"><code class="diff">  var Food = db.model('Food', new mongoose.Schema({
+    name: {type: String, required: true},
+<span class="deletion">-   organic: Boolean</span>
+  }, {
+    strict: true
+  }));</code></pre>
+<p>If we reload our broccoli doc, will mongoose strip out the undeclared properties?  We did tell Mongoose to be <code>strict</code> with our <code>Food</code>…</p>
+<pre class="highlighted"><code class="javascript">Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
+  console.log(broccoli.get(<span class="string">'organic'</span>));
+});
+
+&gt; <span class="literal">true</span></code></pre>
+<p>No.  Too slick.  I suppose it&#39;s comforting that mongoose isn&#39;t silently manipulating our docs.  Maybe we just need to re-save <code>broccoli</code>.  Surely mongoose will be <code>strict</code> now…</p>
+<pre class="highlighted"><code class="javascript">broccoli.save(<span class="keyword">function</span>() {
+  Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
+    console.log(broccoli.get(<span class="string">'organic'</span>))
+  })
+});
+
+&gt; <span class="literal">true</span></code></pre>
+<p>Nope.  <a href="http://grokbase.com/t/gg/mongoose-orm/123ya4qp0a/mongoose-removing-an-existing-field-from-a-collection#20120330swrofqtizat6i3kalhvfrusz5a">Mr. Heckmann rationalizes this behavior</a> as</p>
+<blockquote>
+<p>Mongoose &quot;plays nice&quot; with existing data in the db, not deleting it unless you tell it to.</p>
+</blockquote>
+<p>I&#39;ll have to be more explicit with this broccoli, more meticulous with my cleanup.  I&#39;ll unset <code>organic</code> directly.</p>
+<pre class="highlighted"><code class="javascript">broccoli.set(<span class="string">'organic'</span>, <span class="literal">undefined</span>);
+broccoli.save(<span class="keyword">function</span>() {
+  Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
+    console.log(broccoli.get(<span class="string">'organic'</span>));
+  });
+});
+
+&gt; <span class="literal">true</span></code></pre>
+<p>Wow.  Fine.  Now <code>strict</code> decides to help out.</p>
+<p>Mongoose isn&#39;t cooperating.  Time to talk directly to Mongo.  Maybe Mongoose can at least offer me some <a href="http://mongoosejs.com/docs/api.html#model_Model-update">update sugar</a>:</p>
+<pre class="highlighted"><code class="javascript">Food.update({},
+  {$unset: {organic: <span class="literal">true</span>}},
+  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>},
+  <span class="keyword">function</span>(err) {
+    Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
+      console.log(broccoli.get(<span class="string">'organic'</span>));
+    });
+  }
+);
+
+&gt; <span class="literal">true</span></code></pre>
+<p><img src="/images/yuno.jpg" alt="Y U NO UNSET!?"></p>
+<p>This must be <code>strict</code> still <a href="https://groups.google.com/d/topic/mongoose-orm/ypvL3Fximjc/discussion">keeping us safe</a>.</p>
+<p>Okay.  Last chance Mongoose.  Just give me the collection.</p>
+<pre class="highlighted"><code class="javascript">Food.collection.update({},
+  {$unset: {organic: <span class="literal">true</span>}},
+  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>},
+  <span class="keyword">function</span>(err) {
+    Food.findById(broccoli, <span class="keyword">function</span>(err, brocolli) {
+      console.log(broccoli.get(<span class="string">'organic'</span>));
+  }
+);
+
+&gt; <span class="literal">undefined</span></code></pre>
+<p>Phew.</p>
+<p>Here&#39;s a <a href="https://gist.github.com/4008255">Mocha spec</a> reproducing this frustrating sequence.  How should we make it be better?</p>
+]]></description>
+            <link>http://hurrymaplelad.com/removing-a-property-from-a-mongoose-schema/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/removing-a-property-from-a-mongoose-schema/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Sat, 03 Nov 2012 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Rotational Grazing]]></title>
+            <description><![CDATA[<div id="flash"></div>
+<p>
+Click and drag to fence in the sheep.
+</p>
+<!-- more -->
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/rotational-grazing/master/rotational-grazing.swf',
+    'flash',
+    '900', '500',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>]]></description>
+            <link>http://hurrymaplelad.com/rotational-grazing/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/rotational-grazing/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Mon, 01 Sep 2008 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Robots in Isometric Projection]]></title>
+            <description><![CDATA[<div id="flash"></div>
+<p>
+You can move, but not very far.  You may aim.  Shooting is uncivilized.
+</p>
+<!-- more -->
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &uarr; &darr; &rarr;</td></tr>
+  <tr><th>Aim:</th><td>Mouse</td></tr>
+</table>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/isobots/master/isobots.swf',
+    'flash',
+    '600', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  }
+</script>]]></description>
+            <link>http://hurrymaplelad.com/isobots/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/isobots/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Fri, 09 Jan 2004 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Mini Golf]]></title>
+            <description><![CDATA[<div id="flash"></div>
+<p>
+Just three holes.  Aim with with mouse.  Click to putt.  Force ∝ distance from mouse to ball.  Sounds and title image plundered from the internet.
+</p>
+<!-- more -->
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/mini-golf/master/mini-golf.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  }
+</script>]]></description>
+            <link>http://hurrymaplelad.com/mini-golf/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/mini-golf/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Thu, 08 Jan 2004 00:00:00 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[Pirates!]]></title>
+            <description><![CDATA[<div id="flash"></div>
+<p>
+  The turtle shaped rock is the only functioning dock.
+</p>
+<!-- more -->
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &uarr; &rarr; &darr;</td></tr>
+  <tr><th>Run:</th><td>&larr;&larr; or &rarr;&rarr;</td></tr>
+  <tr><th>Attack:</th><td> Space (try with different arrow keys)</td></tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/pirates/master/pirates.swf',
+    'flash',
+    '600', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>]]></description>
+            <link>http://hurrymaplelad.com/pirates/</link>
+            <guid isPermaLink="true">
+                http://hurrymaplelad.com/pirates/            </guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Wed, 07 Jan 2004 00:00:00 GMT</pubDate>
+        </item>
+    </channel>
+</rss>
