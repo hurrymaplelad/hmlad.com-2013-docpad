@@ -32,7 +32,7 @@ PG's [post][pgtodo], inspired by a nurse who spent a lot of time with dying peop
 
 San Francisco has taken a beating lately, and socially graceless, self-priotizing people are a [common criticism][graces].  Could stoicism worsen the problem by giving us philosophical justification for building up emotional walls, for focusing things within our control and neglecting our would-be friends?
 
-Epicureanism, a rival school of Hellenistic Greek philosophy, has a different focus.  Something like:  friends are important;  treasure your relationships.  Money is [well spent](http://www.newrepublic.com/article/114031/money-happiness-and-new-science-smarter-spending) on experiences that help them grow.  I like that focus.
+Epicureanism, a rival school of Hellenistic Greek philosophy, has a different focus.  Something like:  friends are important;  treasure your relationships.  Money is [well spent](http://www.newrepublic.com/article/114031/money-happiness-and-new-science-smarter-spending) on experiences that help them grow.  I like that.
 
 [pgtodo]: http://www.paulgraham.com/todo.html
 [regrets]: http://www.inspirationandchai.com/Regrets-of-the-Dying.html
