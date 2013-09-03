@@ -88,7 +88,7 @@ module.exports = (grunt) ->
 
     watch:
       docpad:
-        files: 'src/**'
+        files: 'src/**/*.md'
         tasks: [
           'generate'
           'copy:release'
