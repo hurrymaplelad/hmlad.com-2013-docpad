@@ -1,4 +1,9 @@
-<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>How to Remove a Property from a Mongoose.js Schema</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/post/36553128854/how-to-remove-a-property-from-a-mongoosejs-schema" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="Hurry Maple Lad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>How to Remove a Property from a Mongoose.js Schema</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/post/36553128854/how-to-remove-a-property-from-a-mongoosejs-schema" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="How to Remove a Property from a Mongoose.js Schema" /><meta property="og:description" content=" This should be simple, but Mongoose really clings to data in existing documents.  I'll walk through all the ways I wanted it to work that failed.  We'll remove an  organic  flag from a toy  Food  model so we can replace it with  Bittman's dream label .  If you just came for the solution, I arrived at: 
+  Food.collection.update({},
+  {$unset: {organic:  true }},
+  {multi:  true , safe:  true }
+);  
+ " /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/removing-a-property-from-a-mongoose-schema/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-35976996-1']);
 _gaq.push(['_trackPageview']);
 

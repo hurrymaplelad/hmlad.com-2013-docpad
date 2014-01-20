@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title><![CDATA[Hurry Maple Lad]]></title>
-        <description><![CDATA[Hurry Maple Lad]]></description>
+        <title><![CDATA[HurryMapleLad]]></title>
+        <description><![CDATA[HurryMapleLad]]></description>
         <link>http://hurrymaplelad.com</link>
         <generator>NodeJS RSS Module</generator>
-        <lastBuildDate>Mon, 20 Jan 2014 08:13:02 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 20 Jan 2014 08:48:23 GMT</lastBuildDate>
         <atom:link href="http://hurrymaplelad.com/rss.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Adam Hull]]></author>
-        <pubDate>Mon, 20 Jan 2014 08:12:59 GMT</pubDate>
+        <pubDate>Mon, 20 Jan 2014 08:48:20 GMT</pubDate>
         <item>
             <title><![CDATA[Automobile ♡ Smartphone]]></title>
             <description><![CDATA[<p>Put an iPhone in the dash of an old Pathfinder on the cheap.</p>
