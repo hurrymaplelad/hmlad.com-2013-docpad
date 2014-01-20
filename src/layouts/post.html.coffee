@@ -7,7 +7,7 @@ url = require 'url'
 disqus = require '../partials/disqus'
 
 module.exports = (docpad) ->
-  {document, content} = docpad
+  {site, document, content} = docpad
 
   # TODO: extract into plugin, assumes sorted newest first
   posts = docpad.getCollection('posts')
@@ -55,4 +55,4 @@ module.exports = (docpad) ->
         if document.disqus
           disqus
             shortname: document.disqus.shortname
-            url: document.disqus.url or document.canonical or document.url
+            url: document.disqus.url or document.canonical or site.url + document.url
