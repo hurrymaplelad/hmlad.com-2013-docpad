@@ -2,6 +2,8 @@
 title: Automobile ♡ Smartphone
 layout: post
 post: true
+disqus:
+  shortname: hmlad
 style: |
   .dashboard-iphone p {
     text-align: justify;
