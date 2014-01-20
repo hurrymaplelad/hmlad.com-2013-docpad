@@ -5,7 +5,7 @@ module.exports =
 
   templateData:
     site:
-      title: 'Hurry Maple Lad'
+      title: 'HurryMapleLad'
       author: 'Adam Hull'
       url: 'http://hurrymaplelad.com'
 
