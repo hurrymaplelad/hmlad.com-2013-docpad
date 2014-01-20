@@ -4,7 +4,7 @@ isPaged: true
 pagedCollection: posts
 pageSize: 10
 ---
-{a, article, footer, div, h1, header, p, raw, text} = require 'teacup'
+{a, article, footer, div, h1, header, p, raw, text, tag} = require 'teacup'
 {excerpt, hasExcerpt, date} = require '../partials/helpers'
 
 module.exports = (docpad) ->
@@ -25,6 +25,9 @@ module.exports = (docpad) ->
   div '.blog-index', ->
     for post in page.docs
       article ->
+        if post.style
+          tag 'style', scoped: true, ->
+            raw post.style
         unless post.noHeader
           header ->
             h1 '.entry-title', ->
@@ -32,7 +35,7 @@ module.exports = (docpad) ->
             p '.meta', ->
               date post
         content = post.contentRenderedWithoutLayouts
-        div '.entry-content', ->
+        div ".entry-content.#{post.basename}", ->
           raw excerpt content
         if hasExcerpt content
           footer ->

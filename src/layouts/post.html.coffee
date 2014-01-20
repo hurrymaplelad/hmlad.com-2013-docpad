@@ -37,7 +37,7 @@ module.exports = (docpad) ->
                 text 'Crossposted from '
                 text url.parse(document.canonical, false, true).host
 
-      div '.entry-content', ->
+      div ".entry-content.#{document.basename}", ->
         raw content
 
       footer ->
