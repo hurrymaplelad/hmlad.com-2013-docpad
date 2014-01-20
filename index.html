@@ -6,7 +6,25 @@ _gaq.push(['_trackPageview']);
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div class="blog-index"><article><header><h1 class="entry-title"><a href="/pg-and-the-epicureans/">PG and the Epicureans</a></h1><p class="meta"><time datetime="2013-09-02T00:00:00.000Z">September 2nd, 2013</time></p></header><div class="entry-content"><blockquote>
+})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div class="blog-index"><article><style scoped="scoped">.dashboard-iphone p {
+  text-align: justify;
+}
+.dashboard-iphone img {
+  float: right;
+  margin-left: 1em;
+  max-width: 35%;
+}
+.dashboard-iphone .clear {
+  clear: both;
+}
+</style><header><h1 class="entry-title"><a href="/dashboard-iphone/">Automobile ♡ Smartphone</a></h1><p class="meta"><time datetime="2014-01-19T00:00:00.000Z">January 19th, 2014</time></p></header><div class="entry-content dashboard-iphone"><p>Put an iPhone in the dash of an old Pathfinder on the cheap.</p>
+<p><img src="/images/pathfinder/audio_schematic.thumb.jpg" alt="Audio wiring diagram">
+Bless their hearts, auto-folks are trying to keep up with the tech world.  Lucklily, my 14 year old truck<sup>1</sup> was built before that started, so it was pretty easy to gut it&#39;s onboard entertainment and dock my phone instead.</p>
+<p><sup>1 - Mechanics always call it a truck, whatever.</sup></p>
+</div><footer><a rel="full-article" href="/dashboard-iphone/">▨ More</a></footer></article><article><style scoped="scoped">.by {
+  margin-left: 10em;
+}
+</style><header><h1 class="entry-title"><a href="/pg-and-the-epicureans/">PG and the Epicureans</a></h1><p class="meta"><time datetime="2013-09-02T00:00:00.000Z">September 2nd, 2013</time></p></header><div class="entry-content pg-and-the-epicureans"><blockquote>
 <p>Don&#39;t fear god, <br/>
 Don&#39;t worry about death; <br/>
 What is good is easy to get, and <br/>
@@ -24,42 +42,56 @@ Be happy</p>
   <p class="by"><a href="http://www.paulgraham.com/todo.html">Paul Graham, 2012</a></p>
 
 <p>Stoicism is making a bit of a comeback in tech circles.  Folks find
-</div><footer><a rel="full-article" href="/pg-and-the-epicureans/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/fibrous-on-harmony-generators/">Fibrous on Harmony Generators? Impossible</a></h1><p class="meta"><time datetime="2013-08-17T00:00:00.000Z">August 17th, 2013</time></p></header><div class="entry-content"><p>A good Friday afternoon chat about asynchronous programming models left me wondering if the fibrous API could be implemented on top of <a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators">ES6 generators</a>. Generators are baked in to Node 0.11, Chrome 19, and Firefox.  A port would be a big boost to interoperability.  <a href="https://github.com/google/traceur-compiler">Traceur</a> can even transform generator based code into a <a href="http://traceur-compiler.googlecode.com/git/demo/repl.html#function*%20test%20()%20%7B%0A%20%20yield%201%3B%0A%20%20var%20a%20%3D%20yield%202%3B%0A%20%20try%20%7B%0A%20%20%20%20yield%20a%3B%0A%20%20%7D%20catch%20(e)%20%7B%0A%20%20%20%20yield%2099%3B%0A%20%20%7D%0A%20%20for(var%20i%20%3D0%3B%20i%20%3C%201%3B%20i%2B%2B)%20%7B%0A%20%20%20%20yield%20123%3B%0A%20%20%7D%0A%7D%0A%0Afunction%20normal()%20%7B%0A%20%20var%20a%20%3D%20b%3B%0A%20%20return%20b%3B%0A%7D">giant state machine</a> that runs on all of today&#39;s environments.</p>
+</div><footer><a rel="full-article" href="/pg-and-the-epicureans/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/fibrous-on-harmony-generators/">Fibrous on Harmony Generators? Impossible</a></h1><p class="meta"><time datetime="2013-08-17T00:00:00.000Z">August 17th, 2013</time></p></header><div class="entry-content fibrous-on-harmony-generators"><p>A good Friday afternoon chat about asynchronous programming models left me wondering if the fibrous API could be implemented on top of <a href="http://wiki.ecmascript.org/doku.php?id=harmony:generators">ES6 generators</a>. Generators are baked in to Node 0.11, Chrome 19, and Firefox.  A port would be a big boost to interoperability.  <a href="https://github.com/google/traceur-compiler">Traceur</a> can even transform generator based code into a <a href="http://traceur-compiler.googlecode.com/git/demo/repl.html#function*%20test%20()%20%7B%0A%20%20yield%201%3B%0A%20%20var%20a%20%3D%20yield%202%3B%0A%20%20try%20%7B%0A%20%20%20%20yield%20a%3B%0A%20%20%7D%20catch%20(e)%20%7B%0A%20%20%20%20yield%2099%3B%0A%20%20%7D%0A%20%20for(var%20i%20%3D0%3B%20i%20%3C%201%3B%20i%2B%2B)%20%7B%0A%20%20%20%20yield%20123%3B%0A%20%20%7D%0A%7D%0A%0Afunction%20normal()%20%7B%0A%20%20var%20a%20%3D%20b%3B%0A%20%20return%20b%3B%0A%7D">giant state machine</a> that runs on all of today&#39;s environments.</p>
 <p>At first the port looked promising. Wikipedia claimed that general coroutines could be <a href="http://en.wikipedia.org/wiki/Coroutine#Comparison_with_generators">built on generators</a>, and many folks have <a href="http://taskjs.org/">done</a> <a href="https://gist.github.com/creationix/5762837">just</a> <a href="https://gist.github.com/Benvie/5667557">that</a>.  After a little noodling I&#39;m pretty sure it can&#39;t be done.  In a Harmony environment a function can only suspend execution at <code>yield</code> expressions and <code>yield</code> expressions can only appear in generator functions. A yield expression cannot be wrapped up behind a fibrous <code>sync</code> or <code>wait</code>.</p>
-</div><footer><a rel="full-article" href="/fibrous-on-harmony-generators/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/ids-in-mongoose-json-and-backbone/">Ids in Mongoose, JSON, and Backbone</a></h1><p class="meta"><time datetime="2013-04-02T00:00:00.000Z">April 2nd, 2013</time></p></header><div class="entry-content"><p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
+</div><footer><a rel="full-article" href="/fibrous-on-harmony-generators/">▨ More</a></footer></article><article><style scoped="scoped">.ids {
+  width: 100%;
+  margin-bottom: 30px;
+  table-layout: fixed;
+}
+
+.ids th:first-child {
+  font-size: 160%;
+  padding-bottom: 20px;
+  padding-top: 30px;
+  font-weight: normal;
+  width: 40%;
+}
+
+.ids th {
+  font-weight: bold;
+  width: 30%;
+}
+</style><header><h1 class="entry-title"><a href="/ids-in-mongoose-json-and-backbone/">Ids in Mongoose, JSON, and Backbone</a></h1><p class="meta"><time datetime="2013-04-02T00:00:00.000Z">April 2nd, 2013</time></p></header><div class="entry-content ids-in-mongoose-json-and-backbone"><p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
 <p>If you find yourself typing <code>vegetable.id</code> when you really needed <code>new ObjectID(vegetable.toJSON()._id)</code> this fancy chart might help:
-</div><footer><a rel="full-article" href="/ids-in-mongoose-json-and-backbone/">▨ More</a></footer></article><article><div class="entry-content"><blockquote>
+</div><footer><a rel="full-article" href="/ids-in-mongoose-json-and-backbone/">▨ More</a></footer></article><article><div class="entry-content a-breakthrough-a-day"><blockquote>
 <p>A breakthrough a day keeps the crisis at bay.</p>
 <p><cite>E. F. Schumacher<br>
 <a href="http://www.goodreads.com/book/show/1117634.Small_Is_Beautiful">Small is Beautiful</a></cite></p>
 </blockquote>
-</div></article><article><header><h1 class="entry-title"><a href="/restructuring-assignment-in-coffeescript/">Structuring Expressions in CoffeeScript</a></h1><p class="meta"><time datetime="2013-02-12T00:00:00.000Z">February 12th, 2013</time></p></header><div class="entry-content"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
+</div></article><article><header><h1 class="entry-title"><a href="/restructuring-assignment-in-coffeescript/">Structuring Expressions in CoffeeScript</a></h1><p class="meta"><time datetime="2013-02-12T00:00:00.000Z">February 12th, 2013</time></p></header><div class="entry-content restructuring-assignment-in-coffeescript"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
 <p class="update">
   For a while I was calling this lexeme <em>restructuring assignment</em> until some on Stack Overflow <a href="http://stackoverflow.com/a/14822198/407845">pointed out that name was ridiculous</a>.  Now I&#39;ve taken to the name <em>structuring expressions</em>.
 </p>
 
-</div><footer><a rel="full-article" href="/restructuring-assignment-in-coffeescript/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/teacup-released/">Teacup Released</a></h1><p class="meta"><time datetime="2013-01-09T00:00:00.000Z">January 9th, 2013</time></p></header><div class="entry-content"><p><img src="https://raw.github.com/goodeggs/teacup/master/docs/teacup.jpg" alt="Teacup"></p>
+</div><footer><a rel="full-article" href="/restructuring-assignment-in-coffeescript/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/teacup-released/">Teacup Released</a></h1><p class="meta"><time datetime="2013-01-09T00:00:00.000Z">January 9th, 2013</time></p></header><div class="entry-content teacup-released"><p><img src="https://raw.github.com/goodeggs/teacup/master/docs/teacup.jpg" alt="Teacup"></p>
 <p>CoffeeScript templating from the Good Eggs labs:</p>
 <ul>
 <li><a href="http://bites.goodeggs.com/post/40042760798/teacup-coffeescript-templates-for-developer-happiness">Intro Post</a></li>
 <li><a href="http://goodeggs.github.com/teacup/">Homepage</a></li>
 <li><a href="http://github.com/goodeggs/teacup/">Source on Github</a></li>
 </ul>
-</div></article><article><header><h1 class="entry-title"><a href="/removing-a-property-from-a-mongoose-schema/">How to Remove a Property from a Mongoose.js Schema</a></h1><p class="meta"><time datetime="2012-11-03T00:00:00.000Z">November 3rd, 2012</time></p></header><div class="entry-content"><p>This should be simple, but Mongoose really clings to data in existing documents.  I&#39;ll walk through all the ways I wanted it to work that failed.  We&#39;ll remove an <code>organic</code> flag from a toy <code>Food</code> model so we can replace it with <a href="http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html">Bittman&#39;s dream label</a>.  If you just came for the solution, I arrived at:</p>
+</div></article><article><header><h1 class="entry-title"><a href="/removing-a-property-from-a-mongoose-schema/">How to Remove a Property from a Mongoose.js Schema</a></h1><p class="meta"><time datetime="2012-11-03T00:00:00.000Z">November 3rd, 2012</time></p></header><div class="entry-content removing-a-property-from-a-mongoose-schema"><p>This should be simple, but Mongoose really clings to data in existing documents.  I&#39;ll walk through all the ways I wanted it to work that failed.  We&#39;ll remove an <code>organic</code> flag from a toy <code>Food</code> model so we can replace it with <a href="http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html">Bittman&#39;s dream label</a>.  If you just came for the solution, I arrived at:</p>
 <pre class="highlighted"><code class="javascript">Food.collection.update({},
   {$unset: {organic: <span class="literal">true</span>}},
   {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>}
 );</code></pre>
-<p></div><footer><a rel="full-article" href="/removing-a-property-from-a-mongoose-schema/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/rotational-grazing/">Rotational Grazing</a></h1><p class="meta"><time datetime="2008-09-01T00:00:00.000Z">September 1st, 2008</time></p></header><div class="entry-content"><div id="flash"></div>
+<p></div><footer><a rel="full-article" href="/removing-a-property-from-a-mongoose-schema/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/rotational-grazing/">Rotational Grazing</a></h1><p class="meta"><time datetime="2008-09-01T00:00:00.000Z">September 1st, 2008</time></p></header><div class="entry-content rotational-grazing"><div id="flash"></div>
 <p>
 Click and drag to fence in the sheep.
 </p>
-</div><footer><a rel="full-article" href="/rotational-grazing/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/isobots/">Robots in Isometric Projection</a></h1><p class="meta"><time datetime="2004-01-09T00:00:00.000Z">January 9th, 2004</time></p></header><div class="entry-content"><div id="flash"></div>
+</div><footer><a rel="full-article" href="/rotational-grazing/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/isobots/">Robots in Isometric Projection</a></h1><p class="meta"><time datetime="2004-01-09T00:00:00.000Z">January 9th, 2004</time></p></header><div class="entry-content isobots"><div id="flash"></div>
 <p>
 You can move, but not very far.  You may aim.  Shooting is uncivilized.
 </p>
-</div><footer><a rel="full-article" href="/isobots/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/mini-golf/">Mini Golf</a></h1><p class="meta"><time datetime="2004-01-08T00:00:00.000Z">January 8th, 2004</time></p></header><div class="entry-content"><div id="flash"></div>
-<p>
-Just three holes.  Aim with with mouse.  Click to putt.  Force ∝ distance from mouse to ball.  Sounds and title image plundered from the internet.
-</p>
-</div><footer><a rel="full-article" href="/mini-golf/">▨ More</a></footer></article><div class="pagination"><a class="prev" href="/index.1">← Older</a><a href="/archives/">Archives</a></div></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
+</div><footer><a rel="full-article" href="/isobots/">▨ More</a></footer></article><div class="pagination"><a class="prev" href="/index.1">← Older</a><a href="/archives/">Archives</a></div></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
