@@ -10,7 +10,22 @@ _gaq.push(['_trackPageview']);
 <p>On Good Eggs, shoppers with full-sized computers don&#39;t want all their grocery aisles hidden behind a collapsible menu. The markup to generate the desktop navigation is different enough from the mobile navigation that using media queries would be a stretch (heh, get it?).  By trimming the more complicated desktop markup from the mobile response, we save precious page weight for a faster load time.</p>
 <p>Let&#39;s take a journey along the request-response cycle to illustrate how we send different responses to different devices while maximizing cache hits:</p>
 <p><img src="/images/speed-up-your-responsive-app-with-node-and-varnish/flow.jpg" alt="Flow Diagram">
-</div><footer><a rel="full-article" href="/speed-up-your-responsive-app-with-node-and-varnish/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/a-better-food-system,-phone-sized/">A Better Food System, Phone Sized</a></h1><p class="meta"><time datetime="2014-05-04T00:00:00.000Z">May 4th, 2014</time></p></header><div class="entry-content a-better-food-system,-phone-sized"><p>We built a mobile site at Good Eggs.  Check it out by visiting <a href="http://goodeggs.com">goodeggs.com</a> on your phone.  In case you&#39;re not on a phone now, it looks kinda like this:</p>
+</div><footer><a rel="full-article" href="/speed-up-your-responsive-app-with-node-and-varnish/">▨ More</a></footer></article><article><style scoped="scoped">img {
+  max-width: 90%;
+}
+.right {
+  float: right;
+  margin-left: 1.5em;
+}
+.center {
+  text-align: center;
+  margin-bottom: 1em;
+}
+.clear {
+  clear: both;
+}
+</style><header><h1 class="entry-title"><a href="/mobile-page-load/">Loading Scripts in the Critical Path: A Commerce Case Study</a></h1><p class="meta"><time datetime="2014-06-16T00:00:00.000Z">June 16th, 2014</time></p></header><div class="entry-content mobile-page-load"><p>Starting javascript on DOMContentLoaded, a pattern <a href="https://docs.angularjs.org/guide/bootstrap">baked into</a> or <a href="http://backbonejs.org/docs/todos.html#section-2">recommended by</a> many frameworks, defers some work that could be done earlier.  There aren&#39;t many examples of what can be done early, or how to wire it up.  Here&#39;s how we did it on the Good Eggs mobile site.
+</div><footer><a rel="full-article" href="/mobile-page-load/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/a-better-food-system-phone-sized/">A Better Food System, Phone Sized</a></h1><p class="meta"><time datetime="2014-05-04T00:00:00.000Z">May 4th, 2014</time></p></header><div class="entry-content a-better-food-system-phone-sized"><p>We built a mobile site at Good Eggs.  Check it out by visiting <a href="http://goodeggs.com">goodeggs.com</a> on your phone.  In case you&#39;re not on a phone now, it looks kinda like this:</p>
 <p><img src="/images/mobile-screenshot.jpg" alt="Screenshot"></p>
 <p>Hopefully we made it a little easier to buy food from foodmakers living their dreams.  We had a good time making it, and we&#39;re chronicling the process with a series of <a href="http://bites.goodeggs.com/posts/good-eggs-goes-mobile/">blog posts</a>.  Follow along for the full story.</p>
 </div></article><article><div class="entry-content gladstone-and-disraeli"><blockquote>
@@ -86,11 +101,4 @@ Be happy</p>
   For a while I was calling this lexeme <em>restructuring assignment</em> until some on Stack Overflow <a href="http://stackoverflow.com/a/14822198/407845">pointed out that name was ridiculous</a>.  Now I&#39;ve taken to the name <em>structuring expressions</em>.
 </p>
 
-</div><footer><a rel="full-article" href="/restructuring-assignment-in-coffeescript/">▨ More</a></footer></article><article><header><h1 class="entry-title"><a href="/teacup-released/">Teacup Released</a></h1><p class="meta"><time datetime="2013-01-09T00:00:00.000Z">January 9th, 2013</time></p></header><div class="entry-content teacup-released"><p><img src="https://raw.github.com/goodeggs/teacup/master/docs/teacup.jpg" alt="Teacup"></p>
-<p>CoffeeScript templating from the Good Eggs labs:</p>
-<ul>
-<li><a href="http://bites.goodeggs.com/post/40042760798/teacup-coffeescript-templates-for-developer-happiness">Intro Post</a></li>
-<li><a href="http://goodeggs.github.com/teacup/">Homepage</a></li>
-<li><a href="http://github.com/goodeggs/teacup/">Source on Github</a></li>
-</ul>
-</div></article><div class="pagination"><a class="prev" href="/index.1">← Older</a><a href="/archives/">Archives</a></div></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
+</div><footer><a rel="full-article" href="/restructuring-assignment-in-coffeescript/">▨ More</a></footer></article><div class="pagination"><a class="prev" href="/index.1">← Older</a><a href="/archives/">Archives</a></div></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
