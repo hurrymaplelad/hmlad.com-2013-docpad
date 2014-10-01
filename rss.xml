@@ -4,20 +4,76 @@
         <title><![CDATA[HurryMapleLad]]></title>
         <description><![CDATA[HurryMapleLad]]></description>
         <link>http://hurrymaplelad.com</link>
-        <generator>NodeJS RSS Module</generator>
-        <lastBuildDate>Mon, 05 May 2014 05:15:03 GMT</lastBuildDate>
+        <generator>RSS for Node</generator>
+        <lastBuildDate>Wed, 01 Oct 2014 06:22:51 GMT</lastBuildDate>
         <atom:link href="http://hurrymaplelad.com/rss.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Adam Hull]]></author>
-        <pubDate>Mon, 05 May 2014 05:15:00 GMT</pubDate>
+        <pubDate>Wed, 01 Oct 2014 06:22:47 GMT</pubDate>
+        <item>
+            <title><![CDATA[Speed up your Responsive App with Node and Varnish]]></title>
+            <description><![CDATA[<p>Conversations about responsive design often focus on the browser: media queries, grids, and the like, but there&#39;s more!  Creating a great experience on all sorts of consumer-grade doo-dads demands some work on the server.</p>
+<p>On Good Eggs, shoppers with full-sized computers don&#39;t want all their grocery aisles hidden behind a collapsible menu. The markup to generate the desktop navigation is different enough from the mobile navigation that using media queries would be a stretch (heh, get it?).  By trimming the more complicated desktop markup from the mobile response, we save precious page weight for a faster load time.</p>
+<p>Let&#39;s take a journey along the request-response cycle to illustrate how we send different responses to different devices while maximizing cache hits:</p>
+<p><img src="/images/speed-up-your-responsive-app-with-node-and-varnish/flow.jpg" alt="Flow Diagram">
+<!-- more --></p>
+<h2 id="request">Request</h2>
+<p>Browsers send requests to a <a href="https://www.varnish-cache.org/">varnish</a> cache server (<a href="https://www.fastly.com/">Fastly</a> has worked great for us).  All requests come with a User-Agent header that hints at the shopper&#39;s device.</p>
+<p>iPhone 5 sends something like:</p>
+<pre class="highlight"><code class="vbnet">Mozilla/<span class="number">5.0</span> (iPhone; CPU iPhone OS <span class="number">5</span>_0 <span class="keyword">like</span> Mac OS X) AppleWebKit/<span class="number">534.46</span> (KHTML, <span class="keyword">like</span> Gecko) Version/<span class="number">5.1</span> Mobile/<span class="number">9</span>A334 Safari/<span class="number">7534.48</span><span class="number">.3</span></code></pre>
+<p>while IE 11 on Windows 8 sends:</p>
+<pre class="highlight"><code class="smalltalk"><span class="class">Mozilla</span>/<span class="number">5.0</span> (<span class="class">Windows</span> <span class="class">NT</span> <span class="number">6.3</span>; <span class="class">Trident</span>/<span class="number">7.0</span>; <span class="method">rv:</span><span class="number">11.0</span>) like <span class="class">Gecko</span></code></pre>
+<p>which is <a href="http://blogs.msdn.com/b/ieinternals/archive/2013/09/21/internet-explorer-11-user-agent-string-ua-string-sniffing-compatibility-with-gecko-webkit.aspx">a deliberate lie</a> but gives us enough information to call it a desktop browser.</p>
+<p>Grouping these messy headers into nice buckets of devices: <code>phone</code>, <code>tablet</code>, or <code>desktop</code> in our case, is the job of <a href="https://github.com/varnish/varnish-devicedetect">varnish-device-detect</a>.  To get up and running quickly, <a href="https://github.com/goodeggs/connect-devicedetect">connect-device-detect</a> can do the same grouping within the express server, but grouping at the edge cache yields much better hit rates.  Our express server only has to generate one <code>phone</code> response, which varnish will serve to iPhones, Androids, or any other devices who&#39;s User-Agent string matches our phone regular expressions.</p>
+<p>Varnish sends the device bucket on to our Express server as an <code>X-UA-Device</code> header. In Express, we use <a href="https://github.com/goodeggs/connect-device-router">connect-device-router</a> to switch controllers per device:</p>
+<pre class="highlight"><code class="javascript"><span class="keyword">var</span> express = require(<span class="string">'express'</span>),
+    device = require(<span class="string">'connect-device-router'</span>);
+
+express()
+  .get(<span class="string">'/food'</span>,
+    device(<span class="string">'phone'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(req, res, next)</span> {</span>
+      # ...
+      res.render(<span class="string">'mobileView'</span>)
+    }),
+    device(<span class="string">'desktop'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(req, res, next)</span> {</span>
+      # ...
+      res.render(<span class="string">'desktopView'</span>)
+    }),
+    <span class="function"><span class="keyword">function</span> <span class="params">(req, res, next)</span> {</span>
+      # <span class="keyword">default</span>
+    }
+  )</code></pre>
+<p>Matched routes also get a <code>req.device</code> string for branching within a template or a shared controller.</p>
+<h2 id="response">Response</h2>
+<p>Now our controller has generated a response, and we&#39;re on our way back out. Device router adds a <code>Vary: X-UA-Device</code> header only to matched routes, so routes that serve the same response to all devices will hit the same cache regardless of which device requests them.</p>
+<p>Varnish includes the <code>Vary</code> header by default when calculating cache keys, so device router&#39;s <code>Vary: X-UA-Device</code> triggers separate cached responses per device bucket.</p>
+<p>Our setup has a few customizations on top of varnish-devicedetect to support downstream caching, including adding a <code>Vary: User-Agent</code> header, since downstream caches won&#39;t have bucketed the device:</p>
+<pre class="highlight"><code class="r">sub vcl_deliver {
+  <span class="keyword">...</span>
+  set resp.http.vary = resp.http.vary <span class="string">", User-Agent"</span>;
+
+  <span class="comment"># We also remove the Vary: X-UA-Device set upstream by connect-device-router</span>
+  set resp.http.vary = regsuball(resp.http.vary, <span class="string">"[, ]*?X-UA-Device"</span>, <span class="string">""</span>);
+
+  <span class="comment"># And copy over the X-UA-Device bucket for easy auditing in browser</span>
+  set resp.http.X-UA-Device = req.http.X-UA-Device;
+  <span class="keyword">...</span>
+}</code></pre>
+<p>Now browsers can store the reponse locally, and won&#39;t need to make another request until their cached response is stale.</p>
+<p>Caching can get a little mind bending.  I often found myself wondering why I couldn&#39;t just send <code>Vary: X-UA-Device</code> all the way back to the browser, I mean we&#39;re telling the browser what it&#39;s X-UA-Device is in the response, right?.  <a href="http://stackoverflow.com/questions/21056733/can-i-vary-on-a-custom-header">The answer</a> seems obvious in retrospect.  What else is confusing?</p>
+]]></description>
+            <link>http://hurrymaplelad.com/speed-up-your-responsive-app-with-node-and-varnish/</link>
+            <guid isPermaLink="true">http://hurrymaplelad.com/speed-up-your-responsive-app-with-node-and-varnish/</guid>
+            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
+            <pubDate>Tue, 30 Sep 2014 00:00:00 GMT</pubDate>
+        </item>
         <item>
             <title><![CDATA[A Better Food System, Phone Sized]]></title>
             <description><![CDATA[<p>We built a mobile site at Good Eggs.  Check it out by visiting <a href="http://goodeggs.com">goodeggs.com</a> on your phone.  In case you&#39;re not on a phone now, it looks kinda like this:</p>
-<p><img src="/images/mobile-screenshot.jpg" alt="Y U NO UNSET!?"></p>
-<p>Hopefully we made it a little easier to buy food from cool people, folks living their dreams.  We had a good time making it, and were chronicling the process with a series of <a href="http://bites.goodeggs.com/posts/good-eggs-goes-mobile/">blog posts</a>.  Follow along for the full story.</p>
+<p><img src="/images/mobile-screenshot.jpg" alt="Screenshot"></p>
+<p>Hopefully we made it a little easier to buy food from foodmakers living their dreams.  We had a good time making it, and we&#39;re chronicling the process with a series of <a href="http://bites.goodeggs.com/posts/good-eggs-goes-mobile/">blog posts</a>.  Follow along for the full story.</p>
 ]]></description>
             <link>http://hurrymaplelad.com/a-better-food-system,-phone-sized/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/a-better-food-system,-phone-sized/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/a-better-food-system,-phone-sized/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Sun, 04 May 2014 00:00:00 GMT</pubDate>
         </item>
@@ -30,8 +86,7 @@ I was the smartest woman in England.</p>
 </blockquote>
 ]]></description>
             <link>http://hurrymaplelad.com/gladstone-and-disraeli/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/gladstone-and-disraeli/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/gladstone-and-disraeli/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Wed, 12 Mar 2014 00:00:00 GMT</pubDate>
         </item>
@@ -67,8 +122,7 @@ Wired together with:
 Now the phone is in charge.  The auto keeps it stable and powered, hides away the cords, and will happily support next year&#39;s model.  1 year in, nothing has melted yet.</p>
 <div class="clear"/>]]></description>
             <link>http://hurrymaplelad.com/dashboard-iphone/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/dashboard-iphone/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/dashboard-iphone/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Sun, 19 Jan 2014 00:00:00 GMT</pubDate>
         </item>
@@ -99,8 +153,7 @@ Be happy</p>
 <p>Epicureanism, a rival school of Hellenistic Greek philosophy, has a different focus.  Something like:  friends are important;  treasure your relationships.  Money is <a href="http://www.newrepublic.com/article/114031/money-happiness-and-new-science-smarter-spending">well spent</a> on experiences that help them grow.  I like that.</p>
 ]]></description>
             <link>http://hurrymaplelad.com/pg-and-the-epicureans/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/pg-and-the-epicureans/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/pg-and-the-epicureans/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Mon, 02 Sep 2013 00:00:00 GMT</pubDate>
         </item>
@@ -111,28 +164,27 @@ Be happy</p>
 <!-- more -->
 
 <p>Let&#39;s say we&#39;ve got a fibrous function <code>f</code> that synchronously calls asychronous function <code>g</code>:</p>
-<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> g = <span class="keyword">function</span>(callback) {
-  setTimeout(<span class="keyword">function</span>() {
+<pre class="highlight"><code class="javascript"><span class="keyword">var</span> g = <span class="function"><span class="keyword">function</span><span class="params">(callback)</span> {</span>
+  setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
     console.log(<span class="string">'g done'</span>);
     callback();
   }, <span class="number">1000</span>);
 };
 
-<span class="keyword">var</span> f = fibrous(<span class="keyword">function</span>() {
+<span class="keyword">var</span> f = fibrous(<span class="function"><span class="keyword">function</span><span class="params">()</span> {</span>
   g.sync();
   console.log(<span class="string">'f done'</span>);
 };</code></pre>
 <p>When we call <code>f</code> we wait one second, log <code>&#39;g done&#39;</code>, then log <code>&#39;f done&#39;</code>.  We need to halt <code>f</code> before the <code>console.log</code>, but <code>f</code> has no yield expressions.  It cannot be halted with any combination of ES6 generators.  Tough break.</p>
 <hr>
-<h3>Related</h3>
+<h3 id="related">Related</h3>
 <ul>
 <li><a href="http://taskjs.org/">Task.js</a> seems like a great way to get fibrous-like behavior within the generator constraints.  Still waiting on <a href="https://github.com/mozilla/task.js/issues/28">ES6 syntax support</a> and a <a href="https://github.com/mozilla/task.js/issues/17">CommonJS module published to NPM</a>.</li>
 <li>Fellow coffee lovers, the proposed <a href="https://github.com/jashkenas/coffee-script/pull/3078">coffee script syntax for generators</a> is a &#39;lil fugly and worth checking out.</li>
 </ul>
 ]]></description>
             <link>http://hurrymaplelad.com/fibrous-on-harmony-generators/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/fibrous-on-harmony-generators/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/fibrous-on-harmony-generators/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Sat, 17 Aug 2013 00:00:00 GMT</pubDate>
         </item>
@@ -155,8 +207,7 @@ Be happy</p>
   <tr><td><a href="http://backbonejs.org/#Model-get">model.get()</td><td>∅</td><td>String</td></tr>
 </table>]]></description>
             <link>http://hurrymaplelad.com/ids-in-mongoose-json-and-backbone/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/ids-in-mongoose-json-and-backbone/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/ids-in-mongoose-json-and-backbone/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Tue, 02 Apr 2013 00:00:00 GMT</pubDate>
         </item>
@@ -169,8 +220,7 @@ Be happy</p>
 </blockquote>
 ]]></description>
             <link>http://hurrymaplelad.com/a-breakthrough-a-day/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/a-breakthrough-a-day/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/a-breakthrough-a-day/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Mon, 18 Feb 2013 00:00:00 GMT</pubDate>
         </item>
@@ -185,69 +235,68 @@ Be happy</p>
 
 <p>Sure <a href="http://blog.carbonfive.com/2011/09/28/destructuring-assignment-in-coffeescript/">C5 told you all about</a> CoffeeScript’s <a href="http://coffeescript.org/#destructuring">destructing assignment</a> syntax for objects…</p>
 <p>How it can reach deep into nested structures</p>
-<pre class="highlighted"><code class="coffeescript">coffee&gt; user = name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state:
+<pre class="highlight"><code class="coffeescript">coffee&gt; user = <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>:
 <span class="string">'AL'</span> }
-{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state: <span class="string">'AL'</span> } }
+{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>: <span class="string">'AL'</span> } }
 
-coffee&gt; { address: { city, state } } = user
-{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span>, address: { city: <span class="string">'Anytown'</span>, state: <span class="string">'AL'</span> } }
+coffee&gt; { <span class="attribute">address</span>: { city, state } } = user
+{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>: <span class="string">'AL'</span> } }
 
 coffee&gt; city
 <span class="string">'Anytown'</span></code></pre>
 <p>Or pluck apart function arguments</p>
-<pre class="highlighted"><code class="coffeescript"><span class="function"><span class="title">displayName</span></span> = ({ name, age }) -&gt;
+<pre class="highlight"><code class="coffeescript"><span class="function"><span class="title">displayName</span> = <span class="params">({ name, age })</span> -&gt;</span>
   console.log <span class="string">"<span class="subst">#{name}</span>, <span class="subst">#{age}</span> year(s) old"</span>
 
-coffee&gt; displayName name: <span class="string">'Foo'</span>, age: <span class="number">42</span>
+coffee&gt; displayName <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>
 Foo, <span class="number">42</span> year(s) old</code></pre>
 <p>Or even destructure directly to instance attributes</p>
-<pre class="highlighted"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
-  constructor: ({ <span class="property">@name</span>, <span class="property">@age</span> }) -&gt;
+<pre class="highlight"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
+  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@name</span>, <span class="property">@age</span> })</span> -&gt;</span>
 
-coffee&gt; <span class="keyword">new</span> User(name: <span class="string">'Foo'</span>, age: <span class="number">42</span>)
-{ name: <span class="string">'foo'</span>, age: <span class="number">42</span> }</code></pre>
+coffee&gt; <span class="keyword">new</span> User(<span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>)
+{ <span class="attribute">name</span>: <span class="string">'foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }</code></pre>
 <p>But what does this do?</p>
-<pre class="highlighted"><code class="coffeescript">coffee&gt; age = <span class="number">42</span>
+<pre class="highlight"><code class="coffeescript">coffee&gt; age = <span class="number">42</span>
 <span class="number">42</span>
 
 coffee&gt; user = { <span class="string">'Foo'</span>, age }
 ?</code></pre>
 <p>My fudge-fingers managed to mash that one unknowingly into my editor one day while attempting to rack up velocity points on the latest story. Instead of hemorrhaging the expected SyntaxError, it evaluated to this beautiful new object</p>
-<pre class="highlighted"><code class="coffeescript">{ Foo: <span class="string">'Foo'</span>, age: <span class="number">42</span> }</code></pre>
+<pre class="highlight"><code class="coffeescript">{ <span class="attribute">Foo</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }</code></pre>
 <p>Now I’ve got a handy set syntax</p>
-<pre class="highlighted"><code class="coffeescript">coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span> }
+<pre class="highlight"><code class="coffeescript">coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span> }
 <span class="literal">true</span>
 
 coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> }
 <span class="literal">false</span></code></pre>
 <p>And with consistent variable naming, breezy data marshaling between some framework actors</p>
-<pre class="highlighted"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
-  constructor: ({ <span class="property">@name</span>, <span class="property">@age</span> }) -&gt;
+<pre class="highlight"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
+  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@name</span>, <span class="property">@age</span> })</span> -&gt;</span>
 
-<span class="function"><span class="title">template</span></span> = ({ user, face }) -&gt;
+<span class="function"><span class="title">template</span> = <span class="params">({ user, face })</span> -&gt;</span>
   <span class="string">"&lt;div&gt;<span class="subst">#{user.name}</span> <span class="subst">#{face}</span>&lt;/div&gt;"</span>
 
 <span class="class"><span class="keyword">class</span> <span class="title">UserView</span></span>
-  constructor: ({ <span class="property">@user</span> }) -&gt;
+  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@user</span> })</span> -&gt;</span>
 
-  render: -&gt;
+  <span class="attribute">render</span>:<span class="function"> -&gt;</span>
     <span class="property">@html</span> = template {
       <span class="property">@user</span>
-      face: <span class="string">':)'</span>
+      <span class="attribute">face</span>: <span class="string">':)'</span>
     }
 
-coffee&gt; user = <span class="keyword">new</span> User(name: <span class="string">'Foo'</span>, age: <span class="number">42</span>)
-{ name: <span class="string">'Foo'</span>, age: <span class="number">42</span> }
+coffee&gt; user = <span class="keyword">new</span> User(<span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>)
+{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }
 
 coffee&gt; view = <span class="keyword">new</span> UserView {user}
-{ user: { name: <span class="string">'Foo'</span>, age: <span class="number">42</span> } }
+{ <span class="attribute">user</span>: { <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> } }
 
 coffee&gt; view.render()
 <span class="string">'&lt;div&gt;Foo :)&lt;/div&gt;'</span></code></pre>
 ]]></description>
             <link>http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Tue, 12 Feb 2013 00:00:00 GMT</pubDate>
         </item>
@@ -262,98 +311,9 @@ coffee&gt; view.render()
 </ul>
 ]]></description>
             <link>http://hurrymaplelad.com/teacup-released/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/teacup-released/            </guid>
+            <guid isPermaLink="true">http://hurrymaplelad.com/teacup-released/</guid>
             <dc:creator><![CDATA[Adam Hull]]></dc:creator>
             <pubDate>Wed, 09 Jan 2013 00:00:00 GMT</pubDate>
-        </item>
-        <item>
-            <title><![CDATA[How to Remove a Property from a Mongoose.js Schema]]></title>
-            <description><![CDATA[<p>This should be simple, but Mongoose really clings to data in existing documents.  I&#39;ll walk through all the ways I wanted it to work that failed.  We&#39;ll remove an <code>organic</code> flag from a toy <code>Food</code> model so we can replace it with <a href="http://www.nytimes.com/2012/10/14/opinion/sunday/bittman-my-dream-food-label.html">Bittman&#39;s dream label</a>.  If you just came for the solution, I arrived at:</p>
-<pre class="highlighted"><code class="javascript">Food.collection.update({},
-  {$unset: {organic: <span class="literal">true</span>}},
-  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>}
-);</code></pre>
-<p><!-- more -->Our well-loved <code>Food</code> schema might look something like:</p>
-<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> Food = db.model(<span class="string">'Food'</span>, <span class="keyword">new</span> mongoose.Schema({
-  name: {type: String, required: <span class="literal">true</span>},
-  organic: Boolean
-}, {
-  strict: <span class="literal">true</span>
-}));</code></pre>
-<p>and it might be populated with documents like organic frozen broccoli:</p>
-<pre class="highlighted"><code class="javascript"><span class="keyword">var</span> broccoli = <span class="keyword">new</span> Food({
-  name: <span class="string">'frozen broccoli'</span>,
-  organic: <span class="literal">true</span>
-});</code></pre>
-<p>Alright, time to get rid of that <code>organic</code> property.  Adding a property with Mongoose is as easy as declaring it in the schema.  Could removing be just as easy?</p>
-<pre class="highlighted"><code class="diff">  var Food = db.model('Food', new mongoose.Schema({
-    name: {type: String, required: true},
-<span class="deletion">-   organic: Boolean</span>
-  }, {
-    strict: true
-  }));</code></pre>
-<p>If we reload our broccoli doc, will mongoose strip out the undeclared properties?  We did tell Mongoose to be <code>strict</code> with our <code>Food</code>…</p>
-<pre class="highlighted"><code class="javascript">Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
-  console.log(broccoli.get(<span class="string">'organic'</span>));
-});
-
-&gt; <span class="literal">true</span></code></pre>
-<p>No.  Too slick.  I suppose it&#39;s comforting that mongoose isn&#39;t silently manipulating our docs.  Maybe we just need to re-save <code>broccoli</code>.  Surely mongoose will be <code>strict</code> now…</p>
-<pre class="highlighted"><code class="javascript">broccoli.save(<span class="keyword">function</span>() {
-  Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
-    console.log(broccoli.get(<span class="string">'organic'</span>))
-  })
-});
-
-&gt; <span class="literal">true</span></code></pre>
-<p>Nope.  <a href="http://grokbase.com/t/gg/mongoose-orm/123ya4qp0a/mongoose-removing-an-existing-field-from-a-collection#20120330swrofqtizat6i3kalhvfrusz5a">Mr. Heckmann rationalizes this behavior</a> as</p>
-<blockquote>
-<p>Mongoose &quot;plays nice&quot; with existing data in the db, not deleting it unless you tell it to.</p>
-</blockquote>
-<p>I&#39;ll have to be more explicit with this broccoli, more meticulous with my cleanup.  I&#39;ll unset <code>organic</code> directly.</p>
-<pre class="highlighted"><code class="javascript">broccoli.set(<span class="string">'organic'</span>, <span class="literal">undefined</span>);
-broccoli.save(<span class="keyword">function</span>() {
-  Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
-    console.log(broccoli.get(<span class="string">'organic'</span>));
-  });
-});
-
-&gt; <span class="literal">true</span></code></pre>
-<p>Wow.  Fine.  Now <code>strict</code> decides to help out.</p>
-<p>Mongoose isn&#39;t cooperating.  Time to talk directly to Mongo.  Maybe Mongoose can at least offer me some <a href="http://mongoosejs.com/docs/api.html#model_Model-update">update sugar</a>:</p>
-<pre class="highlighted"><code class="javascript">Food.update({},
-  {$unset: {organic: <span class="literal">true</span>}},
-  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>},
-  <span class="keyword">function</span>(err) {
-    Food.findById(broccoli, <span class="keyword">function</span>(err, broccoli) {
-      console.log(broccoli.get(<span class="string">'organic'</span>));
-    });
-  }
-);
-
-&gt; <span class="literal">true</span></code></pre>
-<p><img src="/images/yuno.jpg" alt="Y U NO UNSET!?"></p>
-<p>This must be <code>strict</code> still <a href="https://groups.google.com/d/topic/mongoose-orm/ypvL3Fximjc/discussion">keeping us safe</a>.</p>
-<p>Okay.  Last chance Mongoose.  Just give me the collection.</p>
-<pre class="highlighted"><code class="javascript">Food.collection.update({},
-  {$unset: {organic: <span class="literal">true</span>}},
-  {multi: <span class="literal">true</span>, safe: <span class="literal">true</span>},
-  <span class="keyword">function</span>(err) {
-    Food.findById(broccoli, <span class="keyword">function</span>(err, brocolli) {
-      console.log(broccoli.get(<span class="string">'organic'</span>));
-  }
-);
-
-&gt; <span class="literal">undefined</span></code></pre>
-<p>Phew.</p>
-<p>Here&#39;s a <a href="https://gist.github.com/4008255">Mocha spec</a> reproducing this frustrating sequence.  How should we make it be better?</p>
-]]></description>
-            <link>http://hurrymaplelad.com/removing-a-property-from-a-mongoose-schema/</link>
-            <guid isPermaLink="true">
-                http://hurrymaplelad.com/removing-a-property-from-a-mongoose-schema/            </guid>
-            <dc:creator><![CDATA[Adam Hull]]></dc:creator>
-            <pubDate>Sat, 03 Nov 2012 00:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
