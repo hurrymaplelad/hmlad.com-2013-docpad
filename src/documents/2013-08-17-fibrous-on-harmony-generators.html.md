@@ -2,7 +2,7 @@
 title: "Fibrous on Harmony Generators? Impossible"
 layout: post
 post: true
-canonical: "http://bites.goodeggs.com/fibrous-on-harmony-generators/"
+canonical: "http://bites.goodeggs.com/posts/fibrous-on-harmony-generators/"
 disqus:
   shortname: goodeggsbytes
 ---

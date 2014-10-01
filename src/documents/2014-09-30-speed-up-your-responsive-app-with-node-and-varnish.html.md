@@ -1,8 +1,10 @@
 ---
-title: Speed up your responsive app with Node and Varnish
+title: Speed up your Responsive App with Node and Varnish
 canonical: "http://bytes.goodeggs.com/post/speed-up-your-responsive-app-with-node-and-varnish"
 layout: post
 post: true
+disqus:
+  shortname: goodeggsbytes
 ---
 
 Conversations about responsive design often focus on the browser: media queries, grids, and the like, but there's more!  Creating a great experience on all sorts of consumer-grade doo-dads demands some work on the server.
