@@ -3,6 +3,7 @@ gulp = require 'gulp'
 gulp.task 'generate', (next) ->
   metalsmith = require 'metalsmith'
   markdown = require 'metalsmith-markdown'
+  teacup = require 'metalsmith-teacup'
   collections = require 'metalsmith-collections'
   paginate = require 'metalsmith-collections-paginate'
   permalinks = require 'metalsmith-permalinks'
@@ -39,15 +40,7 @@ gulp.task 'generate', (next) ->
       done()
 
     # Teacup
-    .use (files, metalsmith, done) ->
-      {render} = require 'teacup'
-
-      for filename, file of files
-        continue unless file.template
-        templateFilename = metalsmith.path 'templates', file.template+'.coffee'
-        rendered = render require(templateFilename), file
-        file.contents = new Buffer rendered
-      done()
+    .use teacup()
 
     .destination 'build'
     .build next
