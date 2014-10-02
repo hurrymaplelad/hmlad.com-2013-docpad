@@ -1,6 +1,6 @@
 ---
 title: Automobile ♡ Smartphone
-layout: post
+template: post
 post: true
 thumbnail: /images/pathfinder/connections.jpg
 disqus:

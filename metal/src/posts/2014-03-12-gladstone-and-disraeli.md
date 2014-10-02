@@ -1,5 +1,5 @@
 ---
-layout: post
+template: post
 post: true
 title: "Gladstone and Disraeli"
 tags:

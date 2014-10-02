@@ -8,10 +8,24 @@ gulp.task 'generate', (next) ->
   paginate = require 'metalsmith-collections-paginate'
   permalinks = require 'metalsmith-permalinks'
   jekyllDates = require 'metalsmith-jekyll-dates'
+  more = require 'metalsmith-more'
 
   metalsmith __dirname
+    .metadata
+      site:
+        title: 'HurryMapleLad'
+        author: 'Adam Hull'
+        url: 'http://hurrymaplelad.com'
+        googleAnalytics:
+          id: 'UA-35976996-1'
 
+    .use jekyllDates()
     .use markdown()
+    .use more()
+    .use (files, metalsmith, done) ->
+      for file in files
+        file.contentsWithoutLayout = file.contents
+      done()
     .use collections
       posts:
         pattern: 'posts/*'
@@ -20,13 +34,12 @@ gulp.task 'generate', (next) ->
 
     .use paginate
       posts:
-        perPage: 10
+        perPage: 20
         first: 'index.html'
         path: 'posts/:num/index.html'
         template: 'posts'
 
 
-    .use jekyllDates()
     .use permalinks
       relative: false
       pattern: ':slug'

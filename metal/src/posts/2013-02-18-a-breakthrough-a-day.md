@@ -1,8 +1,8 @@
 ---
-layout: post
+template: post
 post: true
 title: "A Breakthrough a Day"
-tags: 
+tags:
   - quote
 noHeader: true
 ---

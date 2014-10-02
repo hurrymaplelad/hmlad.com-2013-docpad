@@ -1,17 +1,8 @@
-{a, article, footer, div, h1, header, p, raw, text, tag} = require 'teacup'
-# {excerpt, hasExcerpt, date} = require '../partials/helpers'
+{a, article, footer, div, h1, header, p, raw, renderable, text, tag} = require 'teacup'
+{extendLayout, date} = require './helpers'
+defaultLayout = require './default'
 
-module.exports = (file) ->
-
-  # # TODO: and this
-  # page = document.page
-  # page.docs = docpad.getCollection(document.pagedCollection)
-  #   .slice(page.startIdx, page.endIdx)
-  #   .map((doc) -> doc.toJSON())
-  # page.hasNextPage = -> documentModel.hasNextPage()
-  # page.hasPrevPage = -> documentModel.hasPrevPage()
-  # page.getNextPage = -> documentModel.getNextPage()
-  # page.getPrevPage = -> documentModel.getPrevPage()
+module.exports = extendLayout defaultLayout, renderable (file) ->
 
   div '.blog-index', ->
     for post in file.paginate.files
@@ -24,13 +15,12 @@ module.exports = (file) ->
             h1 '.entry-title', ->
               a {href: post.path}, post.title
             p '.meta', ->
-              # date post
-        content = post.contentRenderedWithoutLayouts
+              date post
         div ".entry-content.#{post.basename}", ->
-        #   raw excerpt content
-        # if hasExcerpt content
-        #   footer ->
-        #     a rel: 'full-article', href: post.url, '▨ More'
+          raw post.less or post.contentsWithoutLayout
+        if post.less
+          footer ->
+            a rel: 'full-article', href: post.path, '▨ More'
 
     div '.pagination', ->
       if file.paginate.next

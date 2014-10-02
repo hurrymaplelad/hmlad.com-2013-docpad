@@ -10,7 +10,6 @@
     "docpad-plugin-marked": "~2.1.1",
     "docpad-plugin-paged": "~2.1.4",
     "docpad-plugin-stylus": "~2.3.0",
-    "docpad-plugin-teacup": "~2.0.3",
     "docpad-plugin-highlightjs": "~2.1.6",
     "docpad-plugin-rss": "~2.0.1",
     "htmlstrip-native": "0.0.2",
@@ -39,7 +38,8 @@
     "metalsmith-collections-paginate": "~1.0.0",
     "metalsmith-permalinks": "~0.4.0",
     "metalsmith-jekyll-dates": "0.0.5",
-    "metalsmith-teacup": "0.0.1"
+    "metalsmith-teacup": "0.0.2",
+    "metalsmith-more": "~0.2.0"
   },
   "repository": {
     "type": "git",

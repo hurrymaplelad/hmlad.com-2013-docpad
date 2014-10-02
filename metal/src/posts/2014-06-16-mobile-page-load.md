@@ -1,7 +1,7 @@
 ---
 title: "Loading Scripts in the Critical Path: A Commerce Case Study"
 canonical: "http://bites.goodeggs.com/posts/mobile-page-load/"
-layout: post
+template: post
 post: true
 disqus:
   shortname: goodeggsbytes

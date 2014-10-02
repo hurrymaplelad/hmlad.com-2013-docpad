@@ -1,6 +1,6 @@
 ---
 title: A Better Food System, Phone Sized
-layout: post
+template: post
 post: true
 ---
 

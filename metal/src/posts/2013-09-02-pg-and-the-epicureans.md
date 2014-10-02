@@ -1,6 +1,6 @@
 ---
 title: PG and the Epicureans
-layout: post
+template: post
 post: true
 style: |
   .by {

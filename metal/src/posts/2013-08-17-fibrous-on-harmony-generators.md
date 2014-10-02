@@ -1,6 +1,6 @@
 ---
 title: "Fibrous on Harmony Generators? Impossible"
-layout: post
+template: post
 post: true
 canonical: "http://bites.goodeggs.com/posts/fibrous-on-harmony-generators/"
 disqus:
