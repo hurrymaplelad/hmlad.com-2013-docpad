@@ -12,6 +12,7 @@ gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
 
   metalsmith __dirname
+    .source 'documents'
     .metadata
       site:
         title: 'HurryMapleLad'
