@@ -1,4 +1,23 @@
 gulp = require 'gulp'
+convict = require 'convict'
+
+settings = convict
+  env:
+    doc: 'The applicaton environment.'
+    format: ['production', 'development', 'test']
+    default: 'development'
+    env: 'NODE_ENV'
+  port:
+    format: 'port'
+    default: 8000
+    env: 'PORT'
+  optimizeAssets:
+    format: Boolean
+    default: false
+.validate()
+.get()
+
+console.log settings
 
 gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
@@ -72,15 +91,17 @@ gulp.task 'styles', ->
   rename = require 'gulp-rename'
 
   gulp.src 'styles/rollup.styl'
-  .pipe stylus use: nib()
+  .pipe stylus
+    use: nib()
+    compress: settings.optimizeAssets
+    linenos: !settings.optimizeAssets
   .pipe rename 'main.css'
   .pipe gulp.dest 'build/styles'
 
 gulp.task 'clean', ->
   del = require 'del'
-  del.sync [
-    'build'
-  ]
+
+  del.sync ['build']
 
 gulp.task 'serve', (next) ->
   connect = require 'connect'
@@ -88,12 +109,12 @@ gulp.task 'serve', (next) ->
 
   connect()
     .use serveStatic 'build'
-    .listen 8000, next
+    .listen settings.port, next
 
-gulp.task 'open', ['dev'], (next) ->
+gulp.task 'build', ['generate', 'styles']
+
+gulp.task 'open', ['build', 'serve'], (next) ->
   open = require 'open'
-  open "http://localhost:8000"
+  open "http://localhost:#{settings.port}"
 
-gulp.task 'dev', ['generate', 'styles', 'serve']
-
-gulp.task 'default', ['dev']
+gulp.task 'default', ['build']
