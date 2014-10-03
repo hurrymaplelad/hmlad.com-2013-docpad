@@ -1,15 +1,16 @@
 gulp = require 'gulp'
 
 gulp.task 'generate', (next) ->
-  metalsmith = require 'metalsmith'
-  markdown = require 'metalsmith-markdown'
-  teacup = require 'metalsmith-teacup'
+  assets = require 'metalsmith-assets'
   collections = require 'metalsmith-collections'
+  jekyllDates = require 'metalsmith-jekyll-dates'
+  markdown = require 'metalsmith-markdown'
+  metallic = require 'metalsmith-metallic'
+  metalsmith = require 'metalsmith'
+  more = require 'metalsmith-more'
   paginate = require 'metalsmith-collections-paginate'
   permalinks = require 'metalsmith-permalinks'
-  jekyllDates = require 'metalsmith-jekyll-dates'
-  more = require 'metalsmith-more'
-  assets = require 'metalsmith-assets'
+  teacup = require 'metalsmith-teacup'
 
   metalsmith __dirname
   .source 'documents'
@@ -22,6 +23,7 @@ gulp.task 'generate', (next) ->
         id: 'UA-35976996-1'
 
   .use jekyllDates()
+  .use metallic()
   .use markdown()
   .use more()
   .use (files, metalsmith, done) ->
