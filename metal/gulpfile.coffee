@@ -12,57 +12,67 @@ gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
 
   metalsmith __dirname
-    .source 'documents'
-    .metadata
-      site:
-        title: 'HurryMapleLad'
-        author: 'Adam Hull'
-        url: 'http://hurrymaplelad.com'
-        googleAnalytics:
-          id: 'UA-35976996-1'
+  .source 'documents'
+  .metadata
+    site:
+      title: 'HurryMapleLad'
+      author: 'Adam Hull'
+      url: 'http://hurrymaplelad.com'
+      googleAnalytics:
+        id: 'UA-35976996-1'
 
-    .use jekyllDates()
-    .use markdown()
-    .use more()
-    .use (files, metalsmith, done) ->
-      for file in files
-        file.contentsWithoutLayout = file.contents
-      done()
-    .use collections
-      posts:
-        pattern: 'posts/*'
-        sortBy: 'date'
-        reverse: true
+  .use jekyllDates()
+  .use markdown()
+  .use more()
+  .use (files, metalsmith, done) ->
+    for file in files
+      file.contentsWithoutLayout = file.contents
+    done()
+  .use collections
+    posts:
+      pattern: 'posts/*'
+      sortBy: 'date'
+      reverse: true
 
-    .use paginate
-      posts:
-        perPage: 20
-        first: 'index.html'
-        path: 'posts/:num/index.html'
-        template: 'posts'
+  .use paginate
+    posts:
+      perPage: 20
+      first: 'index.html'
+      path: 'posts/:num/index.html'
+      template: 'posts'
 
+  .use permalinks
+    relative: false
+    pattern: ':slug'
 
-    .use permalinks
-      relative: false
-      pattern: ':slug'
+  # Absolute paths, trailing slashes
+  .use (files, metalsmith, done) ->
+    for filename, file of files
+      file.path = '/' + file.path
+      if file.path.length > 1
+        file.path += '/'
+    done()
 
-    # Absolute paths, trailing slashes
-    .use (files, metalsmith, done) ->
-      for filename, file of files
-        file.path = '/' + file.path
-        if file.path.length > 1
-          file.path += '/'
-      done()
+  # Teacup
+  .use teacup()
 
-    # Teacup
-    .use teacup()
+  .use assets
+    source: 'static'
+    destination: '.'
 
-    .use assets
-      source: 'static'
-      destination: '.'
+  .destination 'build'
+  .clean false # handled by gulp
+  .build next
 
-    .destination 'build'
-    .build next
+gulp.task 'styles', ->
+  nib = require 'nib'
+  stylus = require 'gulp-stylus'
+  rename = require 'gulp-rename'
+
+  gulp.src 'styles/rollup.styl'
+  .pipe stylus use: nib()
+  .pipe rename 'main.css'
+  .pipe gulp.dest 'build/styles'
 
 gulp.task 'clean', ->
   del = require 'del'
@@ -70,12 +80,14 @@ gulp.task 'clean', ->
     'build'
   ]
 
-gulp.task 'dev', ['generate'], (next) ->
+gulp.task 'serve', (next) ->
   connect = require 'connect'
   serveStatic = require 'serve-static'
 
   connect()
     .use serveStatic 'build'
     .listen 8000, next
+
+gulp.task 'dev', ['generate', 'styles', 'serve']
 
 gulp.task 'default', ['dev']
