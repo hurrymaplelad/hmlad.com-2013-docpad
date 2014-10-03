@@ -5,10 +5,10 @@
         <description><![CDATA[HurryMapleLad]]></description>
         <link>http://hurrymaplelad.com</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Wed, 01 Oct 2014 06:36:19 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 03 Oct 2014 04:22:15 GMT</lastBuildDate>
         <atom:link href="http://hurrymaplelad.com/rss.xml" rel="self" type="application/rss+xml"/>
         <author><![CDATA[Adam Hull]]></author>
-        <pubDate>Wed, 01 Oct 2014 06:36:17 GMT</pubDate>
+        <pubDate>Fri, 03 Oct 2014 04:22:12 GMT</pubDate>
         <item>
             <title><![CDATA[Speed up your Responsive App with Node and Varnish]]></title>
             <description><![CDATA[<p>Conversations about responsive design often focus on the browser: media queries, grids, and the like, but there&#39;s more!  Creating a great experience on all sorts of consumer-grade doo-dads demands some work on the server.</p>
