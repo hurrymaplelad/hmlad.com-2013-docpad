@@ -90,6 +90,10 @@ gulp.task 'serve', (next) ->
     .use serveStatic 'build'
     .listen 8000, next
 
+gulp.task 'open', ['dev'], (next) ->
+  open = require 'open'
+  open "http://localhost:8000"
+
 gulp.task 'dev', ['generate', 'styles', 'serve']
 
 gulp.task 'default', ['dev']
