@@ -1,12 +1,12 @@
 {
   doctype, html, head, title, meta, link,
   body, header, footer, h1, br, div, p, a, raw,
-  script, text, renderable
+  script, text
 } = require 'teacup'
 {openGraph, googleAnalytics} = require './helpers'
 
 
-module.exports = renderable (file) ->
+module.exports = (file) ->
   {site} = file
   doctype 5
 

@@ -1,9 +1,9 @@
 url = require 'url'
 base = require './base'
-{a, article, div, footer, h1, header, p, renderable, script, style, tag, text, raw} = require 'teacup'
+{a, article, div, footer, h1, header, p, script, style, tag, text, raw} = require 'teacup'
 {date, disqus, chain} = require './helpers'
 
-module.exports = chain base, renderable (file) ->
+module.exports = chain base, (file) ->
   {site} = file
 
   div ->

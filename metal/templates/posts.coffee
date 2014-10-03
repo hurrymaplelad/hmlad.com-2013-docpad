@@ -1,8 +1,8 @@
-{a, article, footer, div, h1, header, p, raw, renderable, text, tag} = require 'teacup'
+{a, article, footer, div, h1, header, p, raw, text, tag} = require 'teacup'
 {chain, date} = require './helpers'
 base = require './base'
 
-module.exports = chain base, renderable (file) ->
+module.exports = chain base, (file) ->
 
   div '.blog-index', ->
     for post in file.paginate.files
