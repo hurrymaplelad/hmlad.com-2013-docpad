@@ -9,6 +9,7 @@ gulp.task 'generate', (next) ->
   permalinks = require 'metalsmith-permalinks'
   jekyllDates = require 'metalsmith-jekyll-dates'
   more = require 'metalsmith-more'
+  assets = require 'metalsmith-assets'
 
   metalsmith __dirname
     .metadata
@@ -54,6 +55,10 @@ gulp.task 'generate', (next) ->
 
     # Teacup
     .use teacup()
+
+    .use assets
+      source: 'static'
+      destination: '.'
 
     .destination 'build'
     .build next
