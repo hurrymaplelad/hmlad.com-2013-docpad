@@ -1,9 +1,9 @@
 url = require 'url'
-defaultLayout = require './default'
+base = require './base'
 {a, article, div, footer, h1, header, p, renderable, script, style, tag, text, raw} = require 'teacup'
-{date, disqus, extendLayout} = require './helpers'
+{date, disqus, chain} = require './helpers'
 
-module.exports = extendLayout defaultLayout, renderable (file) ->
+module.exports = chain base, renderable (file) ->
   {site} = file
 
   div ->

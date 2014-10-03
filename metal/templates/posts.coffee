@@ -1,8 +1,8 @@
 {a, article, footer, div, h1, header, p, raw, renderable, text, tag} = require 'teacup'
-{extendLayout, date} = require './helpers'
-defaultLayout = require './default'
+{chain, date} = require './helpers'
+base = require './base'
 
-module.exports = extendLayout defaultLayout, renderable (file) ->
+module.exports = chain base, renderable (file) ->
 
   div '.blog-index', ->
     for post in file.paginate.files
