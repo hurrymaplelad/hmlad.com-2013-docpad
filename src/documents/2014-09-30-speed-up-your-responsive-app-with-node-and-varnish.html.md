@@ -1,6 +1,6 @@
 ---
 title: Speed up your Responsive App with Node and Varnish
-canonical: "http://bytes.goodeggs.com/post/speed-up-your-responsive-app-with-node-and-varnish"
+canonical: "http://bytes.goodeggs.com/posts/speed-up-your-responsive-app-with-node-and-varnish"
 layout: post
 post: true
 disqus:
