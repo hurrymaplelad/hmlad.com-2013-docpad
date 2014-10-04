@@ -22,6 +22,7 @@ console.log settings
 gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
   collections = require 'metalsmith-collections'
+  feed = require 'metalsmith-feed'
   jekyllDates = require 'metalsmith-jekyll-dates'
   markdown = require 'metalsmith-markdown'
   metallic = require 'metalsmith-metallic'
@@ -73,6 +74,8 @@ gulp.task 'generate', (next) ->
       if file.path.length > 1
         file.path += '/'
     done()
+
+  .use feed collection: 'posts'
 
   # Teacup
   .use teacup()

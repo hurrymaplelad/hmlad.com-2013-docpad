@@ -46,7 +46,8 @@
     "metalsmith-teacup": "0.0.2",
     "nib": "~1.0.4",
     "open": "0.0.5",
-    "convict": "~0.4.2"
+    "convict": "~0.4.2",
+    "metalsmith-feed": "0.0.2"
   },
   "repository": {
     "type": "git",
