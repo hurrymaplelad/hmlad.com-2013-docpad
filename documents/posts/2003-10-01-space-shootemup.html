@@ -1,0 +1,33 @@
+---
+template: post
+post: true
+title: "Space Shoot 'em Up"
+---
+<div id="flash"></div>
+
+<p>
+A dusty relic from the days rolling around in a creaky office chair on the red carpet of my old room.  My second game<sup>†</sup>, and one of very few that have an end.
+</p>
+
+<!-- more -->
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &rarr;</td></tr>
+  <tr><th>Shoot:</th><td>Space</td></tr>
+</table>
+
+<ul class="footnotes">
+<sup>†</sup><small>The first, Cow Hunter, I can't bring myself to put (back) on the internet.  It's out there somehere.  If you've dug this far into the dust bucket of the footnotes of the archives, you might be crazy enough to look :)</small>
+</ul>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/space-shootemup/master/space-shootemup.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>

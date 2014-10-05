@@ -1,0 +1,28 @@
+---
+template: post
+post: true
+title: Ninja Slug
+---
+<div id="flash"></div>
+<p>
+Creative release post Ninja Gaiden and Metal Slug binges.  I should really make that motorcycle do something.  Don't run off the screen.  There's nothing to shoot.
+</p>
+<!-- more -->
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &uarr; &darr; &rarr;</td></tr>
+  <tr><th>Shoot:</th><td>Space</td></tr>
+</table>
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/ninja-slug/master/ninja-slug.swf',
+    'flash',
+    '400', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  }
+</script>
+

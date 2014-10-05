@@ -1,0 +1,30 @@
+---
+template: post
+post: true
+title: "Turtle Shoot 'em Up"
+---
+<div id="flash"></div>
+
+<p>
+Under the sea! Kinda fizzles after the whale rush…
+</p>
+
+<!-- more -->
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Move:</th><td>&larr; &uarr; &rarr; &darr;</td></tr>
+  <tr><th>Shoot:</th><td>Space</td></tr>
+</table>
+
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/turtle-shootemup/master/turtle-shootemup.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>

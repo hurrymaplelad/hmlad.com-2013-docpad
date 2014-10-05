@@ -1,0 +1,25 @@
+---
+template: post
+post: true
+title: Throwing
+---
+<div id="flash"></div>
+<table class="controls">
+  <caption>Controls:</caption>
+  <tr><th>Catch:</th><td>Click</td></tr>
+  <tr><th>Throw:</th><td>Drag</td></tr>
+</table>
+<!-- more -->
+
+<script src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+<script>
+  swfobject.embedSWF(
+    'https://rawgithub.com/hurrymaplelad/throwing/master/throwing.swf',
+    'flash',
+    '550', '400',
+    '9.0.0'
+  );
+  window.onload = function() {
+    document.getElementById('flash').focus();
+  };
+</script>
