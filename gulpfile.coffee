@@ -1,23 +1,29 @@
 gulp = require 'gulp'
-convict = require 'convict'
+gutil = require 'gulp-util'
 
-settings = convict
-  env:
-    doc: 'The applicaton environment.'
-    format: ['production', 'development', 'test']
-    default: 'development'
-    env: 'NODE_ENV'
-  port:
-    format: 'port'
-    default: 8000
-    env: 'PORT'
-  optimizeAssets:
-    format: Boolean
-    default: false
-.validate()
-.get()
+settings = do ->
+  convict = require 'convict'
 
-console.log settings
+  settings = convict
+    env:
+      doc: 'The applicaton environment.'
+      format: ['production', 'development', 'test']
+      default: 'development'
+      env: 'NODE_ENV'
+    port:
+      format: 'port'
+      default: 8000
+      env: 'PORT'
+    optimizeAssets:
+      format: Boolean
+      default: false
+  .validate()
+  .get()
+
+  gutil.log 'Settings:'
+  for key, value of settings
+    gutil.log gutil.colors.cyan(key), gutil.colors.magenta(value)
+  settings
 
 gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
@@ -104,8 +110,7 @@ gulp.task 'styles', ->
 
 gulp.task 'clean', ->
   del = require 'del'
-
-  del.sync ['build']
+  del.sync ['build', 'release']
 
 gulp.task 'serve', (next) ->
   connect = require 'connect'
@@ -122,5 +127,38 @@ gulp.task 'dev', ['build', 'serve']
 gulp.task 'open', ['dev'], (next) ->
   open = require 'open'
   open "http://localhost:#{settings.port}"
+  next()
+
+gulp.task 'assert:clean', (done) ->
+  git = require 'gift'
+
+  git('.').status (err, status) ->
+    switch
+      when err
+        done err
+      when not status?.clean
+        console.error JSON.stringify status?.files, null, 2
+        done new Error 'Cant publish uncommitted changes'
+      else
+        done()
+
+publish = ({push}={}) ->
+  git = require 'gift'
+  ghPages = require 'gulp-gh-pages'
+
+  (done) ->
+    git('.').current_commit (err, commit) ->
+      sourceId = commit.id[...12]
+      gulp.src 'build/**/*'
+      .pipe ghPages
+        cacheDir: './release'
+        message: "Publish from #{sourceId}"
+        push: push
+      .on 'end', done
+      .resume()
+
+gulp.task 'stage', ['build'], publish push: false
+
+gulp.task 'release', ['clean', 'assert:clean', 'build'], publish push: true
 
 gulp.task 'default', ['build']
