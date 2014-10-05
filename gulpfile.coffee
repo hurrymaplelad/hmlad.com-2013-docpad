@@ -47,7 +47,8 @@ gulp.task 'generate', (next) ->
   .use markdown()
   .use more()
   .use (files, metalsmith, done) ->
-    for file in files
+    # Snapshot contents before rendering
+    for name, file of files
       file.contentsWithoutLayout = file.contents
     done()
   .use collections
