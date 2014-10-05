@@ -116,7 +116,9 @@ gulp.task 'serve', (next) ->
 
 gulp.task 'build', ['generate', 'styles']
 
-gulp.task 'open', ['build', 'serve'], (next) ->
+gulp.task 'dev', ['build', 'serve']
+
+gulp.task 'open', ['dev'], (next) ->
   open = require 'open'
   open "http://localhost:#{settings.port}"
 
