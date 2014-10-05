@@ -1,5 +1,4 @@
-<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Loading Scripts in the Critical Path: A Commerce Case Study</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/posts/mobile-page-load/" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="Loading Scripts in the Critical Path: A Commerce Case Study" /><meta property="og:description" content=" Starting javascript on DOMContentLoaded, a pattern  baked into  or  recommended by  many frameworks, defers some work that could be done earlier.  There aren't many examples of what can be done early, or how to wire it up.  Here's how we did it on the Good Eggs mobile site.
-" /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/mobile-page-load/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Loading Scripts in the Critical Path: A Commerce Case Study</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/posts/mobile-page-load/" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="Loading Scripts in the Critical Path: A Commerce Case Study" /><meta property="og:description" content="瀼匾慴瑲湩⁧慪慶捳楲瑰漠⁮佄䍍湯整瑮潌摡摥‬⁡慰瑴牥⁮愼栠敲㵦栢瑴獰⼺搯捯⹳湡畧慬橲⹳牯⽧畧摩⽥潢瑯瑳慲≰戾歡摥椠瑮㱯愯‾牯㰠⁡牨晥∽瑨灴⼺戯捡扫湯橥⹳牯⽧潤獣琯摯獯栮浴⍬敳瑣潩⵮∲爾捥浯敭摮摥戠㱹愯‾慭祮映慲敭潷歲ⱳ搠晥牥⁳潳敭眠牯⁫桴瑡挠畯摬戠⁥潤敮攠牡楬牥‮吠敨敲愠敲♮㌣㬹⁴慭祮攠慸灭敬⁳景眠慨⁴慣⁮敢搠湯⁥慥汲ⱹ漠⁲潨⁷潴眠物⁥瑩甠⹰†效敲⌦㤳猻栠睯眠⁥楤⁤瑩漠⁮桴⁥潇摯䔠杧⁳潭楢敬猠瑩⹥" /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/mobile-page-load/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-35976996-1']);
 _gaq.push(['_trackPageview']);
 
@@ -20,8 +19,7 @@ _gaq.push(['_trackPageview']);
 }
 .clear {
   clear: both;
-}
-</style><header><h1 class="entry-title">Loading Scripts in the Critical Path: A Commerce Case Study</h1><p class="meta"><time datetime="2014-06-16T00:00:00.000Z">June 16th, 2014</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/mobile-page-load/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content mobile-page-load"><p>Starting javascript on DOMContentLoaded, a pattern <a href="https://docs.angularjs.org/guide/bootstrap">baked into</a> or <a href="http://backbonejs.org/docs/todos.html#section-2">recommended by</a> many frameworks, defers some work that could be done earlier.  There aren&#39;t many examples of what can be done early, or how to wire it up.  Here&#39;s how we did it on the Good Eggs mobile site.
+}</style><header><h1 class="entry-title">Loading Scripts in the Critical Path: A Commerce Case Study</h1><p class="meta"><time datetime="2014-06-16T19:00:00.000Z">June 16th, 2014</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/mobile-page-load/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content undefined"><p>Starting javascript on DOMContentLoaded, a pattern <a href="https://docs.angularjs.org/guide/bootstrap">baked into</a> or <a href="http://backbonejs.org/docs/todos.html#section-2">recommended by</a> many frameworks, defers some work that could be done earlier.  There aren&#39;t many examples of what can be done early, or how to wire it up.  Here&#39;s how we did it on the Good Eggs mobile site.
 <!-- more --></p>
 <h2 id="the-problem">The Problem</h2>
 <p>DOMContentLoaded is the start of life for most Javascript apps. It&#39;s a browser event signalling HTML has been fully parsed, and javascript can do <a href="http://blogs.msdn.com/b/ie/archive/2008/04/23/what-happened-to-operation-aborted.aspx">its worst</a>. Frameworks like Angular wait by default for this event before starting up. Usually, our app must start up before a visitor can accomplish whatever it is they came for.  We need to wire up event listeners.  We might even need to generate DOM elements by rendering templates. DOMContentLoaded quickly becomes a bottleneck in our <a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp">critical rendering path</a>.  Phones, with their high-latency networks, exacerbate the problem.  An extra request for javascript can <a href="http://calendar.perfplanet.com/2011/carrier-networks-down-the-rabbit-hole/">add hundreds of milliseconds</a>.</p>
@@ -43,16 +41,17 @@ _gaq.push(['_trackPageview']);
 <p>Loading the page on an iPhone 5 over a 3G network reveals this timeline:</p>
 <p><img src="/images/mobile-page-load/timeline.jpg" alt="timeline"></p>
 <p>Note that all three of these events occur on this page before <a href="https://developer.mozilla.org/en-US/docs/Web/Reference/Events/DOMContentLoaded">DOMContentLoaded</a>, the traditional launchpoint for single page js apps.  We&#39;re piggybacking on the browser&#39;s <a href="http://en.wikipedia.org/wiki/Incremental_rendering">incremental rendering</a> to wire up javascript before the DOM has fully finished loading.</p>
-<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">body</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="comment">&lt;!-- Page DOM ... --&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="comment">&lt;!-- 1. Page DOM Loaded --&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdn.example.com/page.{{hash}}.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="comment">&lt;!-- 2. Page JS Loaded --&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">startPage({<span class="comment">/* user-agnostic data */</span>})</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/session.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="comment">&lt;!-- 3. Session JS Loaded --&gt;</span>
-<span class="tag">&lt;/<span class="title">body</span>&gt;</span>
-<span class="comment">&lt;!-- DOMContentLoaded --&gt;</span></code></pre>
+<pre><code class="html"><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span><span class="hljs-comment">&lt;!-- Page DOM ... --&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 1. Page DOM Loaded --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//cdn.example.com/page.{{hash}}.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 2. Page JS Loaded --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">startPage({<span class="hljs-comment">/* user-agnostic data */</span>})</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"/session.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 3. Session JS Loaded --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- DOMContentLoaded --&gt;</span></code></pre>
+
 <p>What can we do at these points? We&#39;ll explore each in detail below.</p>
 <h2 id="page-dom-loaded">Page DOM Loaded</h2>
 <div class="right">
@@ -87,12 +86,13 @@ _gaq.push(['_trackPageview']);
 <p><img src="/images/mobile-page-load/network.jpg" alt="network"></p>
 <p>For visitors who came to shop (rather than ogle), the &quot;Add to Basket&quot; button is in the critical path. They can&#39;t leave this page with the blueberries they came for until they click that button. We wait for session information to load before showing the button so shoppers can see how many, if any, blueberries they&#39;re already getting.</p>
 <p>The session request is often the slowest for this user flow. We want to start it as early as possible, so we load it with a script tag. Firing off an XmlHttpRequest from the page js would be more convenient for developers (we&#39;d get a sucess callback to wire into), but doing so would delay starting the session request until after the page script had loaded and executed, potentially several hundred millis.  Instead we place a script tag just below the page js script tag in the body:</p>
-<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">body</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="comment">&lt;!-- Page DOM ... --&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"//cdn.example.com/page.{{hash}}.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">startPage(<span class="comment">/*...*/</span>)</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-  <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"/session.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">body</span>&gt;</span></code></pre>
+<pre><code class="html"><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span><span class="hljs-comment">&lt;!-- Page DOM ... --&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//cdn.example.com/page.{{hash}}.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">startPage(<span class="hljs-comment">/*...*/</span>)</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"/session.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span></code></pre>
+
 <p>With this arrangement, modern browsers will download both scripts in parallel, and execute them in the order they appear in the DOM. The page script can listen for the session script to finish, fill in the user details, and complete our page.</p>
 <h2 id="next-steps">Next Steps</h2>
 <p>There are still major oppourtunities to optimize our critical path.</p>

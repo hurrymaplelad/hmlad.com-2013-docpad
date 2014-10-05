@@ -1,9 +1,4 @@
-<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Structuring Expressions in CoffeeScript</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="Structuring Expressions in CoffeeScript" /><meta property="og:description" content=" CoffeeScript can save as many keystrokes putting objects together as it can taking them apart. 
- 
-  For a while I was calling this lexeme  restructuring assignment  until some on Stack Overflow  pointed out that name was ridiculous .  Now I've taken to the name  structuring expressions .
- 
-
-" /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Structuring Expressions in CoffeeScript</title><meta name="author" content="Adam Hull" /><link rel="canonical" href="http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="Structuring Expressions in CoffeeScript" /><meta property="og:description" content="瀼䌾景敦卥牣灩⁴慣⁮慳敶愠⁳慭祮欠祥瑳潲敫⁳異瑴湩⁧扯敪瑣⁳潴敧桴牥愠⁳瑩挠湡琠歡湩⁧桴浥愠慰瑲㰮瀯ਾ瀼挠慬獳∽灵慤整㸢 䘠牯愠眠楨敬䤠眠獡挠污楬杮琠楨⁳敬數敭㰠浥爾獥牴捵畴楲杮愠獳杩浮湥㱴支㹭甠瑮汩猠浯⁥湯匠慴正传敶晲潬⁷愼栠敲㵦栢瑴㩰⼯瑳捡潫敶晲潬⹷潣⽭⽡㐱㈸ㄲ㠹㐯㜰㐸∵瀾楯瑮摥漠瑵琠慨⁴慮敭眠獡爠摩捩汵畯㱳愯⸾†潎⁷♉㌣㬹敶琠歡湥琠⁯桴⁥慮敭㰠浥猾牴捵畴楲杮攠灸敲獳潩獮⼼浥⸾㰊瀯" /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/restructuring-assignment-in-coffeescript/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-35976996-1']);
 _gaq.push(['_trackPageview']);
 
@@ -11,7 +6,7 @@ _gaq.push(['_trackPageview']);
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><header><h1 class="entry-title">Structuring Expressions in CoffeeScript</h1><p class="meta"><time datetime="2013-02-12T00:00:00.000Z">February 12th, 2013</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content restructuring-assignment-in-coffeescript"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
+})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><header><h1 class="entry-title">Structuring Expressions in CoffeeScript</h1><p class="meta"><time datetime="2013-02-12T20:00:00.000Z">February 12th, 2013</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content undefined"><p>CoffeeScript can save as many keystrokes putting objects together as it can taking them apart.</p>
 <p class="update">
   For a while I was calling this lexeme <em>restructuring assignment</em> until some on Stack Overflow <a href="http://stackoverflow.com/a/14822198/407845">pointed out that name was ridiculous</a>.  Now I&#39;ve taken to the name <em>structuring expressions</em>.
 </p>
@@ -20,63 +15,68 @@ _gaq.push(['_trackPageview']);
 
 <p>Sure <a href="http://blog.carbonfive.com/2011/09/28/destructuring-assignment-in-coffeescript/">C5 told you all about</a> CoffeeScript’s <a href="http://coffeescript.org/#destructuring">destructing assignment</a> syntax for objects…</p>
 <p>How it can reach deep into nested structures</p>
-<pre class="highlight"><code class="coffeescript">coffee&gt; user = <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>:
-<span class="string">'AL'</span> }
-{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>: <span class="string">'AL'</span> } }
+<pre><code class="coffeescript">coffee&gt; user = <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>, <span class="hljs-attribute">address</span>: { <span class="hljs-attribute">city</span>: <span class="hljs-string">'Anytown'</span>, <span class="hljs-attribute">state</span>:
+<span class="hljs-string">'AL'</span> }
+{ <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>, <span class="hljs-attribute">address</span>: { <span class="hljs-attribute">city</span>: <span class="hljs-string">'Anytown'</span>, <span class="hljs-attribute">state</span>: <span class="hljs-string">'AL'</span> } }
 
-coffee&gt; { <span class="attribute">address</span>: { city, state } } = user
-{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>, <span class="attribute">address</span>: { <span class="attribute">city</span>: <span class="string">'Anytown'</span>, <span class="attribute">state</span>: <span class="string">'AL'</span> } }
+coffee&gt; { <span class="hljs-attribute">address</span>: { city, state } } = user
+{ <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>, <span class="hljs-attribute">address</span>: { <span class="hljs-attribute">city</span>: <span class="hljs-string">'Anytown'</span>, <span class="hljs-attribute">state</span>: <span class="hljs-string">'AL'</span> } }
 
 coffee&gt; city
-<span class="string">'Anytown'</span></code></pre>
+<span class="hljs-string">'Anytown'</span></code></pre>
+
 <p>Or pluck apart function arguments</p>
-<pre class="highlight"><code class="coffeescript"><span class="function"><span class="title">displayName</span> = <span class="params">({ name, age })</span> -&gt;</span>
-  console.log <span class="string">"<span class="subst">#{name}</span>, <span class="subst">#{age}</span> year(s) old"</span>
+<pre><code class="coffeescript"><span class="hljs-function"><span class="hljs-title">displayName</span> = <span class="hljs-params">({ name, age })</span> -&gt;</span>
+  <span class="hljs-built_in">console</span>.log <span class="hljs-string">"<span class="hljs-subst">#{name}</span>, <span class="hljs-subst">#{age}</span> year(s) old"</span>
 
-coffee&gt; displayName <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>
-Foo, <span class="number">42</span> year(s) old</code></pre>
+coffee&gt; displayName <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>
+Foo, <span class="hljs-number">42</span> year(s) old</code></pre>
+
 <p>Or even destructure directly to instance attributes</p>
-<pre class="highlight"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
-  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@name</span>, <span class="property">@age</span> })</span> -&gt;</span>
+<pre><code class="coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">({ <span class="hljs-property">@name</span>, <span class="hljs-property">@age</span> })</span> -&gt;</span>
 
-coffee&gt; <span class="keyword">new</span> User(<span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>)
-{ <span class="attribute">name</span>: <span class="string">'foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }</code></pre>
+coffee&gt; <span class="hljs-keyword">new</span> User(<span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>)
+{ <span class="hljs-attribute">name</span>: <span class="hljs-string">'foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span> }</code></pre>
+
 <p>But what does this do?</p>
-<pre class="highlight"><code class="coffeescript">coffee&gt; age = <span class="number">42</span>
-<span class="number">42</span>
+<pre><code class="coffeescript">coffee&gt; age = <span class="hljs-number">42</span>
+<span class="hljs-number">42</span>
 
-coffee&gt; user = { <span class="string">'Foo'</span>, age }
+coffee&gt; user = { <span class="hljs-string">'Foo'</span>, age }
 ?</code></pre>
+
 <p>My fudge-fingers managed to mash that one unknowingly into my editor one day while attempting to rack up velocity points on the latest story. Instead of hemorrhaging the expected SyntaxError, it evaluated to this beautiful new object</p>
-<pre class="highlight"><code class="coffeescript">{ <span class="attribute">Foo</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }</code></pre>
+<pre><code class="coffeescript">{ <span class="hljs-attribute">Foo</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span> }</code></pre>
+
 <p>Now I’ve got a handy set syntax</p>
-<pre class="highlight"><code class="coffeescript">coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">2</span>, <span class="number">5</span> }
-<span class="literal">true</span>
+<pre><code class="coffeescript">coffee&gt; <span class="hljs-number">2</span> <span class="hljs-keyword">of</span> { <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span> }
+<span class="hljs-literal">true</span>
 
-coffee&gt; <span class="number">2</span> <span class="keyword">of</span> { <span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span> }
-<span class="literal">false</span></code></pre>
+coffee&gt; <span class="hljs-number">2</span> <span class="hljs-keyword">of</span> { <span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span> }
+<span class="hljs-literal">false</span></code></pre>
+
 <p>And with consistent variable naming, breezy data marshaling between some framework actors</p>
-<pre class="highlight"><code class="coffeescript"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>
-  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@name</span>, <span class="property">@age</span> })</span> -&gt;</span>
+<pre><code class="coffeescript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">({ <span class="hljs-property">@name</span>, <span class="hljs-property">@age</span> })</span> -&gt;</span>
 
-<span class="function"><span class="title">template</span> = <span class="params">({ user, face })</span> -&gt;</span>
-  <span class="string">"&lt;div&gt;<span class="subst">#{user.name}</span> <span class="subst">#{face}</span>&lt;/div&gt;"</span>
+<span class="hljs-function"><span class="hljs-title">template</span> = <span class="hljs-params">({ user, face })</span> -&gt;</span>
+  <span class="hljs-string">"&lt;div&gt;<span class="hljs-subst">#{user.name}</span> <span class="hljs-subst">#{face}</span>&lt;/div&gt;"</span>
 
-<span class="class"><span class="keyword">class</span> <span class="title">UserView</span></span>
-  <span class="attribute">constructor</span>: <span class="function"><span class="params">({ <span class="property">@user</span> })</span> -&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserView</span></span>
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">({ <span class="hljs-property">@user</span> })</span> -&gt;</span>
 
-  <span class="attribute">render</span>:<span class="function"> -&gt;</span>
-    <span class="property">@html</span> = template {
-      <span class="property">@user</span>
-      <span class="attribute">face</span>: <span class="string">':)'</span>
+  <span class="hljs-attribute">render</span>:<span class="hljs-function"> -&gt;</span>
+    <span class="hljs-property">@html</span> = template {
+      <span class="hljs-property">@user</span>
+      <span class="hljs-attribute">face</span>: <span class="hljs-string">':)'</span>
     }
 
-coffee&gt; user = <span class="keyword">new</span> User(<span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span>)
-{ <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> }
+coffee&gt; user = <span class="hljs-keyword">new</span> User(<span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span>)
+{ <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span> }
 
-coffee&gt; view = <span class="keyword">new</span> UserView {user}
-{ <span class="attribute">user</span>: { <span class="attribute">name</span>: <span class="string">'Foo'</span>, <span class="attribute">age</span>: <span class="number">42</span> } }
+coffee&gt; view = <span class="hljs-keyword">new</span> UserView {user}
+{ <span class="hljs-attribute">user</span>: { <span class="hljs-attribute">name</span>: <span class="hljs-string">'Foo'</span>, <span class="hljs-attribute">age</span>: <span class="hljs-number">42</span> } }
 
 coffee&gt; view.render()
-<span class="string">'&lt;div&gt;Foo :)&lt;/div&gt;'</span></code></pre>
-</div><footer><p class="meta"><a class="basic-alignment left" href="/teacup-released/">&laquo; Teacup Released</a><a class="basic-alignment right" href="/a-breakthrough-a-day/">A Breakthrough a Day &raquo;</a></p></footer></article></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
+<span class="hljs-string">'&lt;div&gt;Foo :)&lt;/div&gt;'</span></code></pre></div><footer><p class="meta"><a class="basic-alignment left" href="/teacup-released/">&laquo; Teacup Released</a><a class="basic-alignment right" href="/a-breakthrough-a-day/">A Breakthrough a Day &raquo;</a></p></footer></article></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>

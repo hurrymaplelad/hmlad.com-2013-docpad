@@ -1,205 +1,1683 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
-body{line-height:1;color:#000;background:#fff}
-ol,ul{list-style:none}
-table{border-collapse:separate;border-spacing:0;vertical-align:middle}
-caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
-a img{border:none}
-article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,main{margin:0;padding:0;border:0;outline:0;display:block}
-audio,canvas,video{display:inline-block;*display:inline;*zoom:1}
-audio:not([controls]),[hidden]{display:none}
-a{color:#ab501d;-webkit-transition:color .3s;-moz-transition:color .3s;-o-transition:color .3s;-ms-transition:color .3s;transition:color .3s;text-decoration:none;}
-a:visited{color:#97867d}
-a:hover{color:#e0a381}
-a:focus{color:#e0a381}
-a:active{color:#97867d}
-a:hover,a:active{text-decoration:underline}
-html{background:#fff}
-.heading,h1,h2,h3,h4,h5,h6{font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif}
-.sans,body,article header p.meta,#content .blog-index footer,#blog-archives a.category,#blog-archives time{font-family:'HelveticaNeue-Light','HelveticaNeue',Helvetica,Arial,sans-serif}
-.serif{font-family:"PT Serif",Georgia,Times,"Times New Roman",serif}
-.mono,pre,code,tt{font-family:PragmataPro,Menlo,Monaco,"Andale Mono","Lucida Console","Courier New",monospace;font-size:85%}
-body > header h1{font-size:3em !important;font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif;font-weight:bold;line-height:.85em;text-transform:uppercase}
-body{font-size:1.125em;line-height:1.5em;color:#333;}
-h1{font-size:1.8em;line-height:1.2em}
-@media only screen and (min-width: 768px){h1{font-size:2.2em;line-height:1.2em}
-}h1,h2,h3,h4,h5,h6{text-rendering:optimizelegibility;font-weight:600;color:#111;}
-h1 a:hover,h2 a:hover,h3 a:hover,h4 a:hover,h5 a:hover,h6 a:hover{color:#d76424 !important}
-h2,section h1{font-size:1.5em}
-h3,section h2,section section h1{font-size:1.3em}
-h4,section h3,section section h2,section section section h1{font-size:1em}
-h5,section h4,section section h3{font-size:.9em}
-h6,section h5,section section h4,section section section h3{font-size:.8em}
-p,blockquote,ul,ol,pre,code{margin-bottom:1.5em}
-ul{list-style-type:circle;}
-ul ul{list-style-type:disc;margin-bottom:0;}
-ul ul ul{list-style-type:square;margin-bottom:0}
-ol{list-style-type:decimal;}
-ol ol{list-style-type:lower-alpha;margin-bottom:0;}
-ol ol ol{list-style-type:lower-roman;margin-bottom:0}
-ul,ol,ul ul,ol ul,ul ol,ol ol{margin-left:1.3em}
-strong{font-weight:bold}
-em{font-style:italic}
-mark{color:#626262;background-color:transparent;font-weight:normal;font-style:italic;font-family:"PT Serif",Georgia,Times,"Times New Roman",serif}
-sup,sub{font-size:.6em;display:inline;padding:0 1px}
-sup{vertical-align:super}
-sub{bottom:-.5em}
-q{font-style:italic;}
-q:before{content:"\201C"}
-q:after{content:"\201D"}
-em,dfn{font-style:italic}
-strong,dfn{font-weight:bold}
-del,s{text-decoration:line-through}
-abbr,acronym{border-bottom:1px dotted;cursor:help}
-pre > code{line-height:1.7;padding-left:8%}
-hr{margin-bottom:.2em}
-small{font-size:.8em}
-big{font-size:1.2em}
-blockquote{font-style:italic;position:relative;font-size:1.2em;font-weight:lighter;line-height:1.5em;padding-left:1em;}
-blockquote cite{display:block;font-style:italic;font-size:80%;line-height:1.2;padding-right:30%;text-align:right;}
-blockquote cite a{color:#888 !important;word-wrap:break-word}
-@media only screen and (min-width: 992px){blockquote{padding-left:1.5em;border-left-width:4px}
-}.pullquote-right:before,.pullquote-left:before{padding:0;border:none;content:attr(data-pullquote);float:right;width:45%;margin:.5em 0 1em 1.5em;position:relative;top:7px;font-size:1.4em;line-height:1.45em}
-.pullquote-left:before{float:left;margin:.5em 1.5em 1em 0}
-.force-wrap,article a{white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;white-space:pre-wrap;word-wrap:break-word}
-h1.status-code{font-size:12em}
-.group,body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section,body div.pagination{zoom:1}
-.group:before,body > header:before,body > nav:before,body > footer:before,body #content > article:before,body #content > div > article:before,body #content > div > section:before,body div.pagination:before,.group:after,body > header:after,body > nav:after,body > footer:after,body #content > article:after,body #content > div > article:after,body #content > div > section:after,body div.pagination:after{content:"";display:table}
-.group:after,body > header:after,body > nav:after,body > footer:after,body #content > article:after,body #content > div > article:after,body #content > div > section:after,body div.pagination:after{clear:both}
-body{-webkit-text-size-adjust:none;max-width:676px;position:relative;margin:0 auto;}
-body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px;}
-@media only screen and (min-width: 768px){body > header,body > nav,body > footer,body #content > article,body #content > div > article,body #content > div > section{padding-left:24px;padding-right:24px}
-}body div.pagination{padding-left:24px;padding-right:24px;}
-@media only screen and (min-width: 768px){body div.pagination{padding-left:24px;padding-right:24px}
-}body > header{font-size:1em;padding-top:2em;padding-bottom:.75em}
-#content > div,#content > article{width:100%}
-.flex-content,table,article img,article video{max-width:100%;height:auto}
-.basic-alignment.left,table.left,article img.left,article video.left{float:left;margin-right:1.5em}
-.basic-alignment.right,table.right,article img.right,article video.right{float:right;margin-left:1.5em}
-.basic-alignment.center,table.center,article img.center,article video.center{display:block;margin:0 auto 1.5em}
-.basic-alignment.left,table.left,article img.left,article video.left,.basic-alignment.right,table.right,article img.right,article video.right{margin-bottom:.8em}
-#content{border-right:none}
-@media only screen and (min-width: 550px){body > header{font-size:1em}
-}@media only screen and (min-width: 768px){body{-webkit-text-size-adjust:auto}
-body > header{font-size:1.3em}
-#main{zoom:1;padding:0;margin:0 auto}
-#main:before,#main:after{content:"";display:table}
-#main:after{clear:both}
-#content{zoom:1;position:relative;}
-#content:before,#content:after{content:"";display:table}
-#content:after{clear:both}
-.no-sidebar #content{margin-right:0;border-right:0}
-#content > div,#content > article{padding-top:12px;padding-bottom:12px;float:left}
-}@media only screen and (min-width: 992px){body > header{font-size:1.3em}
-#content > div,#content > article{padding-top:12px;padding-bottom:12px}
-}dl{margin-bottom:1em}
-dt{font-weight:bold}
-dt,dd,li{padding-bottom:.25em}
-@media only screen and (min-width: 550px){dt{float:none}
-}@media only screen and (min-width: 750px){dt{clear:left;float:left;padding-right:.5em;width:10em}
-}table{padding:.25em .25em;}
-table thead,table thead th{font-weight:bold;font-size:1em}
-table thead{border-bottom:2px solid #333}
-body > header h1{display:inline-block;color:#000;background-image:url("/images/syrup.trans.png");-webkit-background-size:auto 38%;-moz-background-size:auto 38%;background-size:auto 38%;background-repeat:no-repeat;background-position:88% bottom;padding-bottom:.3em;}
-body > header h1 a,body > header h1 a:visited{color:#000;text-decoration:none !important}
-body > footer{font-size:.7em;color:#272727;position:relative;padding-top:.5em;margin-bottom:2em;border-top:4px solid #e6e6e6}
-.icon{display:inline-block;width:32px;height:32px;float:right;margin-left:10px}
-.github{background-image:url("/images/icons/github.desaturated.png");}
-.github:hover,.github:active{background-image:url("/images/icons/github.png")}
-.goodreads{background-image:url("/images/icons/goodreads.desaturated.png");}
-.goodreads:hover,.goodreads:active{background-image:url("/images/icons/goodreads.png")}
-.linkedin{background-image:url("/images/icons/linkedin.desaturated.png");}
-.linkedin:hover,.linkedin:active{background-image:url("/images/icons/linkedin.png")}
-.stackoverflow{background-image:url("/images/icons/stackoverflow.desaturated.png");}
-.stackoverflow:hover,.stackoverflow:active{background-image:url("/images/icons/stackoverflow.png")}
-.context-row,article pre > code,article p.update{padding-top:1em;padding-bottom:1em;padding-left:24px;padding-right:24px;margin-left:-24px;margin-right:-24px;}
-@media only screen and (min-width: 768px){.context-row,article pre > code,article p.update{padding-left:24px;padding-right:24px}
-}@media only screen and (min-width: 768px){.context-row,article pre > code,article p.update{margin-left:-24px;margin-right:-24px}
-}.separator,article > footer .byline + time:before,article > footer time +time:before,article > footer .comments:before,article > footer .byline ~ .categories:before{content:"—";padding:0 .4em 0 .2em;display:inline-block}
-article{padding-top:1em;}
-article header{position:relative;margin-bottom:1em;}
-article header h1{margin:0;}
-article header h1 a{text-decoration:none;}
-article header h1 a:hover{text-decoration:none}
-article header p{font-size:.9em;color:#a2a2a2;margin:0;}
-@media only screen and (min-width: 768px){article header{margin-bottom:1.5em}
-}article h2{padding-top:.8em}
-.entry-content article h2:first-child,article header + h2{padding-top:0}
-article h2:first-child,article header + h2{background:none}
-article .feature{padding-top:.5em;margin-bottom:1em;padding-bottom:1em;background:#666 bottom left repeat-x;line-height:1.3em}
-article img,article video{padding:.25em;background-color:#fff}
-article .no-border{border:none;-webkit-border-radius:0;border-radius:0;-moz-border-radius:0;-webkit-box-shadow:none;box-shadow:none;background:transparent;padding:0}
-article video{margin:0 auto 1.5em;display:block;width:100%}
-article > footer{margin-top:2em;}
-article > footer p.meta{margin-bottom:.8em;font-size:.85em;clear:both;overflow:hidden}
-article #flash{margin-bottom:1.5em}
-article table.controls{margin:.3in auto;}
-article table.controls caption{text-align:center}
-article table.controls th{text-align:right}
-article table.controls td{padding-left:6px}
-article ul.footnotes{margin:1.2em}
-article pre > code{background-color:#fcfbf8;overflow:auto}
-article p.update{background-color:#fffff9;}
-article p.update:before{content:'Update:';font-family:'HelveticaNeue-CondensedBold','HelveticaNeue',Helvetica,Arial,sans-serif;display:block;margin-bottom:.3em}
-#content .blog-index article{padding-top:3em;padding-bottom:1.5em;border-top:4px solid #e6e6e6}
-#content .blog-index article:first-child{padding-top:1em;border-top:none}
-#content .blog-index article header{background:none}
-#content .blog-index article h1 a{color:inherit;}
-#content .blog-index article h1 a:hover{color:#e0a381}
-#content .blog-index a[rel=full-article]{display:inline-block;margin-right:.5em}
-#content .blog-index footer{margin-top:1em}
-#content div.pagination{text-align:center;font-size:.95em;position:relative;padding-top:1.5em;padding-bottom:1.5em;border-top:1px solid #fff;}
-#content div.pagination a{text-decoration:none;color:#888;}
-#content div.pagination a.prev{position:absolute;left:0}
-#content div.pagination a.next{position:absolute;right:0}
-#content div.pagination a:hover{color:#e0a381}
-#archive #content > div,#archive #content > div > article{padding-top:0}
-#blog-archives{color:#888;}
-#blog-archives article{padding:1em 0 1em;position:relative;}
-#blog-archives article:last-child{background:none}
-#blog-archives article footer{padding:0;margin:0;font-size:.75em}
-#blog-archives h1{color:#333;margin-bottom:0}
-#blog-archives h2{display:none}
-#blog-archives h1{font-size:1.5em;}
-#blog-archives h1 a{color:inherit;font-weight:normal;display:inline-block}
-#blog-archives h1 a:hover{color:#e0a381}
-#blog-archives a.category,#blog-archives time{color:#888}
-#blog-archives .entry-content{display:none}
-#blog-archives time{font-size:.875em;line-height:1.2em;}
-#blog-archives time .month,#blog-archives time .day{display:inline-block}
-#blog-archives time .month{text-transform:uppercase}
-#blog-archives p{margin-bottom:1em}
-#blog-archives a,#blog-archives .entry-content a{color:inherit;}
-#blog-archives a:hover,#blog-archives .entry-content a:hover{color:#e0a381}
-#blog-archives a:hover{color:#e0a381}
-@media only screen and (min-width: 550px){#blog-archives article{margin-left:5em}
-#blog-archives h2{margin-bottom:.3em;font-weight:normal;display:inline-block;position:relative;top:-1px;float:left;}
-#blog-archives h2:first-child{padding-top:.75em}
-#blog-archives time{position:absolute;text-align:right;left:0;top:1.8em}
-#blog-archives .year{display:none}
-#blog-archives article{padding-left:4.5em;padding-bottom:.7em}
-#blog-archives a.category{line-height:1.1em}
-}#content > .category article{margin-left:0;padding-left:6.8em}
-#content > .category .year{display:inline}
-pre code{display:block;color:#000;background:#fff}
-pre .comment,pre .template_comment,pre .javadoc,pre .comment *{color:#006a00}
-pre .keyword,pre .literal,pre .nginx .title{color:#aa0d91}
-pre .method,pre .list .title,pre .tag .title,pre .setting .value,pre .winutils,pre .tex .command,pre .http .title,pre .request,pre .status{color:#008}
-pre .envvar,pre .tex .special{color:#660}
-pre .string{color:#c41a16}
-pre .tag .value,pre .cdata,pre .filter .argument,pre .attr_selector,pre .apache .cbracket,pre .date,pre .regexp{color:#080}
-pre .sub .identifier,pre .pi,pre .tag,pre .tag .keyword,pre .decorator,pre .ini .title,pre .shebang,pre .prompt,pre .hexcolor,pre .rules .value,pre .css .value .number,pre .symbol,pre .symbol .string,pre .number,pre .css .function,pre .clojure .title,pre .clojure .built_in,pre .function .title,pre .coffeescript .attribute{color:#1c00cf}
-pre .class .title,pre .haskell .type,pre .smalltalk .class,pre .javadoctag,pre .yardoctag,pre .phpdoc,pre .typename,pre .tag .attribute,pre .doctype,pre .class .id,pre .built_in,pre .setting,pre .params,pre .clojure .attribute{color:#5c2699}
-pre .variable{color:#3f6e74}
-pre .css .tag,pre .rules .property,pre .pseudo,pre .subst{color:#000}
-pre .css .class,pre .css .id{color:#9b703f}
-pre .value .important{color:#f70;font-weight:bold}
-pre .rules .keyword{color:#c5af75}
-pre .annotation,pre .apache .sqbracket,pre .nginx .built_in{color:#9b859d}
-pre .preprocessor,pre .preprocessor *{color:#643820}
-pre .tex .formula{background-color:#eee;font-style:italic}
-pre .diff .header,pre .chunk{color:#808080;font-weight:bold}
-pre .diff .change{background-color:#bccff9}
-pre .addition{background-color:#baeeba}
-pre .deletion{background-color:#ffc8bd}
-pre .comment .yardoctag{font-weight:bold}
-pre .method .id{color:#000}
+
+/* line 15 : /Users/adam/Projects/hmlad.com/styles/rollup.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+
+/* line 286 : /Users/adam/Projects/hmlad.com/node_modules/gulp-stylus/node_modules/stylus/lib/functions/index.styl */
+
+/* line 13 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/index.styl */
+
+/* line 13 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/index.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/border.styl */
+
+/* line 10 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/border.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+
+/* line 28 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/color-image.styl */
+
+/* line 4 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/color-image.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/flex.styl */
+
+/* line 196 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/flex.styl */
+
+/* line 90 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/gradients.styl */
+
+/* line 90 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/gradients.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/config.styl */
+
+/* line 11 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/config.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/iconic.styl */
+
+/* line 7 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/iconic.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/image.styl */
+
+/* line 25 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/image.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/overflow.styl */
+
+/* line 20 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/overflow.styl */
+
+/* line 3 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/positions.styl */
+
+/* line 66 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/positions.styl */
+
+/* line 3 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+
+/* line 78 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+
+/* line 5 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/index.styl */
+
+/* line 5 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/index.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/aliases.styl */
+
+/* line 12 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/aliases.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/ellipsis.styl */
+
+/* line 9 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/ellipsis.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/hide-text.styl */
+
+/* line 8 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/hide-text.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/replace-text.styl */
+
+/* line 9 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/replace-text.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/shadow-stroke.styl */
+
+/* line 2 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/text/shadow-stroke.styl */
+
+/* line 541 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/vendor.styl */
+
+/* line 11 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/vendor.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/config.styl */
+
+/* line 577 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/config.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/size.styl */
+
+/* line 4 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 14 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+
+/* line 16 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+ol,
+ul {
+  list-style: none;
+}
+
+/* line 18 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+
+/* line 20 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 22 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+a img {
+  border: none;
+}
+
+/* line 68 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+main {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  display: block;
+}
+
+/* line 73 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+audio,
+canvas,
+video {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+}
+
+/* line 77 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/reset.styl */
+audio:not([controls]),
+[hidden] {
+  display: none;
+}
+
+/* line 28 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/size.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/media.styl */
+
+/* line 3 : /Users/adam/Projects/hmlad.com/styles/base/media.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/utilities.styl */
+
+/* line 27 : /Users/adam/Projects/hmlad.com/styles/base/utilities.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+
+/* line 38 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a {
+  color: #ab501d;
+  -webkit-transition: color;
+  -moz-transition: color;
+  -o-transition: color;
+  -ms-transition: color;
+  transition: color;
+  text-decoration: none;
+}
+
+/* line 42 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a:visited {
+  color: #97867d;
+}
+
+/* line 44 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a:hover {
+  color: #e0a381;
+}
+
+/* line 46 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a:focus {
+  color: #e0a381;
+}
+
+/* line 48 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a:active {
+  color: #97867d;
+}
+
+/* line 50 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+/* line 53 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+html {
+  background: #fff;
+}
+
+/* line 54 : /Users/adam/Projects/hmlad.com/styles/base/theme.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+
+/* line 16 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.heading,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'HelveticaNeue-CondensedBold', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+
+/* line 19 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.sans,
+body,
+article header p.meta,
+#content .blog-index footer,
+#blog-archives a.category,
+#blog-archives time {
+  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+
+/* line 20 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.serif {
+  font-family: "PT Serif", Georgia, Times, "Times New Roman", serif;
+}
+
+/* line 21 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.mono,
+pre,
+code,
+tt {
+  font-family: PragmataPro, Menlo, Monaco, "Andale Mono", "Lucida Console", "Courier New", monospace;
+  font-size: 85%;
+}
+
+/* line 25 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+body > header h1 {
+  font-size: 3em !important;
+  font-family: 'HelveticaNeue-CondensedBold', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  line-height: 0.85em;
+  text-transform: uppercase;
+}
+
+/* line 33 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+body {
+  font-size: 1.125em;
+  line-height: 1.5em;
+  color: #333;
+}
+
+/* line 39 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h1 {
+  font-size: 1.8em;
+  line-height: 1.2em;
+}
+@media only screen and (min-width: 768px) {
+
+/* line 45 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+  h1 {
+    font-size: 2.2em;
+    line-height: 1.2em;
+  }
+}
+
+/* line 48 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-rendering: optimizelegibility;
+  font-weight: 600;
+  color: #111;
+}
+
+/* line 53 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #d76424 !important;
+}
+
+/* line 55 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h2,
+section h1 {
+  font-size: 1.5em;
+}
+
+/* line 58 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h3,
+section h2,
+section section h1 {
+  font-size: 1.3em;
+}
+
+/* line 61 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h4,
+section h3,
+section section h2,
+section section section h1 {
+  font-size: 1em;
+}
+
+/* line 64 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h5,
+section h4,
+section section h3 {
+  font-size: 0.9em;
+}
+
+/* line 67 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h6,
+section h5,
+section section h4,
+section section section h3 {
+  font-size: 0.8em;
+}
+
+/* line 70 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+p,
+blockquote,
+ul,
+ol,
+pre,
+code {
+  margin-bottom: 1.5em;
+}
+
+/* line 73 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ul {
+  list-style-type: circle;
+}
+
+/* line 74 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ul ul {
+  list-style-type: disc;
+  margin-bottom: 0px;
+}
+
+/* line 75 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ul ul ul {
+  list-style-type: square;
+  margin-bottom: 0px;
+}
+
+/* line 79 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ol {
+  list-style-type: decimal;
+}
+
+/* line 80 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ol ol {
+  list-style-type: lower-alpha;
+  margin-bottom: 0px;
+}
+
+/* line 81 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ol ol ol {
+  list-style-type: lower-roman;
+  margin-bottom: 0px;
+}
+
+/* line 85 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+
+/* line 85 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+ul,
+ol,
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+  margin-left: 1.3em;
+}
+
+/* line 87 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+strong {
+  font-weight: bold;
+}
+
+/* line 89 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+em {
+  font-style: italic;
+}
+
+/* line 91 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+mark {
+  color: #626262;
+  background-color: transparent;
+  font-weight: normal;
+  font-style: italic;
+  font-family: "PT Serif", Georgia, Times, "Times New Roman", serif;
+}
+
+/* line 98 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+sup,
+sub {
+  font-size: 0.6em;
+  display: inline;
+  padding: 0 1px;
+}
+
+/* line 102 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+sup {
+  vertical-align: super;
+}
+
+/* line 104 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+sub {
+  bottom: -0.5em;
+}
+
+/* line 106 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+q {
+  font-style: italic;
+}
+
+/* line 107 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+q:before {
+  content: "\201C";
+}
+
+/* line 108 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+q:after {
+  content: "\201D";
+}
+
+/* line 111 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+em,
+dfn {
+  font-style: italic;
+}
+
+/* line 113 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+strong,
+dfn {
+  font-weight: bold;
+}
+
+/* line 115 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+del,
+s {
+  text-decoration: line-through;
+}
+
+/* line 117 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+abbr,
+acronym {
+  border-bottom: 1px dotted;
+  cursor: help;
+}
+
+/* line 119 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+
+/* line 122 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+pre > code {
+  line-height: 1.7;
+  padding-left: 8%;
+}
+
+/* line 126 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+hr {
+  margin-bottom: 0.2em;
+}
+
+/* line 128 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+small {
+  font-size: 0.8em;
+}
+
+/* line 130 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+big {
+  font-size: 1.2em;
+}
+
+/* line 132 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+blockquote {
+  font-style: italic;
+  position: relative;
+  font-size: 1.2em;
+  font-weight: lighter;
+  line-height: 1.5em;
+  padding-left: 1em;
+}
+
+/* line 140 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+blockquote cite {
+  display: block;
+  font-style: italic;
+  font-size: 80%;
+  line-height: 1.2;
+  padding-right: 30%;
+  text-align: right;
+}
+
+/* line 147 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+blockquote cite a {
+  color: #888 !important;
+  word-wrap: break-word;
+}
+@media only screen and (min-width: 992px) {
+
+/* line 152 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+  blockquote {
+    padding-left: 1.5em;
+    border-left-width: 4px;
+  }
+}
+
+/* line 158 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.pullquote-right:before,
+.pullquote-left:before {
+/* Reset metrics. */
+  padding: 0;
+  border: none;
+/* Content */
+  content: attr(data-pullquote);
+/* Pull out to the right, modular scale based margins. */
+  float: right;
+  width: 45%;
+  margin: 0.5em 0 1em 1.5em;
+/* Baseline correction */
+  position: relative;
+  top: 7px;
+  font-size: 1.4em;
+  line-height: 1.45em;
+}
+
+/* line 179 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.pullquote-left:before {
+/* Make left pullquotes align properly. */
+  float: left;
+  margin: 0.5em 1.5em 1em 0;
+}
+
+/* line 186 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+.force-wrap,
+article a {
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* line 194 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+h1.status-code {
+  font-size: 12em;
+}
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/typography.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+
+/* line 25 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.group,
+body > header,
+body > nav,
+body > footer,
+body #content > article,
+body #content > div > article,
+body #content > div > section,
+body div.pagination {
+  zoom: 1;
+}
+
+/* line 22 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+.group:before,
+body > header:before,
+body > nav:before,
+body > footer:before,
+body #content > article:before,
+body #content > div > article:before,
+body #content > div > section:before,
+body div.pagination:before,
+.group:after,
+body > header:after,
+body > nav:after,
+body > footer:after,
+body #content > article:after,
+body #content > div > article:after,
+body #content > div > section:after,
+body div.pagination:after {
+  content: "";
+  display: table;
+}
+
+/* line 26 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+.group:after,
+body > header:after,
+body > nav:after,
+body > footer:after,
+body #content > article:after,
+body #content > div > article:after,
+body #content > div > section:after,
+body div.pagination:after {
+  clear: both;
+}
+
+/* line 28 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+body {
+  -webkit-text-size-adjust: none;
+  max-width: 676px;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* line 33 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+body > header,
+body > nav,
+body > footer,
+body #content > article,
+body #content > div > article,
+body #content > div > section {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media only screen and (min-width: 768px) {
+
+/* line 10 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body > header,
+  body > nav,
+  body > footer,
+  body #content > article,
+  body #content > div > article,
+  body #content > div > section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* line 37 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+body div.pagination {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+@media only screen and (min-width: 768px) {
+
+/* line 10 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body div.pagination {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+/* line 41 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+body > header {
+  font-size: 1em;
+  padding-top: 2em;
+  padding-bottom: 0.75em;
+}
+
+/* line 48 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+
+/* line 48 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+#content > div,
+#content > article {
+  width: 100%;
+}
+
+/* line 50 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.flex-content,
+table,
+article img,
+article video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* line 52 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+
+/* line 53 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.basic-alignment.left,
+table.left,
+article img.left,
+article video.left {
+  float: left;
+  margin-right: 1.5em;
+}
+
+/* line 54 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.basic-alignment.right,
+table.right,
+article img.right,
+article video.right {
+  float: right;
+  margin-left: 1.5em;
+}
+
+/* line 55 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.basic-alignment.center,
+table.center,
+article img.center,
+article video.center {
+  display: block;
+  margin: 0 auto 1.5em;
+}
+
+/* line 56 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+.basic-alignment.left,
+table.left,
+article img.left,
+article video.left,
+.basic-alignment.right,
+table.right,
+article img.right,
+article video.right {
+  margin-bottom: 0.8em;
+}
+
+/* line 59 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+#content {
+  border-right: none;
+}
+@media only screen and (min-width: 550px) {
+
+/* line 64 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body > header {
+    font-size: 1em;
+  }
+}
+@media only screen and (min-width: 768px) {
+
+/* line 68 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body {
+    -webkit-text-size-adjust: auto;
+  }
+
+/* line 69 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body > header {
+    font-size: 1.3em;
+  }
+
+/* line 70 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  #main {
+    zoom: 1;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+/* line 22 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+  #main:before,
+  #main:after {
+    content: "";
+    display: table;
+  }
+
+/* line 26 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+  #main:after {
+    clear: both;
+  }
+
+/* line 75 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  #content {
+    zoom: 1;
+    position: relative;
+  }
+
+/* line 22 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+  #content:before,
+  #content:after {
+    content: "";
+    display: table;
+  }
+
+/* line 26 : /Users/adam/Projects/hmlad.com/node_modules/nib/lib/nib/clearfix.styl */
+  #content:after {
+    clear: both;
+  }
+
+/* line 78 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  .no-sidebar #content {
+    margin-right: 0;
+    border-right: 0;
+  }
+
+/* line 79 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  #content > div,
+  #content > article {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    float: left;
+  }
+}
+@media only screen and (min-width: 992px) {
+
+/* line 88 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  body > header {
+    font-size: 1.3em;
+  }
+
+/* line 89 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+
+/* line 90 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  #content > div,
+  #content > article {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}
+
+/* line 97 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+dl {
+  margin-bottom: 1em;
+}
+
+/* line 98 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+dt {
+  font-weight: bold;
+}
+
+/* line 99 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+dt,
+dd,
+li {
+  padding-bottom: 0.25em;
+}
+@media only screen and (min-width: 550px) {
+
+/* line 101 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  dt {
+    float: none;
+  }
+}
+@media only screen and (min-width: 750px) {
+
+/* line 104 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  dt {
+    clear: left;
+    float: left;
+    padding-right: 0.5em;
+    width: 10em;
+  }
+}
+
+/* line 112 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+table {
+  padding: 0.25em 0.25em;
+}
+
+/* line 116 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+table thead,
+table thead th {
+  font-weight: bold;
+  font-size: 1em;
+}
+
+/* line 117 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+table thead {
+  border-bottom: 2px solid #333;
+}
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/header.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/header.styl */
+
+/* line 2 : /Users/adam/Projects/hmlad.com/styles/header.styl */
+body > header h1 {
+  display: inline-block;
+  color: #000;
+  background-image: url("/images/syrup.trans.png");
+  -webkit-background-size: auto 38%;
+  -moz-background-size: auto 38%;
+  background-size: auto 38%;
+  background-repeat: no-repeat;
+  background-position: 88% bottom;
+  padding-bottom: 0.3em;
+}
+
+/* line 12 : /Users/adam/Projects/hmlad.com/styles/header.styl */
+body > header h1 a,
+body > header h1 a:visited {
+  color: #000;
+  text-decoration: none !important;
+}
+
+/* line 14 : /Users/adam/Projects/hmlad.com/styles/header.styl */
+
+/* line 14 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+body > footer {
+  font-size: 0.7em;
+  color: #272727;
+  position: relative;
+  padding-top: 0.5em;
+  margin-bottom: 2em;
+  border-top: 4px solid #e6e6e6;
+}
+
+/* line 10 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  float: right;
+  margin-left: 10px;
+}
+
+/* line 18 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.github {
+  background-image: url("/images/icons/github.desaturated.png");
+}
+
+/* line 20 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.github:hover,
+.github:active {
+  background-image: url("/images/icons/github.png");
+}
+
+/* line 24 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.goodreads {
+  background-image: url("/images/icons/goodreads.desaturated.png");
+}
+
+/* line 26 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.goodreads:hover,
+.goodreads:active {
+  background-image: url("/images/icons/goodreads.png");
+}
+
+/* line 30 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.linkedin {
+  background-image: url("/images/icons/linkedin.desaturated.png");
+}
+
+/* line 32 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.linkedin:hover,
+.linkedin:active {
+  background-image: url("/images/icons/linkedin.png");
+}
+
+/* line 36 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.stackoverflow {
+  background-image: url("/images/icons/stackoverflow.desaturated.png");
+}
+
+/* line 38 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+.stackoverflow:hover,
+.stackoverflow:active {
+  background-image: url("/images/icons/stackoverflow.png");
+}
+
+/* line 41 : /Users/adam/Projects/hmlad.com/styles/footer.styl */
+
+/* line 41 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+.context-row,
+article pre > code,
+article p.update {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-left: -24px;
+  margin-right: -24px;
+}
+@media only screen and (min-width: 768px) {
+
+/* line 10 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  .context-row,
+  article pre > code,
+  article p.update,
+article pre > code,
+article p.update {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+@media only screen and (min-width: 768px) {
+
+/* line 17 : /Users/adam/Projects/hmlad.com/styles/base/layout.styl */
+  .context-row,
+  article pre > code,
+  article p.update,
+article pre > code,
+article p.update {
+    margin-left: -24px;
+    margin-right: -24px;
+  }
+}
+
+/* line 7 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+.separator,
+article > footer .byline + time:before,
+article > footer time +time:before,
+article > footer .comments:before,
+article > footer .byline ~ .categories:before {
+  content: "—";
+  padding: 0 0.4em 0 0.2em;
+  display: inline-block;
+}
+
+/* line 12 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article {
+  padding-top: 1em;
+}
+
+/* line 14 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 16 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article header {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+/* line 18 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article header h1 {
+  margin: 0;
+}
+
+/* line 20 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article header h1 a {
+  text-decoration: none;
+}
+
+/* line 22 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article header h1 a:hover {
+  text-decoration: none;
+}
+
+/* line 24 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article header p {
+  font-size: 0.9em;
+  color: #a2a2a2;
+  margin: 0;
+}
+
+/* line 28 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+@media only screen and (min-width: 768px) {
+
+/* line 32 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+  article header {
+    margin-bottom: 1.5em;
+  }
+}
+
+/* line 34 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article h2 {
+  padding-top: 0.8em;
+}
+
+/* line 36 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+.entry-content article h2:first-child,
+article header + h2 {
+  padding-top: 0;
+}
+
+/* line 38 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article h2:first-child,
+article header + h2 {
+  background: none;
+}
+
+/* line 40 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article .feature {
+  padding-top: 0.5em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  background: #666 bottom left repeat-x;
+  line-height: 1.3em;
+}
+
+/* line 46 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article img,
+article video {
+  padding: 0.25em;
+  background-color: #fff;
+}
+
+/* line 51 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article .no-border {
+  border: none;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  -moz-border-radius: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+}
+
+/* line 58 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article video {
+  margin: 0 auto 1.5em;
+  display: block;
+  width: 100%;
+}
+
+/* line 61 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article > footer {
+  margin-top: 2em;
+}
+
+/* line 63 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article > footer p.meta {
+  margin-bottom: 0.8em;
+  font-size: 0.85em;
+  clear: both;
+  overflow: hidden;
+}
+
+/* line 68 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 71 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article #flash {
+  margin-bottom: 1.5em;
+}
+
+/* line 73 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article table.controls {
+  margin: 0.3in auto;
+}
+
+/* line 75 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article table.controls caption {
+  text-align: center;
+}
+
+/* line 77 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article table.controls th {
+  text-align: right;
+}
+
+/* line 79 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article table.controls td {
+  padding-left: 6px;
+}
+
+/* line 81 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article ul.footnotes {
+  margin: 1.2em;
+}
+
+/* line 84 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article pre > code {
+  background-color: #fcfbf8;
+  overflow: auto;
+  display: block;
+}
+
+/* line 90 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article p.update {
+  background-color: #fffff9;
+}
+
+/* line 93 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+article p.update:before {
+  content: 'Update:';
+  font-family: 'HelveticaNeue-CondensedBold', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+/* line 99 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 100 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index article {
+  padding-top: 3em;
+  padding-bottom: 1.5em;
+  border-top: 4px solid #e6e6e6;
+}
+
+/* line 104 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index article:first-child {
+  padding-top: 1em;
+  border-top: none;
+}
+
+/* line 107 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index article header {
+  background: none;
+}
+
+/* line 109 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 110 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index article h1 a {
+  color: inherit;
+}
+
+/* line 112 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index article h1 a:hover {
+  color: #e0a381;
+}
+
+/* line 114 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index a[rel=full-article] {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+/* line 117 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content .blog-index footer {
+  margin-top: 1em;
+}
+
+/* line 121 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content div.pagination {
+  text-align: center;
+  font-size: 0.95em;
+  position: relative;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  border-top: 1px solid #fff;
+}
+
+/* line 129 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content div.pagination a {
+  text-decoration: none;
+  color: #888;
+}
+
+/* line 132 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content div.pagination a.prev {
+  position: absolute;
+  left: 0;
+}
+
+/* line 135 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content div.pagination a.next {
+  position: absolute;
+  right: 0;
+}
+
+/* line 138 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+#content div.pagination a:hover {
+  color: #e0a381;
+}
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/blog.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 2 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 2 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#archive #content > div,
+#archive #content > div > article {
+  padding-top: 0;
+}
+
+/* line 4 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives {
+  color: #888;
+}
+
+/* line 5 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives article {
+  padding: 1em 0 1em;
+  position: relative;
+}
+
+/* line 8 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives article:last-child {
+  background: none;
+}
+
+/* line 11 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives article footer {
+  padding: 0;
+  margin: 0;
+  font-size: 0.75em;
+}
+
+/* line 17 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives h1 {
+  color: #333;
+  margin-bottom: 0;
+}
+
+/* line 18 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives h2 {
+  display: none;
+}
+
+/* line 19 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives h1 {
+  font-size: 1.5em;
+}
+
+/* line 21 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives h1 a {
+  color: inherit;
+  font-weight: normal;
+  display: inline-block;
+}
+
+/* line 24 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives h1 a:hover {
+  color: #e0a381;
+}
+
+/* line 29 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives a.category,
+#blog-archives time {
+  color: #888;
+}
+
+/* line 34 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives .entry-content {
+  display: none;
+}
+
+/* line 35 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives time {
+  font-size: 0.875em;
+  line-height: 1.2em;
+}
+
+/* line 38 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives time .month,
+#blog-archives time .day {
+  display: inline-block;
+}
+
+/* line 39 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives time .month {
+  text-transform: uppercase;
+}
+
+/* line 41 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives p {
+  margin-bottom: 1em;
+}
+
+/* line 42 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 43 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives a,
+#blog-archives .entry-content a {
+  color: inherit;
+}
+
+/* line 45 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives a:hover,
+#blog-archives .entry-content a:hover {
+  color: #e0a381;
+}
+
+/* line 50 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#blog-archives a:hover {
+  color: #e0a381;
+}
+@media only screen and (min-width: 550px) {
+
+/* line 52 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives article {
+    margin-left: 5em;
+  }
+
+/* line 53 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives h2 {
+    margin-bottom: 0.3em;
+    font-weight: normal;
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    float: left;
+  }
+
+/* line 59 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives h2:first-child {
+    padding-top: 0.75em;
+  }
+
+/* line 61 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives time {
+    position: absolute;
+    text-align: right;
+    left: 0em;
+    top: 1.8em;
+  }
+
+/* line 67 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives .year {
+    display: none;
+  }
+
+/* line 68 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives article {
+    padding-left: 4.5em;
+    padding-bottom: 0.7em;
+  }
+
+/* line 72 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+  #blog-archives a.category {
+    line-height: 1.1em;
+  }
+}
+
+/* line 77 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 78 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#content > .category article {
+  margin-left: 0;
+  padding-left: 6.8em;
+}
+
+/* line 82 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+#content > .category .year {
+  display: inline;
+}
+
+/* line 83 : /Users/adam/Projects/hmlad.com/styles/archive.styl */
+
+/* line 1 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+
+/* line 7 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff;
+  color: #000;
+  -webkit-text-size-adjust: none;
+}
+
+/* line 16 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-comment,
+.hljs-template_comment,
+.hljs-javadoc {
+  color: #006a00;
+}
+
+/* line 22 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-keyword,
+.hljs-literal,
+.nginx .hljs-title {
+  color: #aa0d91;
+}
+
+/* line 27 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.method,
+.hljs-list .hljs-title,
+.hljs-tag .hljs-title,
+.setting .hljs-value,
+.hljs-winutils,
+.tex .hljs-command,
+.http .hljs-title,
+.hljs-request,
+.hljs-status {
+  color: #008;
+}
+
+/* line 39 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-envvar,
+.tex .hljs-special {
+  color: #660;
+}
+
+/* line 44 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-string {
+  color: #c41a16;
+}
+
+/* line 47 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-tag .hljs-value,
+.hljs-cdata,
+.hljs-filter .hljs-argument,
+.hljs-attr_selector,
+.apache .hljs-cbracket,
+.hljs-date,
+.hljs-regexp {
+  color: #080;
+}
+
+/* line 57 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-sub .hljs-identifier,
+.hljs-pi,
+.hljs-tag,
+.hljs-tag .hljs-keyword,
+.hljs-decorator,
+.ini .hljs-title,
+.hljs-shebang,
+.hljs-prompt,
+.hljs-hexcolor,
+.hljs-rules .hljs-value,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.hljs-number,
+.css .hljs-function,
+.hljs-function .hljs-title,
+.coffeescript .hljs-attribute {
+  color: #1c00cf;
+}
+
+/* line 76 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-class .hljs-title,
+.smalltalk .hljs-class,
+.hljs-javadoctag,
+.hljs-yardoctag,
+.hljs-phpdoc,
+.hljs-dartdoc,
+.hljs-type,
+.hljs-typename,
+.hljs-tag .hljs-attribute,
+.hljs-doctype,
+.hljs-class .hljs-id,
+.hljs-built_in,
+.setting,
+.hljs-params,
+.clojure .hljs-attribute {
+  color: #5c2699;
+}
+
+/* line 94 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-variable {
+  color: #3f6e74;
+}
+
+/* line 97 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.css .hljs-tag,
+.hljs-rules .hljs-property,
+.hljs-pseudo,
+.hljs-subst {
+  color: #000;
+}
+
+/* line 104 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.css .hljs-class,
+.css .hljs-id {
+  color: #9b703f;
+}
+
+/* line 109 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-value .hljs-important {
+  color: #f70;
+  font-weight: bold;
+}
+
+/* line 114 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-rules .hljs-keyword {
+  color: #c5af75;
+}
+
+/* line 118 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-annotation,
+.apache .hljs-sqbracket,
+.nginx .hljs-built_in {
+  color: #9b859d;
+}
+
+/* line 124 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-preprocessor,
+.hljs-preprocessor *,
+.hljs-pragma {
+  color: #643820;
+}
+
+/* line 130 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.tex .hljs-formula {
+  background-color: #eee;
+  font-style: italic;
+}
+
+/* line 135 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.diff .hljs-header,
+.hljs-chunk {
+  color: #808080;
+  font-weight: bold;
+}
+
+/* line 141 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.diff .hljs-change {
+  background-color: #bccff9;
+}
+
+/* line 145 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-addition {
+  background-color: #baeeba;
+}
+
+/* line 149 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-deletion {
+  background-color: #ffc8bd;
+}
+
+/* line 153 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.hljs-comment .hljs-yardoctag {
+  font-weight: bold;
+}
+
+/* line 157 : /Users/adam/Projects/hmlad.com/styles/xcode.styl */
+.method .hljs-id {
+  color: #000;
+}
