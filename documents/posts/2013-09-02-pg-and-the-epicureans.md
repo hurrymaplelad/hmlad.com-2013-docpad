@@ -1,7 +1,6 @@
 ---
 title: PG and the Epicureans
 template: post
-post: true
 style: |
   .by {
     margin-left: 10em;

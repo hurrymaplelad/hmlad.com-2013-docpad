@@ -1,6 +1,5 @@
 ---
 template: post
-post: true
 title: "A Breakthrough a Day"
 tags:
   - quote

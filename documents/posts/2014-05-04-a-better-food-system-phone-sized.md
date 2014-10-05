@@ -1,7 +1,6 @@
 ---
 title: A Better Food System, Phone Sized
 template: post
-post: true
 ---
 
 We built a mobile site at Good Eggs.  Check it out by visiting [goodeggs.com](http://goodeggs.com) on your phone.  In case you're not on a phone now, it looks kinda like this:

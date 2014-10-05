@@ -1,7 +1,6 @@
 ---
 title: Automobile ♡ Smartphone
 template: post
-post: true
 thumbnail: /images/pathfinder/connections.jpg
 disqus:
   shortname: hmlad

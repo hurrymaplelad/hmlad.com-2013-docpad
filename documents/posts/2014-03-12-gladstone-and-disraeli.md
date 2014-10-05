@@ -1,6 +1,5 @@
 ---
 template: post
-post: true
 title: "Gladstone and Disraeli"
 tags:
   - quote

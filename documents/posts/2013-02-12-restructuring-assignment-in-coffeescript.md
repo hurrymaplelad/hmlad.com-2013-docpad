@@ -1,6 +1,5 @@
 ---
 template: post
-post: true
 title: "Structuring Expressions in CoffeeScript"
 canonical: "http://bites.goodeggs.com/post/41935904836/restructuring-assignment-in-coffeescript"
 tags:

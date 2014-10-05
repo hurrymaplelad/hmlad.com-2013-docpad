@@ -2,7 +2,6 @@
 title: "Ids in Mongoose, JSON, and Backbone"
 canonical: "http://bites.goodeggs.com/posts/ids-in-mongoose-json-and-backbone/"
 template: post
-post: true
 style: |
   .ids {
     width: 100%;
