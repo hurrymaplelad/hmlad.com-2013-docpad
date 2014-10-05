@@ -112,6 +112,8 @@ gulp.task 'clean', ->
   del = require 'del'
   del.sync ['build', 'release']
 
+gulp.task 'build', ['generate', 'styles']
+
 gulp.task 'serve', (next) ->
   connect = require 'connect'
   serveStatic = require 'serve-static'
@@ -120,9 +122,18 @@ gulp.task 'serve', (next) ->
     .use serveStatic 'build'
     .listen settings.port, next
 
-gulp.task 'build', ['generate', 'styles']
+gulp.task 'watch', ->
+  watch = require 'este-watch'
+  watch ['documents', 'templates', 'styles', 'static'], (e) ->
+    gutil.log 'Changed', gutil.colors.cyan e.filepath
+    switch e.extension
+      when 'styl'
+        gulp.start 'styles'
+      else
+        gulp.start 'generate'
+  .start()
 
-gulp.task 'dev', ['build', 'serve']
+gulp.task 'dev', ['build', 'serve', 'watch']
 
 gulp.task 'open', ['dev'], (next) ->
   open = require 'open'
