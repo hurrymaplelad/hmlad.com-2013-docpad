@@ -124,6 +124,27 @@ gulp.task 'open', ['dev'], ->
   open = require 'open'
   open settings.devServerUrl()
 
+gulp.task 'new:post', (done) ->
+  template = require 'gulp-template'
+  conflict = require 'gulp-conflict'
+  rename = require 'gulp-rename'
+  inquirer = require 'inquirer'
+  slugify = require 'slug'
+  extend = require 'extend'
+  end = require 'stream-end'
+
+  inquirer.prompt [name: 'title', message: 'Title'], (answers) ->
+    date = gutil.date new Date(), 'isoDate'
+    slug = slugify answers.title.toLowerCase()
+    data = extend answers, {date, slug}
+
+    gulp.src 'generators/post.ld'
+      .pipe template(data)
+      .pipe rename "#{date}-#{slug}.md"
+      .pipe conflict 'documents/posts'
+      .pipe gulp.dest 'documents/posts'
+      .pipe end done
+
 gulp.task 'assert:clean', (done) ->
   git = require 'gift'
 
@@ -154,6 +175,6 @@ publish = ({push}={}) ->
 
 gulp.task 'stage', ['build'], publish push: false
 
-gulp.task 'release', ['clean', 'assert:clean', 'build'], publish push: true
+gulp.task 'release', ['clean', 'assert:clean', 'build', 'spec'], publish push: true
 
-gulp.task 'default', ['build']
+gulp.task 'default', ['spec']
