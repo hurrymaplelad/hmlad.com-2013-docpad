@@ -14,13 +14,20 @@
     "htmlstrip-native": "0.0.2"
   },
   "devDependencies": {
-    "serve-static": "~1.6.3",
+    "async": "~0.9.0",
+    "chai": "~1.9.2",
+    "chai-as-promised": "~4.1.1",
+    "coffee-script": "~1.8.0",
+    "connect": "~3.2.0",
+    "convict": "~0.4.2",
+    "este-watch": "0.0.4",
+    "eventemitter2": "~0.4.14",
+    "gift": "~0.4.3-1",
     "gulp": "~3.8.8",
     "gulp-rename": "~1.2.0",
     "gulp-stylus": "~1.3.3",
     "gulp-gh-pages": "git://github.com/hurrymaplelad/gulp-gh-pages.git#commit-message-option",
-    "coffee-script": "~1.8.0",
-    "connect": "~3.2.0",
+    "gulp-util": "~3.0.1",
     "del": "~0.1.3",
     "metalsmith": "~1.0.1",
     "metalsmith-assets": "git://github.com/hurrymaplelad/metalsmith-assets.git#metalsmith-v1",
@@ -33,12 +40,16 @@
     "metalsmith-metallic": "git://github.com/hurrymaplelad/metalsmith-metallic.git#tolerate-whitespace",
     "metalsmith-more": "~0.2.0",
     "metalsmith-teacup": "0.0.2",
+    "mocha": "~1.21.4",
     "nib": "~1.0.4",
     "open": "0.0.5",
-    "convict": "~0.4.2",
-    "gift": "~0.4.3-1",
-    "gulp-util": "~3.0.1",
-    "este-watch": "0.0.4"
+    "serve-static": "~1.6.3",
+    "request": "~2.45.0",
+    "stream-end": "~0.1.0",
+    "wd": "~0.3.8"
+  },
+  "scripts": {
+    "test": "gulp spec"
   },
   "readmeFilename": "README.md",
   "license": "BSD"

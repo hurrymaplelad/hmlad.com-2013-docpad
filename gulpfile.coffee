@@ -1,29 +1,11 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
+settings = require './settings'
 
-settings = do ->
-  convict = require 'convict'
-
-  settings = convict
-    env:
-      doc: 'The applicaton environment.'
-      format: ['production', 'development', 'test']
-      default: 'development'
-      env: 'NODE_ENV'
-    port:
-      format: 'port'
-      default: 8000
-      env: 'PORT'
-    optimizeAssets:
-      format: Boolean
-      default: false
-  .validate()
-  .get()
-
-  gutil.log 'Settings:'
-  for key, value of settings
-    gutil.log gutil.colors.cyan(key), gutil.colors.magenta(value)
-  settings
+gutil.log 'Settings:'
+for key, value of settings when typeof value isnt 'function'
+  gutil.log gutil.colors.cyan(key), gutil.colors.magenta(value)
+settings
 
 gulp.task 'generate', (next) ->
   assets = require 'metalsmith-assets'
@@ -114,13 +96,16 @@ gulp.task 'clean', ->
 
 gulp.task 'build', ['generate', 'styles']
 
-gulp.task 'serve', (next) ->
-  connect = require 'connect'
-  serveStatic = require 'serve-static'
+gulp.task 'serve', (done) ->
+  devServer = require './dev_server'
+  devServer.listen settings.port, done
 
-  connect()
-    .use serveStatic 'build'
-    .listen settings.port, next
+gulp.task 'spec', ['build'], (done) ->
+  {spawn} = require 'child_process'
+  specFiles = 'specs/*.spec.coffee'
+  mocha = spawn 'mocha', ['--opts', 'specs/mocha.opts', specFiles], stdio: 'inherit'
+  .on 'exit', (code) ->
+    done code or null
 
 gulp.task 'watch', ->
   watch = require 'este-watch'
@@ -135,10 +120,9 @@ gulp.task 'watch', ->
 
 gulp.task 'dev', ['build', 'serve', 'watch']
 
-gulp.task 'open', ['dev'], (next) ->
+gulp.task 'open', ['dev'], ->
   open = require 'open'
-  open "http://localhost:#{settings.port}"
-  next()
+  open settings.devServerUrl()
 
 gulp.task 'assert:clean', (done) ->
   git = require 'gift'
@@ -155,6 +139,7 @@ gulp.task 'assert:clean', (done) ->
 
 publish = ({push}={}) ->
   git = require 'gift'
+  end = require 'stream-end'
   ghPages = require 'gulp-gh-pages'
 
   (done) ->
@@ -165,8 +150,7 @@ publish = ({push}={}) ->
         cacheDir: './release'
         message: "Publish from #{sourceId}"
         push: push
-      .on 'end', done
-      .resume()
+      .pipe end done
 
 gulp.task 'stage', ['build'], publish push: false
 
