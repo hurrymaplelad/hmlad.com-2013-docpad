@@ -1,9 +1,9 @@
 require 'sugar'
 {a, div, h1, h2, article, time} = require 'teacup'
-{chain} = require './helpers'
+{nest} = require './helpers'
 page = require './page'
 
-module.exports = chain page, (file) ->
+module.exports = nest page, (file) ->
   div '#blog-archives', ->
     prevYear = null
     for post in file.collections.posts

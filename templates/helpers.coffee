@@ -51,7 +51,7 @@ exports.googleAnalytics = renderable (analyticsId) ->
   """
 
 {render, renderable} = require 'teacup'
-exports.chain = (parent, layout) ->
+exports.nest = (parent, layout) ->
   renderable (file) ->
     file = Object.create(file)
     file.contents = render layout, file

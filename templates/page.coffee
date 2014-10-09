@@ -1,8 +1,8 @@
 {article, h1, header, div, raw} = require 'teacup'
-{chain} = require './helpers'
+{nest} = require './helpers'
 base = require './base'
 
-module.exports = chain base, (file) ->
+module.exports = nest base, (file) ->
   div ->
     article ->
       if file.title
