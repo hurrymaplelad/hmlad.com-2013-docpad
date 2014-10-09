@@ -18,7 +18,7 @@ before ->
     # .on 'http', (meth, path, data) ->
     #   console.log '[HTTP]', meth, path, (data || '')
     .init
-      browserName: 'chrome'
+      browserName: settings.browser
     .configureHttp
       baseUrl: settings.devServerUrl()
 

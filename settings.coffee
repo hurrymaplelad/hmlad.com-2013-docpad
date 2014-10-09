@@ -1,12 +1,6 @@
 convict = require 'convict'
 
 settings = convict
-  env:
-    doc: 'The applicaton environment.'
-    format: ['production', 'development', 'test']
-    default: 'development'
-    env: 'NODE_ENV'
-
   verbose:
     doc: "Dial the console logging up to 11"
     format: Boolean
@@ -18,12 +12,17 @@ settings = convict
     default: 8000
     env: 'PORT'
 
-  # Selenium Server Settings
+  # Test Settings
   seleniumServer:
     port:
       format: 'port'
       default: 4444
       env: 'SELENIUM_SERVER_PORT'
+
+  browser:
+    format: ['chrome', 'firefox', 'phantomjs']
+    default: 'chrome'
+    env: 'BROWSER'
 
   # Build Settings
   optimizeAssets:
