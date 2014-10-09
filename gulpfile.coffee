@@ -89,13 +89,13 @@ gulp.task 'new:post', (done) ->
   conflict = require 'gulp-conflict'
   rename = require 'gulp-rename'
   inquirer = require 'inquirer'
-  slugify = require 'slug'
+  string = require 'string'
   extend = require 'extend'
   end = require 'stream-end'
 
   inquirer.prompt [name: 'title', message: 'Title'], (answers) ->
     date = gutil.date new Date(), 'isoDate'
-    slug = slugify answers.title.toLowerCase()
+    slug = string(answers.title).slugify().s
     data = extend answers, {date, slug}
 
     gulp.src 'generators/post.ld'

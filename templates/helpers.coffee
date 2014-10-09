@@ -13,7 +13,7 @@ exports.date = renderable (file, {format}={}) ->
 
 
 {meta} = require 'teacup'
-stripHtml = require 'htmlstrip-native'
+string = require 'string'
 exports.openGraph = renderable (file) ->
   {site} = file
   if file.title
@@ -21,7 +21,7 @@ exports.openGraph = renderable (file) ->
   if file.thumbnail
     meta property: 'og:image', content: site.url + file.thumbnail
   if file.less
-    meta property: 'og:description', content: stripHtml.html_strip file.less
+    meta property: 'og:description', content: string(file.less).stripTags().s
   meta property: 'og:site_name', content: site.title
   meta property: 'og:url', content: site.url + file.path
 
