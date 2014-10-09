@@ -39,7 +39,7 @@
     "metalsmith-markdown": "~0.2.1",
     "metalsmith-metallic": "git://github.com/hurrymaplelad/metalsmith-metallic.git#tolerate-whitespace",
     "metalsmith-more": "~0.2.0",
-    "metalsmith-teacup": "0.0.2",
+    "metalsmith-teacup": "0.0.4",
     "mocha": "~1.21.4",
     "nib": "~1.0.4",
     "open": "0.0.5",
