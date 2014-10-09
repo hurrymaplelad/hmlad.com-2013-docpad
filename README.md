@@ -13,6 +13,8 @@
 |_____|__|__|____/|_|___|___|_|_|_|
 </pre>
 
+[![Build Status](http://img.shields.io/travis/hurrymaplelad/hmlad.com/master.svg?style=flat-square)](https://travis-ci.org/hurrymaplelad/hmlad.com)
+
 Getting Started
 ---------------
 
