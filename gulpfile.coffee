@@ -30,16 +30,42 @@ gulp.task 'clean', ->
 
 gulp.task 'build', ['generate', 'styles']
 
-gulp.task 'serve', (done) ->
-  devServer = require './dev_server'
-  devServer.listen settings.port, done
+servers =
+  dev: null
+  selenium: null
+  shutdown: (done) ->
+    @dev.close =>
+      @selenium.kill()
+      done?()
 
-gulp.task 'spec', ['build'], (done) ->
+gulp.task 'serve:dev', (done) ->
+  connect = require 'connect'
+  serveStatic = require 'serve-static'
+  http = require 'http'
+
+  servers.dev ?= connect()
+  .use serveStatic('build')
+  .listen settings.port, done
+
+gulp.task 'serve:selenium', ->
+  selenium = require 'selenium-standalone'
+  tcpPort = require 'tcp-port-used'
+
+  servers.selenium = selenium
+    stdio: settings.verbose and 'inherit' or 'ignore'
+    ['-port', settings.seleniumServer.port]
+
+  return tcpPort.waitUntilUsed(settings.seleniumServer.port)
+
+gulp.task 'spec', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   {spawn} = require 'child_process'
   specFiles = 'specs/*.spec.coffee'
-  mocha = spawn 'mocha', ['--opts', 'specs/mocha.opts', specFiles], stdio: 'inherit'
+  mocha = spawn 'mocha',
+    ['--opts', 'specs/mocha.opts', specFiles]
+    stdio: 'inherit'
   .on 'exit', (code) ->
-    done code or null
+    servers.shutdown ->
+      done code or null
 
 gulp.task 'watch', ->
   watch = require 'este-watch'
@@ -52,7 +78,7 @@ gulp.task 'watch', ->
         gulp.start 'generate'
   .start()
 
-gulp.task 'dev', ['build', 'serve', 'watch']
+gulp.task 'dev', ['build', 'serve:dev', 'watch']
 
 gulp.task 'open', ['dev'], ->
   open = require 'open'
