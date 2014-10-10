@@ -1,10 +1,6 @@
 convict = require 'convict'
 
 settings = convict
-  verbose:
-    doc: "Dial the console logging up to 11"
-    format: Boolean
-    default: false
 
   # Dev Server Settings
   port:
@@ -23,6 +19,12 @@ settings = convict
     format: ['chrome', 'firefox', 'phantomjs']
     default: 'chrome'
     env: 'BROWSER'
+
+  verbose:
+    doc: "Dial the console logging up to 11"
+    format: Boolean
+    default: false
+    env: 'VERBOSE'
 
   # Build Settings
   optimizeAssets:

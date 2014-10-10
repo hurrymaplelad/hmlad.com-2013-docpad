@@ -11,16 +11,20 @@ chai
 
 before ->
   @browser = wd.promiseChainRemote()
-    # .on 'status', (info) ->
-    #   console.log '[INFO]', info
-    # .on 'command', (eventType, command, response) ->
-    #   console.log ' > ' + eventType, command, (response || '')
-    # .on 'http', (meth, path, data) ->
-    #   console.log '[HTTP]', meth, path, (data || '')
-    .init
-      browserName: settings.browser
+
+  if settings.verbose
+    @browser
+      .on 'status', (info) ->
+        console.log info
+      .on 'command', (eventType, command, response) ->
+        console.log 'wd', eventType, command, (response || '')
+
+before ->
+  @timeout 5000
+  @browser
     .configureHttp
       baseUrl: settings.devServerUrl()
+    .init browserName: settings.browser
 
 after ->
   @browser.quit()

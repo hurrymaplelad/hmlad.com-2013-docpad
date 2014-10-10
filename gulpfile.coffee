@@ -1,6 +1,7 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 settings = require './settings'
+logProcess = require 'process-logger'
 
 gutil.log 'Settings:'
 for key, value of settings when typeof value isnt 'function'
@@ -41,7 +42,6 @@ servers =
 gulp.task 'serve:dev', (done) ->
   connect = require 'connect'
   serveStatic = require 'serve-static'
-  http = require 'http'
 
   servers.dev ?= connect()
   .use serveStatic('build')
@@ -52,20 +52,30 @@ gulp.task 'serve:selenium', ->
   tcpPort = require 'tcp-port-used'
 
   servers.selenium = selenium
-    stdio: settings.verbose and 'inherit' or 'ignore'
+    stdio: settings.verbose and 'pipe' or 'ignore'
     ['-port', settings.seleniumServer.port]
+
+  if settings.verbose
+    logProcess servers.selenium, prefix: '[selenium-server]'
 
   return tcpPort.waitUntilUsed(settings.seleniumServer.port)
 
 gulp.task 'spec', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   {spawn} = require 'child_process'
   specFiles = 'specs/*.spec.coffee'
-  mocha = spawn 'mocha',
-    ['--opts', 'specs/mocha.opts', specFiles]
-    stdio: 'inherit'
+  mocha = spawn 'mocha', [
+    '--compilers', 'coffee:coffee-script/register'
+    '--reporter', 'spec'
+    '--bail'
+    '--timeout', 5000
+    specFiles
+  ]
   .on 'exit', (code) ->
     servers.shutdown ->
       done code or null
+
+  logProcess mocha, prefix: settings.verbose and '[mocha]' or ''
+  return null # don't return a stream
 
 gulp.task 'watch', ->
   watch = require 'este-watch'
