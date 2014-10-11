@@ -27,30 +27,36 @@ gulp.task 'build', ['metalsmith', 'styles']
 servers =
   dev: null
   selenium: null
-  shutdown: (done) ->
-    @dev.close =>
-      @selenium.kill()
-      done?()
 
 gulp.task 'serve:dev', (done) ->
   connect = require 'connect'
   serveStatic = require 'serve-static'
+  http = require 'http'
 
-  servers.dev ?= connect()
-  .use serveStatic('build')
-  .listen settings.port, done
+  servers.dev
+  app = connect()
+    .use serveStatic('build')
+
+  server = http.createServer app
+  server.on 'listening', ->
+    server.unref()
+    done()
+  server.listen settings.port
+  servers.dev = server
 
 gulp.task 'serve:selenium', ->
   selenium = require 'selenium-standalone'
   tcpPort = require 'tcp-port-used'
 
-  servers.selenium = selenium
+  server = selenium
     stdio: settings.verbose and 'pipe' or 'ignore'
     ['-port', settings.seleniumServer.port]
 
+  server.unref()
   if settings.verbose
-    logProcess servers.selenium, prefix: '[selenium-server]'
+    logProcess server, prefix: '[selenium-server]'
 
+  servers.selenium = server
   return tcpPort.waitUntilUsed(settings.seleniumServer.port)
 
 gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
@@ -83,8 +89,7 @@ gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   logProcess mocha, prefix: settings.verbose and '[mocha]' or ''
   return null # don't return a stream
 
-gulp.task 'spec', ['crawl', 'mocha'], (done) ->
-  servers.shutdown done
+gulp.task 'spec', ['crawl', 'mocha']
 
 gulp.task 'watch', ->
   watch = require 'este-watch'
