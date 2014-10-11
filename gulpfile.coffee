@@ -3,11 +3,6 @@ gutil = require 'gulp-util'
 settings = require './settings'
 logProcess = require 'process-logger'
 
-gutil.log 'Settings:'
-for key, value of settings when typeof value isnt 'function'
-  gutil.log gutil.colors.cyan(key), gutil.colors.magenta(value)
-settings
-
 gulp.task 'metalsmith', require './metalsmith'
 
 gulp.task 'styles', ->
@@ -58,7 +53,7 @@ gulp.task 'serve:selenium', ->
 
   return tcpPort.waitUntilUsed(settings.seleniumServer.port)
 
-gulp.task 'spec:crawl', ['build', 'serve:dev'], (done) ->
+gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
   Crawler = require 'simplecrawler'
   referrers = {}
   crawler = Crawler.crawl settings.devServerUrl()
@@ -72,7 +67,7 @@ gulp.task 'spec:crawl', ['build', 'serve:dev'], (done) ->
     .on 'complete', done
   crawler.timeout = 2000
 
-gulp.task 'spec:mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
+gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   {spawn} = require 'child_process'
   specFiles = 'specs/*.spec.coffee'
   mocha = spawn 'mocha', [
@@ -88,7 +83,7 @@ gulp.task 'spec:mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   logProcess mocha, prefix: settings.verbose and '[mocha]' or ''
   return null # don't return a stream
 
-gulp.task 'spec', ['spec:crawl', 'spec:mocha'], (done) ->
+gulp.task 'spec', ['crawl', 'mocha'], (done) ->
   servers.shutdown done
 
 gulp.task 'watch', ->
@@ -129,20 +124,19 @@ gulp.task 'new:post', (done) ->
       .pipe gulp.dest 'documents/posts'
       .pipe end done
 
-gulp.task 'assert:clean', (done) ->
+# Fails if there are uncommitted changes
+gulp.task 'nochanges', (done) ->
   git = require 'gift'
 
   git('.').status (err, status) ->
-    switch
-      when err
-        done err
-      when not status?.clean
-        console.error JSON.stringify status?.files, null, 2
-        done new Error 'Cant publish uncommitted changes'
-      else
-        done()
+    unless status?.clean
+      for filename, status of status.files
+        gutil.log gutil.colors.red "#{status.type} #{filename}"
+      done new Error 'There are uncommitted changes'
+    else
+      done()
 
-publish = ({push}={}) ->
+release = ({push}={}) ->
   git = require 'gift'
   end = require 'stream-end'
   ghPages = require 'gulp-gh-pages'
@@ -157,8 +151,8 @@ publish = ({push}={}) ->
         push: push
       .pipe end done
 
-gulp.task 'stage', ['build'], publish push: false
+gulp.task 'stage', ['build'], release push: false
 
-gulp.task 'release', ['clean', 'assert:clean', 'build', 'spec'], publish push: true
+gulp.task 'publish', ['clean', 'nochanges', 'build', 'spec'], release push: true
 
 gulp.task 'default', ['spec']

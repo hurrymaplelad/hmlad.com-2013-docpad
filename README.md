@@ -23,9 +23,4 @@ Getting Started
 
 When it looks about right
 
-    > gulp stage
-    > cd release && git diff
-
-If that checks out
-
-    > gulp release
+    > gulp publish
