@@ -32,16 +32,24 @@ gulp.task 'serve:dev', (done) ->
   connect = require 'connect'
   serveStatic = require 'serve-static'
   http = require 'http'
+  port = settings.port
 
-  servers.dev
   app = connect()
     .use serveStatic('build')
 
   server = http.createServer app
-  server.on 'listening', ->
-    server.unref()
-    done()
-  server.listen settings.port
+    .on 'error', (err) ->
+      if err.code is 'EADDRINUSE'
+        fallbackPort = port + Math.floor(Math.random() * 1000)
+        gutil.log "#{port} is busy, trying #{fallbackPort}"
+        setImmediate -> server.listen fallbackPort
+      else
+        throw err
+    .on 'listening', ->
+      settings.port = server.address().port
+      server.unref()
+      done()
+  server.listen port
   servers.dev = server
 
 gulp.task 'serve:selenium', ->
@@ -75,14 +83,16 @@ gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
 
 gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   {spawn} = require 'child_process'
+  extend = require 'extend'
   specFiles = 'specs/*.spec.coffee'
+
   mocha = spawn 'mocha', [
     '--compilers', 'coffee:coffee-script/register'
     '--reporter', 'spec'
     '--bail'
     '--timeout', 5000
     specFiles
-  ]
+  ], env: extend({}, process.env, PORT: settings.port)
   .on 'exit', (code) ->
     done code or null
 
