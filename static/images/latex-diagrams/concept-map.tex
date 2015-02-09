@@ -1,0 +1,31 @@
+\documentclass[tikz]{standalone}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{mindmap}
+\begin{document}
+\begin{tikzpicture}[
+  mindmap,
+  concept color=blue!50,
+  every node/.style={
+    font=\large,
+  }
+]
+\node [concept] {graphdrawing} [clockwise from=0]
+  child { node[concept] (tikz) {tikz}
+    child { node[concept] (pgf) {pgf}}
+  }
+  child { node[concept] {lualatex}
+    child { node[concept] {latex}
+      child { node[concept] (tex) {tex}}
+    }
+    child { node[concept] (lua) {lua}}
+  }
+  child { node[concept] {layouts}
+    child { node[concept] {tree}}
+    child { node[concept] {layered}}
+    child { node[concept] {spring}}
+    child { node[concept] {grid}}
+    child { node[concept] {cartesian}}
+  };
+
+\end{tikzpicture}
+\end{document}

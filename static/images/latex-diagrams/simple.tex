@@ -1,0 +1,22 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{graphs, graphdrawing, shapes}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={
+    minimum size=0.75cm,
+    inner sep=0.5em,
+    outer sep=0.4em,
+  }
+]
+\graph [
+  grow right=6em,
+  branch down=6em,
+  nodes={draw, rectangle, rounded corners}
+] {
+  a -- b -- c,
+  d -- e -- f,
+  a -- d, a -- e
+};
+
+\end{tikzpicture}
+\end{document}
