@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usetikzlibrary{graphs, graphdrawing, shapes}
+\begin{document}
+\begin{tikzpicture}[
+  every node/.style={
+    minimum size=0.75cm,
+    inner sep=0.5em,
+    outer sep=0.2em,
+  }
+]
+\graph [
+  no layout,
+  nodes={draw, circle},
+] {
+  t__.tex [at={(0, 0)}]
+  -> [edge label=\texttt{lualatex}]
+  d__.dvi [at={(3, 0)}]
+  -> [edge label=\texttt{dvisvgm}]
+  s__.svg [at={(6, 0)}],
+  t -> p__.pdf [at={(3, -1.5)}],
+};
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,78 @@
+<!DOCTYPE html><html class="no-js" lang="en"><head><meta charset="utf-8" /><title>Generate Perfectly Aligned SVG Diagrams with LaTeX</title><meta name="author" content="Adam Hull" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta property="og:title" content="Generate Perfectly Aligned SVG Diagrams with LaTeX" /><meta property="og:description" content="
+Just tried out the Mermaid package, promising diagrams at the speed of Markdown, built on modern tools like D3.  I was a little disappointed." /><meta property="og:site_name" content="HurryMapleLad" /><meta property="og:url" content="http://hurrymaplelad.com/latex-diagrams/" /><link rel="icon" type="image/png" href="/favicon.png" /><link rel="stylesheet" href="/styles/main.css" /><link rel="alternate" title="HurryMapleLad" type="application/rss+xml" href="/rss.xml" /><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-35976996-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script></head><body><header><h1><a href="/">Hurry <br>Maple <br> Lad</a></h1></header><div id="main"><div id="content"><div><article class="hentry" role="article"><header><h1 class="entry-title">Generate Perfectly Aligned SVG Diagrams with LaTeX</h1><p class="meta"><time datetime="2015-02-07T20:00:00.000Z">February 7th, 2015</time></p></header><div class="entry-content undefined"><p><img src="/images/latex-diagrams/concept-map.svg" alt="Concept map"></p>
+<p>Just tried out the <a href="http://knsv.github.io/mermaid/index.html">Mermaid package</a>, promising diagrams at the speed of Markdown, built on modern tools like D3.  I was a little disappointed.</p>
+<!-- more -->
+
+<p>In my head I had a graph like this:</p>
+<p><img src="/images/latex-diagrams/simple.svg" alt=""></p>
+<p>but Mermaid spat out:</p>
+<p><img src="/images/latex-diagrams/simple.mermaid.svg" alt=""></p>
+<p>given this graph description:</p>
+<pre><code>graph LR
+  subgraph N
+  <span class="hljs-operator">a</span> <span class="hljs-comment">--- b</span>
+  b <span class="hljs-comment">--- c</span>
+  <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+
+  subgraph M
+  d <span class="hljs-comment">--- e</span>
+  e <span class="hljs-comment">--- f</span>
+  <span class="hljs-function"><span class="hljs-keyword">end</span></span>
+
+  <span class="hljs-operator">a</span> <span class="hljs-comment">--- d</span>
+  <span class="hljs-operator">a</span> <span class="hljs-comment">--- e</span></code></pre>
+
+<p>Disappointing results.  What were my other options?</p>
+<h2 id="guis-">GUIs?</h2>
+<p>I&#39;ve whipped together a few diagrams in Google Docs:</p>
+<p><img src="http://hurrymaplelad.com/images/speed-up-your-responsive-app-with-node-and-varnish/flow.jpg" alt=""></p>
+<p>But they&#39;re not very pretty.  All those little inconsistent spaces and rotations are distracting.</p>
+<h2 id="latex-">LaTeX!</h2>
+<p>Anyone else have fond memories of typesetting state machines?</p>
+<p><img src="/images/latex-diagrams/state-machine.svg" alt="old state machine"></p>
+<p>Señor Knuth put <a href="https://www.tug.org/whatis.html">10+ years</a> into making the TeX typesetting system capable of producing perfect documents, and some folks recently added fancy <a href="https://fosdem.org/2015/schedule/event/algorithmic_graph_drawing_in_tikz/attachments/slides/621/export/events/attachments/algorithmic_graph_drawing_in_tikz/slides/621/2014_fosdem_talk.pdf">automatic graph layout algorithms</a>.</p>
+<p>As usual, it took longer than I expected to try &#39;em out, but these commands got me started on OSX, with <a href="http://brew.sh/">homebrew</a> installed:</p>
+<pre><code class="sh">$ brew cask install basictex  <span class="hljs-comment"># the minimal TeX distro</span>
+<span class="hljs-comment"># add /usr/texbin to $PATH    # so we can use tlmgr</span>
+$ <span class="hljs-built_in">sudo</span> chown -R adam:staff /usr/local/texlive <span class="hljs-comment"># without sudo</span>
+$ tlmgr update --self
+$ tlmgr install standalone    <span class="hljs-comment"># generate just a picture</span>
+$ tlmgr install dvisvgm       <span class="hljs-comment"># generates SVGs from DVIs</span>
+$ brew install ghostscript    <span class="hljs-comment"># using ghostscript</span>
+$ lualatex --output-format=dvi &lt;diagram&gt;.tex
+$ dvisvgm \
+$  --libgs=/usr/local/lib/libgs.dylib \ <span class="hljs-comment"># needs help finding the homebrew install</span>
+$  &lt;diagram&gt;.dvi</code></pre>
+
+<p>I wrapped up the last few commands, rendering a .tex file to an .svg, in a bash script and <a href="https://github.com/hurrymaplelad/texvg">threw it on github</a>.</p>
+<p>It took me a while to figure out that the <code>graphdrawing</code> package <a href="http://www.tcs.uni-luebeck.de/downloads/papers/2011/2011-configurable-graph-drawing-algorithms-jannis-pohlmann.pdf">defaults to <code>Cartesian placement</code></a> if we don&#39;t specify a graph layout algorithm, which</p>
+<blockquote>
+<p>starts with the first node and arranges the others by
+moving either along the grow axis or branch axis, depending on whether a node belongs to the
+same node chain or a different chain group.</p>
+</blockquote>
+<p>With <code>Cartesian placement</code>, we can adjust spacing between the nodes using <code>\graph [grow right=4em, branch down=4em]</code>.  Here&#39;s the <a href="http://texdoc.net/texmf-dist/doc/generic/pgf/pgfmanual.pdf">1000+ page manual</a> on drawing with <code>tigz</code> if you want to learn more.</p>
+<p>I eventually coaxed the diagram I wanted out LaTeX (shown above) with something like:</p>
+<pre><code class="tex"><span class="hljs-command">\begin</span><span class="hljs-special">{</span>tikzpicture<span class="hljs-special">}</span>
+<span class="hljs-command">\graph</span> <span class="hljs-special">[</span>
+  grow right=6em,
+  branch down=6em,
+  nodes=<span class="hljs-special">{</span>draw, rectangle, rounded corners<span class="hljs-special">}</span>
+<span class="hljs-special">]</span> <span class="hljs-special">{</span>
+  a -- b -- c,
+  d -- e -- f,
+  a -- d, a -- e
+<span class="hljs-special">}</span>;
+<span class="hljs-command">\end</span><span class="hljs-special">{</span>tikzpicture<span class="hljs-special">}</span></code></pre>
+
+<p>After all that, I really just want to see Mermaid support a little more layout customization.</p>
+<p>PS, this is my other <a href="http://ftp.math.purdue.edu/mirrors/ctan.org/info/symbols/comprehensive/symbols-a4.pdf">favorite giant LaTeX doc</a>.  It has magic Icelandic staves.</p>
+</div><footer><p class="meta"><a class="basic-alignment left" href="/commonjs-modules-make-brittle-singletons/">&laquo; CommonJS Modules Make Brittle Singletons</a></p></footer></article></div></div></div><footer><p>by Adam Hull<a class="linkedin icon" href="http://www.linkedin.com/in/hurrymaplelad" target="_blank"></a><a class="goodreads icon" href="http://www.goodreads.com/hurrymaplelad" target="_blank"></a><a class="stackoverflow icon" href="http://stackoverflow.com/users/407845/hurrymaplelad" target="_blank"></a><a class="github icon" href="https://github.com/hurrymaplelad" target="_blank"></a></p></footer></body></html>
