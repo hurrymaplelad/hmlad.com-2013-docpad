@@ -21,6 +21,11 @@ Getting Started
     > npm install
     > gulp open
 
+Writing A New Post
+------------------
+
+    > gulp new:post
+
 When it looks about right
 
     > gulp publish
