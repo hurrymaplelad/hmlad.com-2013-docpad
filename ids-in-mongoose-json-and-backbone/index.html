@@ -24,7 +24,7 @@ _gaq.push(['_trackPageview']);
 .ids th {
   font-weight: bold;
   width: 30%;
-}</style><header><h1 class="entry-title">Ids in Mongoose, JSON, and Backbone</h1><p class="meta"><time datetime="2013-04-02T19:00:00.000Z">April 2nd, 2013</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/ids-in-mongoose-json-and-backbone/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content undefined"><p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
+}</style><header><h1 class="entry-title">Ids in Mongoose, JSON, and Backbone</h1><p class="meta"><time datetime="2013-04-02T12:00:00.000Z">April 2nd, 2013</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/ids-in-mongoose-json-and-backbone/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content undefined"><p>Mongoose adds <a href="http://mongoosejs.com/docs/guide.html#id">id sugar</a> on top the default _id document attribute.  Backbone has <a href="http://backbonejs.org/#Model-idAttribute">similar sugar</a>, but the types don&#39;t line up.  Pushing bits between the two with a customary JSON document adds a third representation.</p>
 <p>If you find yourself typing <code>vegetable.id</code> when you really needed <code>new ObjectID(vegetable.toJSON()._id)</code> this fancy chart might help:
 <!-- more --></p>
 <table class="ids">
