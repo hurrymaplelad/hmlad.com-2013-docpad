@@ -26,6 +26,20 @@ Writing A New Post
 
     > gulp new:post
 
-When it looks about right
+When it looks about right, merge into master and let Travis run tests do the publishing.
+
+Running Tests
+-------------
+
+    > gulp spec
+
+Runs a few selenium-webdriver powered integration tests and crawls the
+site for broken links.
+
+Manually Publishing
+-------------------
 
     > gulp publish
+
+Runs tests pushes to gh-pages.  Usually Travis will do this automatically for
+passing master builds, but you can always do it manually.
