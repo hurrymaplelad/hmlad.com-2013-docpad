@@ -168,6 +168,10 @@ release = ({push}={}) ->
 
 gulp.task 'stage', ['build'], release push: false
 
+# Humans run this task to release
 gulp.task 'publish', ['clean', 'nochanges', 'build', 'spec'], release push: true
+
+# Machines like travis run this task after specs to release
+gulp.task 'deploy', release push: true
 
 gulp.task 'default', ['spec']
