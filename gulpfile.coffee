@@ -65,7 +65,7 @@ gulp.task 'serve:selenium', ->
     logProcess server, prefix: '[selenium-server]'
 
   servers.selenium = server
-  return tcpPort.waitUntilUsed(settings.seleniumServer.port)
+  return tcpPort.waitUntilUsed(settings.seleniumServer.port, 200, settings.testTimeout)
 
 gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
   Crawler = require 'simplecrawler'
@@ -79,7 +79,7 @@ gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
         gutil.log gutil.colors.red message
         throw new Error message
     .on 'complete', done
-  crawler.timeout = 2000
+  crawler.timeout = settings.testTimeout
 
 gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   {spawn} = require 'child_process'
@@ -90,7 +90,7 @@ gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
     '--compilers', 'coffee:coffee-script/register'
     '--reporter', 'spec'
     '--bail'
-    '--timeout', 5000
+    '--timeout', settings.testTimeout
     specFiles
   ], env: extend({}, process.env, PORT: settings.port)
   .on 'exit', (code) ->
@@ -168,6 +168,10 @@ release = ({push}={}) ->
 
 gulp.task 'stage', ['build'], release push: false
 
+# Humans run this task to release
 gulp.task 'publish', ['clean', 'nochanges', 'build', 'spec'], release push: true
+
+# Machines like travis run this task after specs to release
+gulp.task 'deploy', release push: true
 
 gulp.task 'default', ['spec']

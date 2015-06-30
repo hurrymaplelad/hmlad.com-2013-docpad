@@ -1,5 +1,9 @@
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 env:
+  global:
   - BROWSER=phantomjs
+  - TEST_TIMEOUT="15 seconds"
+  - secure: bk3WSBXIxQCX8/5hrKcAh6atkogAprh6y8DDQSUbywuNFKGdlH/9Znhqy86cI10biogUDh6B2INjZAkjCT0n9gbkI+qEP/l4kFKQ1Vg+Bki6liXisfEiUwX3WYKnPoDbVjPHAxPAXP7C+0pV9uAyS81qqz8pEwy9BZUfisiJrwk= # GH_TOKEN
+after_success: bash travis_deploy.sh

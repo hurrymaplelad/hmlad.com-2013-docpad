@@ -26,6 +26,12 @@ settings = convict
     default: false
     env: 'VERBOSE'
 
+  testTimeout:
+    doc: "Timeout in milliseconds before failing a test"
+    format: 'duration'
+    default: '5 seconds'
+    env: 'TEST_TIMEOUT'
+
   # Build Settings
   optimizeAssets:
     format: Boolean
