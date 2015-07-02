@@ -12,7 +12,7 @@ _gaq.push(['_trackPageview']);
   width: 100%;
   padding: 0;
   margin-bottom: 1em;
-}</style><header><h1 class="entry-title">CommonJS Modules Make Brittle Singletons</h1><p class="meta"><time datetime="2015-01-16T12:00:00.000Z">January 16th, 2015</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/commonjs-modules-make-brittle-singletons/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content undefined"><p>We occasionally rely on node&#39;s <a href="http://nodejs.org/api/modules.html#modules_caching">module caching</a> to share a single instance throughout a full-stack javascript project. This strategy breaks more than we&#39;d like.</p>
+}</style><header><h1 class="entry-title">CommonJS Modules Make Brittle Singletons</h1><p class="meta"><time datetime="2015-01-16T12:00:00.000Z">January 16th, 2015</time></p><p class="meta canonical"><a href="http://bites.goodeggs.com/posts/commonjs-modules-make-brittle-singletons/" target="_blank">Crossposted from bites.goodeggs.com</a></p></header><div class="entry-content commonjs-modules-make-brittle-singletons"><p>We occasionally rely on node&#39;s <a href="http://nodejs.org/api/modules.html#modules_caching">module caching</a> to share a single instance throughout a full-stack javascript project. This strategy breaks more than we&#39;d like.</p>
 <p>If modules <code>butternut</code> and <code>delicata</code> both <code>require(&#39;squash&#39;)</code>, they&#39;ll usually get the same (think <code>===</code>) squash instance. But not always.</p>
 <p>Here are a couple times it hasn&#39;t worked out.</p>
 <!-- more -->
