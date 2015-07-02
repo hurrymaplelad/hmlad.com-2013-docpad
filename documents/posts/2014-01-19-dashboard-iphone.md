@@ -13,6 +13,7 @@ style: |
     margin-left: 1em;
     max-width: 35%;
   }
+
   .dashboard-iphone .clear {
     clear: both;
   }
@@ -20,24 +21,26 @@ style: |
 Put an iPhone in the dash of an old Pathfinder on the cheap.
 
 ![Audio wiring diagram](/images/pathfinder/audio_schematic.thumb.jpg)
-Bless their hearts, auto-folks are trying to keep up with the tech world.  Lucklily, my 14 year old truck<sup>1</sup> was built before that started, so it was pretty easy to gut it's onboard entertainment and dock my phone instead.
-
-<sup>1 - Mechanics always call it a truck, whatever.</sup>
+I should bike everywhere, [I know](http://www.mrmoneymustache.com/2013/06/13/bicycling-the-safest-form-of-transportation/), but sometimes I give in and drive; usually when I'm going far.  A good [audio book](http://www.goodreads.com/hurrymaplelad) gets me lost.  A good [offline GPS](https://itunes.apple.com/us/app/pocket-earth-offline-maps/id481679745?mt=8) gets me *really* lost.  Any newish phone can do both with ease.
 
 <!-- more -->
+<div class="clear"></div>
 
-I don't drive much.  Bikes are [way better](http://www.mrmoneymustache.com/2013/06/13/bicycling-the-safest-form-of-transportation/).  When I do drive, I'm going far.  A good [audio book](http://www.goodreads.com/hurrymaplelad) to helps me get lost.  A good [offline GPS](https://itunes.apple.com/us/app/pocket-earth-offline-maps/id481679745?mt=8) helps me get really lost.  Any newish phone can do both with ease.
+Getting a phone and an auto to cooperate has been a struggle for as long as I've used either.  Bless their hearts, auto-folks are just trying to keep up with the gadget world.  The phone has always been more technologically endowed, but autos refuse to play a support role.
 
 ![wrong](/images/pathfinder/wrong.jpg)
-Getting a phone and an auto to cooperate has been a struggle for as long as I've used either.  The phone has always been more technologically endowed, but autos refuse to play a support role.  They keep (up)selling drivers on integrated touch screens and bluetooth sync, inserting themselves between my phone and I. But their screens are dim and laggy.  Their bluetooth, flakey and battery draining.  An old fasioned cigarrette lighter charger and aux audio cable do better, if only they didn't leave the phone dangling by
-tangly cord tethers.
+Carmakers keep upselling drivers on integrated touch screens and bluetooth sync, inserting themselves between my phone and I. But their screens are dim and laggy;  their bluetooth flakey and battery draining.  An old fasioned cigarrette lighter charger and aux audio cable do better, if only they didn't leave the phone dangling by
+those tangly cords.
+
+Luckily, my ~~14 year~~ very old truck<sup>1</sup> was built before there were many gadgets. Gutting its onboard entertainment (radio) and docking my phone instead was pretty straightforward.
+<sub>&nbsp;&nbsp;&nbsp;1 - Mechanics always call it a truck.</sub>
 
 For the Pathfinder, I cobbled together a satisfying combo of:
 ![finished](/images/pathfinder/finished.jpg)
 
 - [RAM X-Grip Phone Gripper](http://amzn.com/B0066BWMNU) ($50) A little pricey, but it grips well and tolerates the future.
-- [ISO radio install kit](http://amzn.com/B0002BEV84) ($14) For a flat, in-dash base to suction the gripper to.  It baaaarely fits in the top slot.
-- [Hifonics 4-Band EQ](http://amzn.com/B0014JHVHQ) ($70) The iPhone dock cable spits out audio at line-level, so a volume knob is crucial.  My pathfinder has several amps near the speakers, so no amplification necessary at the stereo.
+- [ISO radio install kit](http://amzn.com/B0002BEV84) ($14) For a flat, in-dash base to suction to.  The X-Grip baaaarely fits in the top slot.
+- [Hifonics 4-Band EQ](http://amzn.com/B0014JHVHQ) ($70) The iPhone dock cable spits out audio at line-level, so a volume knob is crucial.  My pathfinder has several amps near the speakers, so no amplification is necessary at the stereo.
 
 <div class="clear"/>
 Wired together with:

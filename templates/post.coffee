@@ -24,7 +24,7 @@ module.exports = nest base, (file) ->
                 text 'Crossposted from '
                 text url.parse(file.canonical, false, true).host
 
-      div ".entry-content.#{file.basename}", ->
+      div ".entry-content.#{file.slug}", ->
         raw file.contents
 
       footer ->

@@ -16,7 +16,7 @@ module.exports = nest base, (file) ->
               a {href: post.path}, post.title
             p '.meta', ->
               date post
-        div ".entry-content.#{post.basename}", ->
+        div ".entry-content.#{post.slug}", ->
           raw post.less or post.contentsWithoutLayout
         if post.less
           footer ->
