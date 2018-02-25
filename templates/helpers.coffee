@@ -1,15 +1,17 @@
 {renderable} = require 'teacup'
 
-require 'sugar'
+Sugar = require 'sugar'
 {time} = require 'teacup'
 
 exports.date = renderable (file, {format}={}) ->
-  format ?= '{Month} {ord}, {year}'
+  format ?= '{Month} {do}, {year}'
   date = file.date
   return unless date
-  formatted = date.format format
-
-  time datetime: date.utc(true).toISOString(), formatted
+  formatted = Sugar.Date.format date, format
+  # Always add timestamps on utc date boundaries, to keep things simple
+  metaFormat = "{yyyy}-{MM}-{dd}T00:00:00.000Z"
+  meta = Sugar.Date.format date, metaFormat
+  time datetime: meta, formatted
 
 
 {meta} = require 'teacup'
@@ -56,5 +58,3 @@ exports.nest = (parent, layout) ->
     file = Object.create(file)
     file.contents = render layout, file
     parent file
-
-

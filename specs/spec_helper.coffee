@@ -20,7 +20,7 @@ before ->
         console.log 'wd', eventType, command, (response || '')
 
 before ->
-  @timeout 5000
+  @timeout 15000
   @browser
     .configureHttp
       baseUrl: settings.devServerUrl()

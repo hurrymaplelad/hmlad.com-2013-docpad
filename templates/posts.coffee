@@ -5,7 +5,7 @@ base = require './base'
 module.exports = nest base, (file) ->
 
   div '.blog-index', ->
-    for post in file.paginate.files
+    for post in file.pagination.files
       article ->
         if post.style
           tag 'style', scoped: true, ->
@@ -23,8 +23,8 @@ module.exports = nest base, (file) ->
             a rel: 'full-article', href: post.path, '▨ More'
 
     div '.pagination', ->
-      if file.paginate.next
-        a '.prev', href: file.paginate.next.path, '← Older'
+      if file.pagination.next
+        a '.prev', href: file.pagination.next.path, '← Older'
       a {href: '/archives/'}, 'Archives'
-      if file.paginate.previous
-        a '.next', href: file.paginate.previous.path, '→ Newer'
+      if file.pagination.previous
+        a '.next', href: file.pagination.previous.path, '→ Newer'

@@ -1,4 +1,5 @@
 convict = require 'convict'
+path = require 'path'
 
 settings = convict
 
@@ -14,6 +15,9 @@ settings = convict
       format: 'port'
       default: 4444
       env: 'SELENIUM_SERVER_PORT'
+    installPath:
+      format: String,
+      default: path.join process.cwd(), '.selenium'
 
   browser:
     format: ['chrome', 'firefox', 'phantomjs']

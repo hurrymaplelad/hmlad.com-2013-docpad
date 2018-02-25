@@ -1,4 +1,4 @@
-require 'sugar'
+Sugar = require 'sugar'
 {a, div, h1, h2, article, time} = require 'teacup'
 {nest} = require './helpers'
 page = require './page'
@@ -14,4 +14,4 @@ module.exports = nest page, (file) ->
       article ->
         h1 ->
           a href: post.path, post.title
-        time post.date.format('{MON} {dd}').toUpperCase()
+        time Sugar.Date.format(post.date, '{Mon} {dd}').toUpperCase()

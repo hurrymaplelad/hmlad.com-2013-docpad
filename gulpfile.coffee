@@ -52,25 +52,73 @@ gulp.task 'serve:dev', (done) ->
   server.listen port
   servers.dev = server
 
-gulp.task 'serve:selenium', ->
+# check for more recent versions of selenium here:
+# https://selenium-release.storage.googleapis.com/index.html
+seleniumVersion = '3.9.1'
+seleniumDrivers =
+  chrome:
+    # check for more recent versions of chrome driver here:
+    # https://chromedriver.storage.googleapis.com/index.html
+    version: '2.35'
+    arch: process.arch
+    baseURL: 'https://chromedriver.storage.googleapis.com'
+  firefox:
+    version: '0.19.1'
+    arch: process.arch
+    baseURL: 'https://github.com/mozilla/geckodriver/releases/download'
+
+gulp.task 'install:selenium', (done) ->
+  selenium = require 'selenium-standalone'
+  ProgressBar = require 'progress'
+  bar = null
+
+  selenium.install
+    # check for more recent versions of selenium here:
+    # https://selenium-release.storage.googleapis.com/index.html
+    version: seleniumVersion
+    baseURL: 'https://selenium-release.storage.googleapis.com'
+    drivers: seleniumDrivers
+    requestOpts:
+      # see https://github.com/request/request#requestoptions-callback
+      timeout: 30000,
+    logger: (message) -> console.log message
+    basePath: settings.seleniumServer.installPath
+    progressCb: (totalLength, progressLength, chunkLength) ->
+      bar ?= new ProgressBar '  downloading [:bar] :percent :etas',
+        complete: '='
+        incomplete: ' '
+        width: 20
+        total: totalLength
+      bar.tick chunkLength
+  , done
+
+gulp.task 'serve:selenium', (done) ->
   selenium = require 'selenium-standalone'
   tcpPort = require 'tcp-port-used'
 
-  server = selenium
-    stdio: settings.verbose and 'pipe' or 'ignore'
-    ['-port', settings.seleniumServer.port]
-
-  server.unref()
-  if settings.verbose
-    logProcess server, prefix: '[selenium-server]'
-
-  servers.selenium = server
-  return tcpPort.waitUntilUsed(settings.seleniumServer.port, 200, settings.testTimeout)
+  server = selenium.start
+    spawnOptions:
+      stdio: settings.verbose and 'pipe' or 'ignore'
+    seleniumArgs: ['-port', settings.seleniumServer.port]
+    basePath: settings.seleniumServer.installPath
+    version: seleniumVersion
+    drivers: seleniumDrivers
+    spawnCb: (child) ->
+      if settings.verbose
+        logProcess child, prefix: '[selenium-server]'
+    , (err, server) ->
+      if err
+        return done err
+      server.unref()
+      servers.selenium = server
+      done()
+      # tcpPort.waitUntilUsed(settings.seleniumServer.port, 200, settings.testTimeout)
+      #  ->then(() -> done(), (err) -> done(err))
 
 gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
   Crawler = require 'simplecrawler'
   referrers = {}
-  crawler = Crawler.crawl settings.devServerUrl()
+  crawler = new Crawler(settings.devServerUrl())
     .on 'discoverycomplete', (item, urls) ->
       referrers[url] = item.url for url in urls
     .on 'fetchheaders', (item, res) ->
@@ -79,6 +127,7 @@ gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
         gutil.log gutil.colors.red message
         throw new Error message
     .on 'complete', done
+    .start()
   crawler.timeout = settings.testTimeout
 
 gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
@@ -87,7 +136,7 @@ gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
   specFiles = 'specs/*.spec.coffee'
 
   mocha = spawn 'mocha', [
-    '--compilers', 'coffee:coffee-script/register'
+    '--require', 'coffee-script/register'
     '--reporter', 'spec'
     '--bail'
     '--timeout', settings.testTimeout

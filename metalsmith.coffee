@@ -6,7 +6,7 @@ markdown = require 'metalsmith-markdown'
 metallic = require 'metalsmith-metallic'
 metalsmith = require 'metalsmith'
 more = require 'metalsmith-more'
-paginate = require 'metalsmith-collections-paginate'
+pagination = require 'metalsmith-pagination'
 permalinks = require 'metalsmith-permalinks'
 teacup = require 'metalsmith-teacup'
 
@@ -36,8 +36,8 @@ module.exports = (done) ->
       sortBy: 'date'
       reverse: true
 
-  .use paginate
-    posts:
+  .use pagination
+    'collections.posts':
       perPage: 20
       first: 'index.html'
       path: 'posts/:num/index.html'
