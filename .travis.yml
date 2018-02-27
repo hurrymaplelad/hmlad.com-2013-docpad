@@ -1,8 +1,12 @@
 language: node_js
 node_js:
 - "lts/*"
-# Travis recommended chrome installation
-# https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-the-Chrome-addon-in-the-headless-mode
+dist: trusty
+before_install:
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  # Travis recommended chrome installation
+  # https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-the-Chrome-addon-in-the-headless-mode
 addons:
   chrome: stable
 env:
