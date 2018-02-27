@@ -16,6 +16,15 @@ settings = convict
     default: false
     env: 'VERBOSE'
 
+  bugLike:
+    doc: "Helpful pupetteer debug configurations with icky names"
+    format: [
+      'creeper', # walk slowly through browser tests with window open
+      'spider',  # test quickly, but leave window open when it fails
+    ]
+    default: undefined
+    env: 'BUG_LIKE'
+
   testTimeout:
     doc: "Timeout in milliseconds before failing a test"
     format: 'duration'
