@@ -1,30 +1,25 @@
-wd = require 'wd'
 chai = require 'chai'
 asPromsed = require 'chai-as-promised'
 settings = require '../settings'
-
-asPromsed.transferPromiseness = wd.transferPromiseness
+puppeteer = require 'puppeteer'
 
 chai
   .use asPromsed
   .should()
 
 before ->
-  @browser = wd.promiseChainRemote()
-
-  if settings.verbose
-    @browser
-      .on 'status', (info) ->
-        console.log info
-      .on 'command', (eventType, command, response) ->
-        console.log 'wd', eventType, command, (response || '')
-
-before ->
-  @timeout 15000
-  @browser
-    .configureHttp
-      baseUrl: settings.devServerUrl()
-    .init browserName: settings.browser
+  @timeout 5000
+  @baseUrl = settings.devServerUrl()
+  puppeteer.launch(
+    headless: false
+    slowMo: 250
+    executablePath: settings.chromePath
+  ).then (browser) =>
+    @browser = browser
+    @browser.newPage().then (page) =>
+      @page = page
+      @page.on 'console', (msg) =>
+        console.log '[BROWSER CONSOLE]:', msg.text()
 
 after ->
-  @browser.quit()
+  @browser.close()

@@ -2,7 +2,7 @@ require './spec_helper'
 
 describe 'post listings page', ->
   before ->
-    @browser.get '/'
+    @page.goto @baseUrl
 
   it 'has a title', ->
-    @browser.title().should.become 'HurryMapleLad'
+    @page.title().should.become 'HurryMapleLad'

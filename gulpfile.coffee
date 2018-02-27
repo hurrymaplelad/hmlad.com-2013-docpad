@@ -67,54 +67,6 @@ seleniumDrivers =
     arch: process.arch
     baseURL: 'https://github.com/mozilla/geckodriver/releases/download'
 
-gulp.task 'install:selenium', (done) ->
-  selenium = require 'selenium-standalone'
-  ProgressBar = require 'progress'
-  bar = null
-
-  selenium.install
-    # check for more recent versions of selenium here:
-    # https://selenium-release.storage.googleapis.com/index.html
-    version: seleniumVersion
-    baseURL: 'https://selenium-release.storage.googleapis.com'
-    drivers: seleniumDrivers
-    requestOpts:
-      # see https://github.com/request/request#requestoptions-callback
-      timeout: 30000,
-    logger: (message) -> console.log message
-    basePath: settings.seleniumServer.installPath
-    progressCb: (totalLength, progressLength, chunkLength) ->
-      bar ?= new ProgressBar '  downloading [:bar] :percent :etas',
-        complete: '='
-        incomplete: ' '
-        width: 20
-        total: totalLength
-      bar.tick chunkLength
-  , done
-
-gulp.task 'serve:selenium', (done) ->
-  selenium = require 'selenium-standalone'
-  tcpPort = require 'tcp-port-used'
-
-  server = selenium.start
-    spawnOptions:
-      stdio: settings.verbose and 'pipe' or 'ignore'
-    seleniumArgs: ['-port', settings.seleniumServer.port]
-    basePath: settings.seleniumServer.installPath
-    version: seleniumVersion
-    drivers: seleniumDrivers
-    spawnCb: (child) ->
-      if settings.verbose
-        logProcess child, prefix: '[selenium-server]'
-    , (err, server) ->
-      if err
-        return done err
-      server.unref()
-      servers.selenium = server
-      done()
-      # tcpPort.waitUntilUsed(settings.seleniumServer.port, 200, settings.testTimeout)
-      #  ->then(() -> done(), (err) -> done(err))
-
 gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
   Crawler = require 'simplecrawler'
   referrers = {}
@@ -130,7 +82,7 @@ gulp.task 'crawl', ['build', 'serve:dev'], (done) ->
     .start()
   crawler.timeout = settings.testTimeout
 
-gulp.task 'mocha', ['build', 'serve:dev', 'serve:selenium'], (done) ->
+gulp.task 'mocha', ['build', 'serve:dev'], (done) ->
   {spawn} = require 'child_process'
   extend = require 'extend'
   specFiles = 'specs/*.spec.coffee'

@@ -1,10 +1,16 @@
 language: node_js
 node_js:
-- "node"
 - "lts/*"
+# Travis recommended chrome installation
+# https://docs.travis-ci.com/user/gui-and-headless-browsers/#Using-the-Chrome-addon-in-the-headless-mode
+addons:
+  chrome: stable
 env:
   global:
-  - BROWSER=phantomjs
+  # Don't dl another chrome at npm install time
+  # https://github.com/GoogleChrome/puppeteer/issues/244#issuecomment-364222174
+  - PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1
+  - CHROME_PATH=google-chrome-stable
   - TEST_TIMEOUT="15 seconds"
   - secure: bk3WSBXIxQCX8/5hrKcAh6atkogAprh6y8DDQSUbywuNFKGdlH/9Znhqy86cI10biogUDh6B2INjZAkjCT0n9gbkI+qEP/l4kFKQ1Vg+Bki6liXisfEiUwX3WYKnPoDbVjPHAxPAXP7C+0pV9uAyS81qqz8pEwy9BZUfisiJrwk= # GH_TOKEN
 after_success: bash travis_deploy.sh

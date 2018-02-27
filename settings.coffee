@@ -10,20 +10,6 @@ settings = convict
     env: 'PORT'
 
   # Test Settings
-  seleniumServer:
-    port:
-      format: 'port'
-      default: 4444
-      env: 'SELENIUM_SERVER_PORT'
-    installPath:
-      format: String,
-      default: path.join process.cwd(), '.selenium'
-
-  browser:
-    format: ['chrome', 'firefox', 'phantomjs']
-    default: 'chrome'
-    env: 'BROWSER'
-
   verbose:
     doc: "Dial the console logging up to 11"
     format: Boolean
@@ -35,6 +21,12 @@ settings = convict
     format: 'duration'
     default: '5 seconds'
     env: 'TEST_TIMEOUT'
+
+  chromePath:
+    doc: "Path of the (potentially-headless) chrome binary"
+    format: String
+    default: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    env: 'CHROME_PATH'
 
   # Build Settings
   optimizeAssets:

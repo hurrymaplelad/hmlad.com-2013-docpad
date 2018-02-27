@@ -44,17 +44,14 @@
     "nib": "~1.1.2",
     "open": "0.0.5",
     "process-logger": "~0.1.0",
-    "progress": "^2.0.0",
+    "puppeteer": "^1.1.1",
     "request": "~2.83.0",
-    "selenium-standalone": "~6.12.0",
     "serve-static": "~1.13.2",
     "simplecrawler": "~1.1.6",
     "stream-end": "~0.1.0",
     "string": "~3.3.3",
     "sugar": "~2.0.4",
-    "tcp-port-used": "~0.1.2",
-    "teacup": "^2.0.0",
-    "wd": "~1.5.0"
+    "teacup": "^2.0.0"
   },
   "scripts": {
     "test": "gulp spec"
