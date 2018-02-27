@@ -88,7 +88,7 @@ gulp.task 'mocha', ['build', 'serve:dev'], (done) ->
   specFiles = 'specs/*.spec.coffee'
 
   mocha = spawn 'mocha', [
-    '--require', 'coffee-script/register'
+    '--require', 'coffeescript/register'
     '--reporter', 'spec'
     '--bail'
     '--timeout', settings.testTimeout
